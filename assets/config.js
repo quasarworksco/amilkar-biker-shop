@@ -34,7 +34,7 @@ export const configBase = {
   tasa: 0,
   mostrarBs: true,
   anuncio: "",
-  envios: "Delivery en Maracaibo y envíos a toda Venezuela. Consulta costos por WhatsApp.",
+  envios: "Te confirmamos disponibilidad, forma de pago y entrega por WhatsApp.",
   sedes: [
     { nombre: "Av. Delicias", direccion: "Maracaibo, Zulia", horario: "", mapa: "" },
     { nombre: "La Curva de Molina", direccion: "Maracaibo, Zulia", horario: "", mapa: "" }
