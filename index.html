@@ -108,7 +108,7 @@ h1,h2,h3{margin:0;font-family:var(--display);font-stretch:125%;font-weight:900;t
 /* Header */
 .header{position:fixed;inset:0 0 auto;z-index:40;transition:background .4s var(--ease),box-shadow .4s,color .4s;color:#fff}
 .header .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;height:84px;max-width:var(--max);margin:0 auto;padding:0 var(--pad);transition:height .4s var(--ease)}
-.header.solid{background:rgba(255,255,255,.86);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 1px 0 var(--line);color:var(--ink)}
+.header.solid{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--line);color:var(--ink)}
 .header.solid .bar{height:68px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand img{width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
@@ -136,7 +136,7 @@ h1,h2,h3{margin:0;font-family:var(--display);font-stretch:125%;font-weight:900;t
 /* Hero */
 .hero{position:relative}
 .hero-media{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#111;color:#fff;isolation:isolate}
-.hero-media video,.hero-media .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(calc(1.04 + var(--k,0) * .08));transition:transform .1s linear}
+.hero-media video,.hero-media .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
 .hero-media .shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.08) 26%,rgba(0,0,0,.2) 52%,rgba(0,0,0,.86) 100%),rgba(0,0,0,.14)}
 .hero-inner{width:100%;max-width:var(--max);margin:0 auto;padding:130px var(--pad) 28px}
 .hero h1{font-size:clamp(50px,14vw,218px);line-height:.84;letter-spacing:-.03em;margin:0 0 clamp(22px,3vw,40px)}
@@ -370,8 +370,8 @@ label.f{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--ink-2)}
 
 /* Detalle de producto */
 dialog.quick{border:0;padding:0;background:transparent;color:var(--ink);width:min(900px,calc(100% - 24px));max-height:calc(100% - 24px)}
-dialog.quick::backdrop{background:rgba(15,17,21,.4);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.quick .panel{position:relative;display:grid;overflow:auto;max-height:calc(100vh - 24px);background:#fff;border-radius:26px;box-shadow:var(--shadow-lg)}
+dialog.quick::backdrop{background:rgba(11,11,12,.55)}
+.quick .panel{position:relative;display:grid;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;max-height:calc(100vh - 24px);background:#fff;border-radius:26px;box-shadow:var(--shadow-lg)}
 .gallery{display:grid;gap:10px;padding:14px}
 .gallery .main{aspect-ratio:1;border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#f7f8fa,#eceef2);display:grid;place-items:center}
 .gallery .main img{width:100%;height:100%;object-fit:contain}
@@ -512,7 +512,6 @@ dialog.quick::backdrop{background:rgba(15,17,21,.4);backdrop-filter:blur(6px);-w
     <div class="wrap">
       <div class="sec-head">
         <div class="reveal">
-          <p class="label"><b>(01)</b> Tienda</p>
           <h2 class="h2">La <span class="r">tienda</span></h2>
         </div>
         <p class="reveal">Toca un producto para ver fotos, colores y medidas. Arma tu carrito y envíanos el pedido por WhatsApp.</p>
@@ -544,7 +543,6 @@ dialog.quick::backdrop{background:rgba(15,17,21,.4);backdrop-filter:blur(6px);-w
     <div class="wrap">
       <div class="sec-head">
         <div class="reveal">
-          <p class="label"><b>(02)</b> Categorías</p>
           <h2 class="h2">Todo para <span class="o">tu moto</span></h2>
         </div>
       </div>
@@ -556,7 +554,6 @@ dialog.quick::backdrop{background:rgba(15,17,21,.4);backdrop-filter:blur(6px);-w
     <div class="wrap">
       <div class="sec-head">
         <div class="reveal">
-          <p class="label"><b>(03)</b> Cómo comprar</p>
           <h2 class="h2">Pedir es <span class="o">fácil</span></h2>
         </div>
         <p class="reveal" id="enviosTxt"></p>
@@ -585,7 +582,6 @@ dialog.quick::backdrop{background:rgba(15,17,21,.4);backdrop-filter:blur(6px);-w
     <div class="wrap">
       <div class="sec-head">
         <div class="reveal">
-          <p class="label"><b>(04)</b> Sedes</p>
           <h2 class="h2">Visítanos en <span class="r">Maracaibo</span></h2>
         </div>
         <p class="reveal">Dos tiendas para atenderte en persona.</p>
@@ -599,7 +595,6 @@ dialog.quick::backdrop{background:rgba(15,17,21,.4);backdrop-filter:blur(6px);-w
       <img class="bg" src="assets/video/cta.webp" alt="" loading="lazy" width="1280" height="720">
       <div class="in">
         <div>
-          <p class="label" style="color:rgba(255,255,255,.7)"><b style="color:#fff">(05)</b> Contacto</p>
           <h2>¿Buscas algo <span class="o">en específico?</span></h2>
           <p style="margin-top:18px">Si no lo ves en la tienda, pregúntanos. Te ayudamos a encontrar el repuesto o accesorio que tu moto necesita.</p>
         </div>
@@ -1057,9 +1052,8 @@ $("#lines").addEventListener("click", e => {
 
 const drawer = $("#drawer"), overlay = $("#overlay");
 let lastFocus = null;
-let vidWasPlaying = false;
-function openCart() { const hv = document.getElementById("heroVideo"); vidWasPlaying = !!hv && !hv.paused; hv?.pause(); lastFocus = document.activeElement; drawer.classList.add("open"); overlay.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; setTimeout(() => $("#closeCart").focus(), 50); }
-function closeCart() { if (vidWasPlaying) document.getElementById("heroVideo").play().catch(() => {}); vidWasPlaying = false; drawer.classList.remove("open"); overlay.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus?.focus?.(); if (pedidoEnviado) { pedidoEnviado = null; renderCart(); } }
+function openCart() { lastFocus = document.activeElement; drawer.classList.add("open"); overlay.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; setTimeout(() => $("#closeCart").focus(), 50); }
+function closeCart() { drawer.classList.remove("open"); overlay.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus?.focus?.(); if (pedidoEnviado) { pedidoEnviado = null; renderCart(); } }
 $("#openCart").addEventListener("click", openCart);
 $("#closeCart").addEventListener("click", closeCart);
 overlay.addEventListener("click", closeCart);
@@ -1154,23 +1148,36 @@ document.querySelectorAll("[data-split]").forEach(el => {
   el.querySelectorAll(".ln").forEach((ln, i) => ln.style.setProperty("--d", (0.12 * i + 0.15) + "s"));
   requestAnimationFrame(() => el.classList.add("in"));
 });
-// Marquesina que acelera y cambia de sentido con el scroll
+// Marquesina que acelera con el scroll (anchos en caché y solo corre cuando está visible)
 if (!reduce) {
   const tracks = [...document.querySelectorAll(".marquee .track")];
-  let x = 0, last = scrollY, v = 0;
+  let widths = [], x = 0, last = scrollY, v = 0, running = false, raf = 0;
+  const measure = () => { widths = tracks.map(t => t.scrollWidth / 2); };
+  measure(); addEventListener("resize", measure, { passive: true });
+  document.fonts?.ready.then(measure);
   const loop = () => {
     const dy = scrollY - last; last = scrollY;
-    v += (dy * 0.25 - v) * 0.08;
+    v += (Math.max(-60, Math.min(60, dy)) * 0.25 - v) * 0.08;
     x -= 0.6 + Math.abs(v);
-    tracks.forEach((t, i) => { const w = t.scrollWidth / 2; const p = ((x % w) - w) % w; t.style.transform = `translate3d(${i % 2 ? -w - p : p}px,0,0)`; });
-    requestAnimationFrame(loop);
+    for (let i = 0; i < tracks.length; i++) { const w = widths[i] || 1; const p = ((x % w) - w) % w; tracks[i].style.transform = `translate3d(${i % 2 ? -w - p : p}px,0,0)`; }
+    raf = running ? requestAnimationFrame(loop) : 0;
   };
-  requestAnimationFrame(loop);
+  new IntersectionObserver(([e]) => { running = e.isIntersecting; if (running && !raf) { last = scrollY; raf = requestAnimationFrame(loop); } }).observe(document.querySelector(".tapes"));
 }
-// Video del hero: leve zoom al hacer scroll
-if (!reduce) {
-  const hv = document.querySelector(".hero-media");
-  addEventListener("scroll", () => { const k = Math.min(1, scrollY / innerHeight); hv.style.setProperty("--k", k); }, { passive: true });
+// Video del hero: se pausa fuera de pantalla, con el detalle de producto abierto o con la pestaña oculta
+{
+  const hv = document.getElementById("heroVideo"), media = document.querySelector(".hero-media");
+  let visible = true, wanted = !hv.paused || !reduce;
+  const sync = () => {
+    const ok = visible && !document.hidden && !quick.open && !drawer.classList.contains("open") && wanted && hv.preload === "auto";
+    if (ok && hv.paused) hv.play().catch(() => {}); else if (!ok && !hv.paused) hv.pause();
+  };
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }, { threshold: 0.05 }).observe(media);
+  document.addEventListener("visibilitychange", sync);
+  quick.addEventListener("close", sync);
+  new MutationObserver(sync).observe(quick, { attributes: true, attributeFilter: ["open"] });
+  new MutationObserver(sync).observe(drawer, { attributes: true, attributeFilter: ["class"] });
+  document.getElementById("vidBtn").addEventListener("click", () => { wanted = !hv.paused; });
 }
 // Botones magnéticos (solo con mouse)
 if (!reduce && matchMedia("(hover: hover) and (pointer: fine)").matches) {
