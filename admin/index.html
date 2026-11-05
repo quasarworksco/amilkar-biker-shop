@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel · Amilkar Biker Shop</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/svg+xml" href="../assets/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080b;--panel:#0e1016;--panel-2:#131620;
+  --ink:#f4f5f7;--ink-2:#b9bdc7;--ink-3:#7f8594;
+  --red:#e3252b;--red-2:#ff4047;--red-glow:rgba(227,37,43,.4);
+  --blue:#2f6bff;--green:#1fa855;--amber:#ffb547;
+  --glass:rgba(255,255,255,.05);--glass-2:rgba(255,255,255,.09);
+  --line:rgba(255,255,255,.1);--line-2:rgba(255,255,255,.18);
+  --r:18px;--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Barlow",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(60vmax 60vmax at -10% -20%,rgba(227,37,43,.2),transparent 60%),radial-gradient(50vmax 50vmax at 110% 40%,rgba(47,107,255,.14),transparent 60%)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--red-2);outline-offset:2px;border-radius:8px}
+.icon{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1;letter-spacing:.01em}
+.glass{background:linear-gradient(160deg,var(--glass-2),var(--glass));border:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:var(--r)}
+.muted{color:var(--ink-3)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 18px;border-radius:12px;border:1px solid var(--line-2);background:var(--glass);font-weight:700;font-size:15px;white-space:nowrap;transition:background .2s,border-color .2s,transform .1s}
+.btn:hover{background:var(--glass-2)}
+.btn:active{transform:scale(.98)}
+.btn-red{background:linear-gradient(135deg,var(--red-2),var(--red));border-color:transparent;color:#fff;box-shadow:0 8px 24px -10px var(--red-glow)}
+.btn-red:hover{background:linear-gradient(135deg,#ff5a60,var(--red-2))}
+.btn-green{background:var(--green);border-color:var(--green);color:#fff}
+.btn-ghost{background:none;border-color:transparent}
+.btn-danger{color:var(--red-2);border-color:rgba(255,64,71,.35)}
+.btn-sm{min-height:38px;padding:0 12px;font-size:14px;border-radius:10px}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.ibtn{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--glass);flex:none}
+.ibtn:hover{background:var(--glass-2)}
+.ibtn.danger:hover{color:var(--red-2);border-color:rgba(255,64,71,.4)}
+.ibtn .icon{width:18px;height:18px}
+
+/* Formularios */
+.f{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.f small{font-weight:500;color:var(--ink-3)}
+.in,.f input:not([type=checkbox]):not([type=color]):not([type=file]),.f select,.f textarea{width:100%;min-height:48px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);outline:0;font-size:16px;font-weight:500;color:var(--ink);transition:border-color .2s}
+.f textarea{min-height:110px;resize:vertical}
+select option{background:#14161c}
+.in:focus,.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--red-2)}
+.row2{display:grid;gap:14px}
+@media (min-width:640px){.row2{grid-template-columns:1fr 1fr}}
+.money{position:relative}
+.money::before{content:"$";position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-weight:700}
+.money input{padding-left:28px!important}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;font-weight:600;font-size:15px}
+.sw small{display:block;font-weight:500;color:var(--ink-3);font-size:13px}
+.sw input{position:absolute;opacity:0;pointer-events:none}
+.sw .t{position:relative;flex:none;width:48px;height:28px;border-radius:999px;background:rgba(255,255,255,.14);transition:background .2s}
+.sw .t::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw input:checked + .t{background:var(--green)}
+.sw input:checked + .t::after{transform:translateX(20px)}
+.sw input:focus-visible + .t{outline:2px solid var(--red-2);outline-offset:2px}
+
+/* Login */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.login .box{width:min(420px,100%);padding:32px 24px;display:grid;gap:16px}
+.login img{width:220px;margin:0 auto 4px}
+.login h1{text-align:center;font-size:32px;text-transform:uppercase;font-style:italic}
+.login p{text-align:center;margin:0 0 6px;color:var(--ink-2)}
+.pw{position:relative}
+.pw input{padding-right:52px!important}
+.pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;width:40px;height:40px;display:grid;place-items:center;color:var(--ink-3)}
+.err{color:var(--red-2);font-size:14px;margin:0;min-height:1em}
+
+/* Layout de la app */
+.app{display:grid;min-height:100vh}
+.app > div{min-width:0}
+.side{display:none}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:rgba(7,8,11,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar .brand{display:flex;align-items:center;gap:10px}
+.topbar .brand img{width:36px;height:36px}
+.topbar h1{font-size:24px;text-transform:uppercase;font-style:italic}
+.content{padding:20px 16px calc(100px + env(safe-area-inset-bottom));width:100%;max-width:1180px;margin:0 auto}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(10,11,16,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.bottom button{position:relative;display:grid;justify-items:center;gap:3px;padding:8px 2px;border:0;background:none;color:var(--ink-3);font-size:11px;font-weight:600;border-radius:12px}
+.bottom button[aria-current="page"]{color:#fff;background:rgba(227,37,43,.16)}
+.bottom .icon{width:22px;height:22px}
+.dot{position:absolute;top:4px;right:calc(50% - 20px);min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+@media (min-width:960px){
+  .app{grid-template-columns:260px 1fr}
+  .side{display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid var(--line);background:rgba(10,11,16,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .side .logo{width:170px;margin:0 auto 18px}
+  .side nav{display:grid;gap:4px}
+  .side nav button{position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;border:0;border-radius:12px;background:none;color:var(--ink-2);font-weight:600;font-size:15px;text-align:left}
+  .side nav button:hover{background:var(--glass);color:var(--ink)}
+  .side nav button[aria-current="page"]{background:linear-gradient(135deg,rgba(255,64,71,.22),rgba(227,37,43,.1));color:#fff;border:1px solid rgba(255,64,71,.3)}
+  .side nav .dot{position:static;margin-left:auto}
+  .side .foot{margin-top:auto;display:grid;gap:8px}
+  .side .user{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--glass);font-size:14px;color:var(--ink-2)}
+  .bottom{display:none}
+  .topbar .brand img{display:none}
+  .content{padding:28px 32px 60px}
+  .topbar{padding:16px 32px}
+}
+
+/* Encabezados de vista */
+.vhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.vhead h2{font-size:clamp(30px,5vw,42px);text-transform:uppercase;font-style:italic}
+.vhead p{margin:4px 0 0;color:var(--ink-3);font-size:14px}
+.card{padding:20px}
+.card h3{font-size:22px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.card h3 .icon{color:var(--red-2)}
+.stack{display:grid;gap:16px}
+
+/* Resumen */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+@media (min-width:900px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{padding:18px;display:grid;gap:6px;text-align:left;border-radius:var(--r)}
+.stat .ic{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:rgba(227,37,43,.14);color:var(--red-2);margin-bottom:4px}
+.stat b{font-family:var(--display);font-size:36px;line-height:1}
+.stat span{color:var(--ink-3);font-size:14px}
+.dash{display:grid;gap:16px}
+@media (min-width:900px){.dash{grid-template-columns:1fr 1.4fr}}
+.rate-row{display:flex;gap:10px}
+.rate-row .f{flex:1}
+
+/* Barra de filtros */
+.bar{display:grid;gap:10px;margin-bottom:14px}
+@media (min-width:800px){.bar{grid-template-columns:1fr 200px 180px}}
+.search{position:relative}
+.search .icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3)}
+.search input{padding-left:44px!important}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:14px}
+.chip{flex:none;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--glass);color:var(--ink-2);font-weight:600;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+
+/* Lista de productos */
+.plist{display:grid;gap:10px}
+.prow{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px;border-radius:16px}
+.prow .th{width:64px;height:64px;border-radius:12px;overflow:hidden;background:var(--glass);display:grid;place-items:center;color:var(--ink-3)}
+.prow .th img{width:100%;height:100%;object-fit:cover}
+.prow h4{margin:0;font-size:15px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.prow .meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--ink-3);margin-top:3px}
+.prow .meta b{color:var(--ink);font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--glass-2);color:var(--ink-2)}
+.pill.red{background:rgba(227,37,43,.2);color:#ff8a8e}
+.pill.green{background:rgba(31,168,85,.2);color:#6be59b}
+.pill.amber{background:rgba(255,181,71,.18);color:var(--amber)}
+.pill.blue{background:rgba(47,107,255,.2);color:#9db8ff}
+.prow .acts{display:flex;gap:6px;align-items:center}
+.prow .acts .more{display:none}
+@media (max-width:640px){.prow{grid-template-columns:56px 1fr}.prow .th{width:56px;height:56px}.prow .acts{grid-column:1/-1;justify-content:flex-end;border-top:1px solid var(--line);padding-top:10px}}
+.empty{padding:40px 20px;text-align:center;color:var(--ink-2)}
+.empty > .icon{width:44px;height:44px;margin:0 auto 10px;color:var(--red-2)}
+.empty h3{font-size:26px;text-transform:uppercase;margin-bottom:6px;color:var(--ink)}
+
+/* Diálogos */
+dialog{border:0;padding:0;background:transparent;color:var(--ink);max-width:none;max-height:none}
+dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.sheet{width:100%;height:100%;margin:0}
+.sheet .wrapd{display:flex;flex-direction:column;height:100dvh;background:var(--panel)}
+@media (min-width:860px){.sheet{width:min(900px,calc(100% - 48px));height:auto;margin:auto}.sheet .wrapd{height:auto;max-height:calc(100dvh - 48px);border-radius:22px;border:1px solid var(--line)}}
+.sheet header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.sheet header h2{font-size:28px;text-transform:uppercase;font-style:italic}
+.sheet .bodyd{flex:1;overflow-y:auto;padding:16px;display:grid;gap:16px;overscroll-behavior:contain;align-content:start}
+.sheet footer{display:flex;gap:10px;justify-content:flex-end;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:rgba(7,8,11,.5)}
+.sheet footer .btn{flex:1}
+@media (min-width:640px){.sheet footer .btn{flex:0 0 auto}}
+.sec{padding:18px;border-radius:16px;background:var(--panel-2);border:1px solid var(--line);display:grid;gap:14px}
+.sec > h3{font-size:20px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.sec > h3 .icon{color:var(--red-2)}
+.sec > p{margin:-6px 0 0;color:var(--ink-3);font-size:14px}
+.small-d{width:min(460px,calc(100% - 32px));margin:auto}
+.small-d .box{padding:22px;border-radius:20px;background:var(--panel);border:1px solid var(--line);display:grid;gap:14px}
+.small-d h2{font-size:26px;text-transform:uppercase;font-style:italic}
+.small-d .acts{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+/* Fotos */
+.drop{display:grid;place-items:center;gap:8px;padding:22px;border:2px dashed var(--line-2);border-radius:14px;text-align:center;color:var(--ink-2);cursor:pointer;transition:border-color .2s,background .2s}
+.drop:hover,.drop.over{border-color:var(--red-2);background:rgba(227,37,43,.06)}
+.drop .icon{width:32px;height:32px;color:var(--red-2)}
+.drop small{color:var(--ink-3)}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.ph{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--glass);border:1px solid var(--line)}
+.ph img{width:100%;height:100%;object-fit:cover}
+.ph .main-tag{position:absolute;top:6px;left:6px;padding:2px 8px;border-radius:999px;background:var(--red);font-size:11px;font-weight:700;text-transform:uppercase}
+.ph .ctl{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;padding:6px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.ph .ctl button{width:32px;height:32px;border-radius:8px;border:0;background:rgba(0,0,0,.55);display:grid;place-items:center;color:#fff}
+.ph .ctl button:hover{background:var(--red)}
+.ph .ctl .icon{width:16px;height:16px}
+.ph.up{display:grid;place-items:center;font-size:13px;color:var(--ink-2)}
+.ph.up .bar2{position:absolute;left:8px;right:8px;bottom:10px;height:6px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
+.ph.up .bar2 i{display:block;height:100%;width:0;background:var(--red-2);transition:width .2s}
+
+/* Variantes */
+.vrows{display:grid;gap:8px}
+.vrow{display:grid;grid-template-columns:48px 1fr 40px;gap:8px;align-items:center}
+.vrow.c{grid-template-columns:48px 1fr 40px;grid-template-areas:"sw nm rm" "ph ph ph";padding-bottom:10px;border-bottom:1px solid var(--line)}
+.vrow.c > :nth-child(1){grid-area:sw}.vrow.c > :nth-child(2){grid-area:nm}.vrow.c > :nth-child(3){grid-area:ph}.vrow.c > :nth-child(4){grid-area:rm}
+@media (min-width:640px){.vrow.c{grid-template-columns:48px 1fr 180px 40px;grid-template-areas:"sw nm ph rm";padding-bottom:0;border-bottom:0}}
+.vrow.t{grid-template-columns:1fr 130px 40px}
+.vrow input[type=color]{width:48px;height:48px;border:1px solid var(--line);border-radius:12px;background:none;padding:4px;cursor:pointer}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button{min-height:34px;padding:0 10px;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-size:13px;font-weight:600;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+.presets button:hover{color:var(--ink);border-color:var(--line-2)}
+.presets i{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,.3)}
+
+/* Categorías */
+.crow{display:grid;grid-template-columns:auto 48px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border-radius:16px}
+.crow .ord{display:grid;gap:2px}
+.crow .ord button{width:30px;height:24px;border:0;border-radius:6px;background:var(--glass);display:grid;place-items:center;color:var(--ink-2)}
+.crow .ord button:hover{background:var(--glass-2);color:#fff}
+.crow .ord .icon{width:14px;height:14px}
+.crow .ci{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;background:rgba(227,37,43,.14);color:var(--red-2)}
+.crow .ci .icon{width:24px;height:24px}
+.crow h4{margin:0;font-size:16px}
+.crow .acts{display:flex;gap:6px;align-items:center}
+@media (max-width:640px){.crow{grid-template-columns:auto 44px 1fr}.crow .acts{grid-column:1/-1;justify-content:flex-end}}
+.icons-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px}
+.icons-pick button{aspect-ratio:1;border-radius:12px;border:1px solid var(--line);background:var(--glass);display:grid;place-items:center;color:var(--ink-2)}
+.icons-pick button[aria-pressed="true"]{border-color:var(--red-2);background:rgba(227,37,43,.18);color:#fff}
+.icons-pick .icon{width:24px;height:24px}
+
+/* Pedidos */
+.olist{display:grid;gap:10px}
+.order{border-radius:16px;overflow:hidden}
+.order summary{list-style:none;display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:14px 16px;cursor:pointer}
+.order summary::-webkit-details-marker{display:none}
+.order .num{font-family:var(--display);font-size:20px;font-weight:800}
+.order .who{color:var(--ink-2);font-size:14px}
+.order .tot{text-align:right;font-family:var(--display);font-size:22px;font-weight:800}
+.order .tot small{display:block;font-family:var(--body);font-size:12px;color:var(--ink-3);font-weight:500}
+.order .od{padding:0 16px 16px;display:grid;gap:12px;border-top:1px solid var(--line);padding-top:14px}
+.order table{width:100%;border-collapse:collapse;font-size:14px}
+.order td{padding:8px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.order td:last-child{text-align:right;white-space:nowrap}
+.order .info{display:grid;gap:4px;font-size:14px;color:var(--ink-2)}
+.order .info b{color:var(--ink)}
+.order .oacts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.order .oacts select{min-height:40px;width:auto;padding:6px 12px}
+
+/* Sedes en ajustes */
+.sede-row{display:grid;gap:10px;padding:14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.sede-row .hd{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));z-index:100;transform:translate(-50%,20px);opacity:0;padding:12px 18px;border-radius:999px;font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px;background:rgba(20,22,30,.95);border:1px solid var(--line-2);transition:all .25s;pointer-events:none;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast.ok .icon{color:#3ddc84}.toast.bad .icon{color:var(--red-2)}
+@media (min-width:960px){.toast{bottom:28px}}
+.loading{display:grid;place-items:center;min-height:100vh;color:var(--ink-3)}
+.spin{width:36px;height:36px;border-radius:50%;border:3px solid var(--line-2);border-top-color:var(--red-2);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.notice{display:flex;gap:12px;padding:14px 16px;border-radius:14px;border:1px solid rgba(255,181,71,.35);background:rgba(255,181,71,.08);color:#ffd9a0;font-size:14px;margin-bottom:16px}
+.notice .icon{color:var(--amber);margin-top:2px}
+.notice code{background:rgba(0,0,0,.35);padding:1px 6px;border-radius:6px;word-break:break-all}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="loading" id="boot"><div class="spin" aria-label="Cargando"></div></div>
+
+<!-- Inicio de sesión -->
+<main class="login" id="login" hidden>
+  <form class="box glass" id="loginForm" novalidate>
+    <img src="../assets/logo.svg" alt="Amilkar Biker Shop" width="220" height="205">
+    <h1>Panel de la tienda</h1>
+    <p>Ingresa con tu usuario y contraseña.</p>
+    <label class="f">Usuario
+      <input name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required placeholder="usuario">
+    </label>
+    <label class="f">Contraseña
+      <span class="pw"><input name="clave" type="password" autocomplete="current-password" required placeholder="Contraseña"><button type="button" id="togglePw" aria-label="Mostrar contraseña"><svg class="icon"><use href="#i-eye"/></svg></button></span>
+    </label>
+    <p class="err" id="loginErr" role="alert"></p>
+    <button class="btn btn-red" type="submit" id="loginBtn"><svg class="icon"><use href="#i-lock"/></svg>Entrar</button>
+    <a class="btn btn-ghost btn-sm" href="../"><svg class="icon"><use href="#i-left"/></svg>Volver a la tienda</a>
+  </form>
+</main>
+
+<!-- Aplicación -->
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <img class="logo" src="../assets/logo.svg" alt="Amilkar Biker Shop" width="170" height="159">
+    <nav id="sideNav" aria-label="Secciones"></nav>
+    <div class="foot">
+      <div class="user"><svg class="icon"><use href="#i-user"/></svg><span id="userName">admin</span></div>
+      <a class="btn btn-sm" href="../" target="_blank" rel="noopener"><svg class="icon"><use href="#i-external"/></svg>Ver tienda</a>
+      <button class="btn btn-sm btn-ghost" type="button" data-logout><svg class="icon"><use href="#i-logout"/></svg>Cerrar sesión</button>
+    </div>
+  </aside>
+  <div>
+    <header class="topbar">
+      <div class="brand"><img src="../assets/logo-mark.svg" alt="" width="36" height="36"><h1 id="viewTitle">Resumen</h1></div>
+      <div style="display:flex;gap:8px">
+        <a class="ibtn" href="../" target="_blank" rel="noopener" aria-label="Ver tienda"><svg class="icon"><use href="#i-external"/></svg></a>
+        <button class="ibtn" type="button" data-logout aria-label="Cerrar sesión"><svg class="icon"><use href="#i-logout"/></svg></button>
+      </div>
+    </header>
+    <div class="content">
+      <div class="notice" id="permNotice" hidden></div>
+
+      <!-- Resumen -->
+      <section data-view="resumen">
+        <div class="stats" id="stats"></div>
+        <div class="dash">
+          <div class="stack">
+            <div class="card glass">
+              <h3><svg class="icon"><use href="#i-dollar"/></svg>Tasa del día</h3>
+              <form class="rate-row" id="quickRate">
+                <label class="f">Bs por cada $1<input class="in" name="tasa" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0,00"></label>
+                <button class="btn btn-red" type="submit" style="align-self:end">Guardar</button>
+              </form>
+              <p class="muted" id="rateInfo" style="margin:10px 0 0;font-size:13px"></p>
+            </div>
+            <div class="card glass">
+              <h3><svg class="icon"><use href="#i-spark"/></svg>Accesos rápidos</h3>
+              <div style="display:grid;gap:8px">
+                <button class="btn btn-red" type="button" data-new-product><svg class="icon"><use href="#i-plus"/></svg>Nuevo producto</button>
+                <button class="btn" type="button" data-go="categorias"><svg class="icon"><use href="#i-tag"/></svg>Administrar categorías</button>
+                <button class="btn" type="button" data-go="ajustes"><svg class="icon"><use href="#i-settings"/></svg>Sedes, horarios y contacto</button>
+              </div>
+            </div>
+          </div>
+          <div class="card glass">
+            <h3><svg class="icon"><use href="#i-receipt"/></svg>Últimos pedidos</h3>
+            <div class="olist" id="lastOrders"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pedidos -->
+      <section data-view="pedidos" hidden>
+        <div class="vhead"><div><h2>Pedidos</h2><p>Los pedidos que los clientes envían desde el carrito llegan aquí y a tu WhatsApp.</p></div></div>
+        <div class="search" style="margin-bottom:12px"><svg class="icon"><use href="#i-search"/></svg><input class="in" id="oq" type="search" placeholder="Buscar por número, cliente o producto"></div>
+        <div class="chips" id="ochips"></div>
+        <div class="olist" id="orders"></div>
+      </section>
+
+      <!-- Productos -->
+      <section data-view="productos" hidden>
+        <div class="vhead">
+          <div><h2>Productos</h2><p id="pcount"></p></div>
+          <button class="btn btn-red" type="button" data-new-product><svg class="icon"><use href="#i-plus"/></svg>Nuevo producto</button>
+        </div>
+        <div class="bar">
+          <div class="search"><svg class="icon"><use href="#i-search"/></svg><input class="in" id="pq" type="search" placeholder="Buscar por nombre, marca o código"></div>
+          <select class="in" id="pcat" aria-label="Filtrar por categoría"></select>
+          <select class="in" id="pstate" aria-label="Filtrar por estado">
+            <option value="">Todos</option>
+            <option value="visibles">Visibles</option>
+            <option value="ocultos">Ocultos</option>
+            <option value="agotados">Agotados</option>
+            <option value="bajo">Stock bajo (3 o menos)</option>
+            <option value="destacados">Destacados</option>
+            <option value="ofertas">En oferta</option>
+          </select>
+        </div>
+        <div class="plist" id="plist"></div>
+      </section>
+
+      <!-- Categorías -->
+      <section data-view="categorias" hidden>
+        <div class="vhead">
+          <div><h2>Categorías</h2><p>Ordena con las flechas. Las categorías ocultas no se muestran en la tienda.</p></div>
+          <button class="btn btn-red" type="button" id="newCat"><svg class="icon"><use href="#i-plus"/></svg>Nueva categoría</button>
+        </div>
+        <div class="plist" id="clist"></div>
+      </section>
+
+      <!-- Ajustes -->
+      <section data-view="ajustes" hidden>
+        <div class="vhead">
+          <div><h2>Ajustes</h2><p>Datos que se muestran en la tienda.</p></div>
+        </div>
+        <form class="stack" id="settingsForm" novalidate>
+          <div class="sec">
+            <h3><svg class="icon"><use href="#i-dollar"/></svg>Precios en bolívares</h3>
+            <div class="row2">
+              <label class="f">Tasa: Bs por cada $1<input name="tasa" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0,00"></label>
+              <div style="display:flex;align-items:end"><label class="sw" style="width:100%"><span>Mostrar precios en Bs<small>Se calculan con la tasa</small></span><input type="checkbox" name="mostrarBs"><span class="t"></span></label></div>
+            </div>
+          </div>
+          <div class="sec">
+            <h3><svg class="icon"><use href="#i-wa"/></svg>Contacto</h3>
+            <div class="row2">
+              <label class="f">WhatsApp de pedidos<small>Solo números con código de país, ej: 584126833301</small><input name="whatsapp" inputmode="numeric" pattern="[0-9]+" maxlength="15"></label>
+              <label class="f">Teléfono visible<small>Como quieres que se vea en la página</small><input name="telefonoVisible" maxlength="30"></label>
+            </div>
+            <label class="f">Correo<input name="email" type="email" maxlength="80" placeholder="Opcional"></label>
+          </div>
+          <div class="sec">
+            <h3><svg class="icon"><use href="#i-instagram"/></svg>Redes sociales</h3>
+            <p>Pega el enlace completo. Deja vacío lo que no uses.</p>
+            <label class="f">Instagram<input name="instagram" type="url" placeholder="https://www.instagram.com/..."></label>
+            <div class="row2">
+              <label class="f">Facebook<input name="facebook" type="url" placeholder="https://facebook.com/..."></label>
+              <label class="f">TikTok<input name="tiktok" type="url" placeholder="https://www.tiktok.com/@..."></label>
+            </div>
+          </div>
+          <div class="sec">
+            <h3><svg class="icon"><use href="#i-store"/></svg>Sedes</h3>
+            <p>Dirección, horario y el enlace de Google Maps de cada sede.</p>
+            <div class="stack" id="sedesEdit"></div>
+            <button class="btn btn-sm" type="button" id="addSede" style="justify-self:start"><svg class="icon"><use href="#i-plus"/></svg>Agregar sede</button>
+          </div>
+          <div class="sec">
+            <h3><svg class="icon"><use href="#i-spark"/></svg>Mensajes de la tienda</h3>
+            <label class="f">Anuncio superior<small>Barra roja arriba de la página. Ej: Envíos a toda Venezuela. Déjalo vacío para ocultarla.</small><input name="anuncio" maxlength="140"></label>
+            <label class="f">Texto de envíos<small>Aparece en la sección "Cómo comprar"</small><textarea name="envios" maxlength="300"></textarea></label>
+          </div>
+          <div style="display:flex;justify-content:flex-end"><button class="btn btn-red" type="submit"><svg class="icon"><use href="#i-check"/></svg>Guardar ajustes</button></div>
+        </form>
+      </section>
+    </div>
+  </div>
+  <nav class="bottom" id="bottomNav" aria-label="Secciones"></nav>
+</div>
+
+<!-- Editor de producto -->
+<dialog class="sheet" id="pdlg" aria-labelledby="pdTitle">
+  <form class="wrapd" id="pform" novalidate>
+    <header>
+      <h2 id="pdTitle">Nuevo producto</h2>
+      <button class="ibtn" type="button" data-close aria-label="Cerrar"><svg class="icon"><use href="#i-x"/></svg></button>
+    </header>
+    <div class="bodyd">
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-box"/></svg>Información</h3>
+        <label class="f">Nombre del producto *<input name="nombre" required maxlength="120" placeholder="Ej: Casco integral LS2 Rapid"></label>
+        <div class="row2">
+          <label class="f">Categoría *<select name="categoria" id="pfCat" required></select></label>
+          <label class="f">Marca<input name="marca" maxlength="60" placeholder="Opcional"></label>
+        </div>
+        <label class="f">Código / SKU<input name="sku" maxlength="40" placeholder="Opcional"></label>
+        <label class="f">Descripción<textarea name="descripcion" maxlength="2000" placeholder="Características, materiales, compatibilidad, garantía..."></textarea></label>
+      </div>
+
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-dollar"/></svg>Precio</h3>
+        <div class="row2">
+          <label class="f">Precio en dólares *<span class="money"><input name="precio" type="number" inputmode="decimal" step="0.01" min="0" required placeholder="0.00"></span><small id="pfBs"></small></label>
+          <label class="f">Precio anterior (oferta)<span class="money"><input name="precioAnterior" type="number" inputmode="decimal" step="0.01" min="0" placeholder="Opcional"></span><small>Si es mayor al precio, se muestra el descuento</small></label>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-image"/></svg>Fotos</h3>
+        <p>La primera foto es la principal. Usa las flechas para ordenar.</p>
+        <label class="drop" id="drop">
+          <svg class="icon"><use href="#i-upload"/></svg>
+          <b>Toca para subir fotos</b>
+          <small>O arrástralas aquí. JPG, PNG o WEBP.</small>
+          <input type="file" id="pfFiles" accept="image/*" multiple hidden>
+        </label>
+        <div class="photos" id="photos"></div>
+      </div>
+
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-palette"/></svg>Colores</h3>
+        <p>Opcional. Puedes asociar una foto a cada color para que cambie al elegirlo.</p>
+        <div class="vrows" id="colors"></div>
+        <div class="presets" id="colorPresets"></div>
+      </div>
+
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-ruler"/></svg>Tallas, medidas o presentaciones</h3>
+        <p>Opcional. Si una opción cuesta distinto, ponle su precio; si lo dejas vacío usa el precio base.</p>
+        <label class="f">Nombre de la opción<input name="etiquetaTalla" list="etiquetas" maxlength="30" placeholder="Talla"></label>
+        <datalist id="etiquetas"><option>Talla</option><option>Medida</option><option>Presentación</option><option>Viscosidad</option><option>Modelo de moto</option></datalist>
+        <div class="vrows" id="sizes"></div>
+        <div class="presets" id="sizePresets"></div>
+      </div>
+
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-box"/></svg>Inventario y visibilidad</h3>
+        <label class="f">Unidades en stock<small>Déjalo vacío si no quieres controlar stock. En 0 se muestra como agotado.</small><input name="stock" type="number" inputmode="numeric" min="0" step="1" placeholder="Sin control"></label>
+        <label class="sw"><span>Visible en la tienda<small>Si lo apagas, el producto queda guardado pero oculto</small></span><input type="checkbox" name="activo" checked><span class="t"></span></label>
+        <label class="sw"><span>Destacado<small>Aparece primero en el catálogo</small></span><input type="checkbox" name="destacado"><span class="t"></span></label>
+        <label class="sw"><span>Nuevo<small>Muestra la etiqueta "Nuevo"</small></span><input type="checkbox" name="nuevo"><span class="t"></span></label>
+      </div>
+      <p class="err" id="pErr" role="alert"></p>
+    </div>
+    <footer>
+      <button class="btn btn-danger" type="button" id="pDelete" hidden><svg class="icon"><use href="#i-trash"/></svg>Eliminar</button>
+      <span style="flex:1" class="spacer"></span>
+      <button class="btn" type="button" data-close>Cancelar</button>
+      <button class="btn btn-red" type="submit" id="pSave"><svg class="icon"><use href="#i-check"/></svg>Guardar</button>
+    </footer>
+  </form>
+</dialog>
+
+<!-- Editor de categoría -->
+<dialog class="small-d" id="cdlg" aria-labelledby="cdTitle">
+  <form class="box" id="cform" novalidate>
+    <h2 id="cdTitle">Nueva categoría</h2>
+    <label class="f">Nombre *<input name="nombre" required maxlength="40" placeholder="Ej: Cascos"></label>
+    <div class="f">Icono<div class="icons-pick" id="iconPick"></div></div>
+    <label class="sw"><span>Visible en la tienda</span><input type="checkbox" name="activa" checked><span class="t"></span></label>
+    <p class="err" id="cErr" role="alert"></p>
+    <div class="acts">
+      <button class="btn" type="button" data-close>Cancelar</button>
+      <button class="btn btn-red" type="submit"><svg class="icon"><use href="#i-check"/></svg>Guardar</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Confirmación -->
+<dialog class="small-d" id="confirmDlg" aria-labelledby="cfTitle">
+  <div class="box">
+    <h2 id="cfTitle">Confirmar</h2>
+    <p id="cfMsg" style="margin:0;color:var(--ink-2)"></p>
+    <div class="acts">
+      <button class="btn" type="button" id="cfNo">Cancelar</button>
+      <button class="btn btn-red" type="button" id="cfYes">Sí, continuar</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status"><svg class="icon"><use href="#i-check"/></svg><span></span></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, doc, onSnapshot, getDoc, setDoc, addDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { firebaseConfig, cloudinary, usuarioAEmail, configBase, categoriasBase, iconosCategoria, estadosPedido, cl, cargarIconos, slugify } from "../assets/config.js";
+
+await cargarIconos("../");
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+setPersistence(auth, browserLocalPersistence).catch(() => {});
+
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const icon = id => `<svg class="icon" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+const num = n => Number(n || 0).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmtUsd = n => "$" + num(n);
+const fmtBs = n => "Bs " + num(n);
+const fecha = ts => ts?.toDate ? ts.toDate().toLocaleString("es-VE", { dateStyle: "medium", timeStyle: "short" }) : "";
+const numOrNull = v => (v === "" || v == null || isNaN(Number(v))) ? null : Number(v);
+
+/* ---------- Avisos ---------- */
+let tt;
+function toast(text, ok = true) {
+  const t = $("#toast"); t.className = "toast on " + (ok ? "ok" : "bad");
+  t.querySelector("use").setAttribute("href", ok ? "#i-check" : "#i-alert");
+  t.querySelector("span").textContent = text; clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 2600);
+}
+function confirmar(msg, titulo = "Confirmar", si = "Sí, continuar") {
+  const d = $("#confirmDlg");
+  $("#cfTitle").textContent = titulo; $("#cfMsg").textContent = msg; $("#cfYes").textContent = si;
+  d.showModal();
+  return new Promise(res => {
+    const done = v => { d.close(); $("#cfYes").onclick = $("#cfNo").onclick = null; res(v); };
+    $("#cfYes").onclick = () => done(true); $("#cfNo").onclick = () => done(false);
+    d.oncancel = () => done(false);
+  });
+}
+function errorTexto(e) {
+  const c = e?.code || "";
+  if (c.includes("permission-denied")) return "Sin permiso. Revisa que las reglas de Firestore estén publicadas.";
+  if (c.includes("unavailable")) return "Sin conexión. Intenta de nuevo.";
+  return e?.message || "Ocurrió un error.";
+}
+function avisoPermisos() {
+  const n = $("#permNotice");
+  n.hidden = false;
+  n.innerHTML = `${icon("alert")}<div><b>Faltan las reglas de seguridad en Firebase.</b> Publica el archivo <code>firestore.rules</code> del repositorio en Firebase Console &gt; Firestore Database &gt; Reglas. Tu ID de usuario es <code>${esc(auth.currentUser?.uid || "")}</code>.</div>`;
+}
+
+/* ---------- Inicio de sesión ---------- */
+$("#togglePw").addEventListener("click", () => {
+  const i = $("#loginForm").clave; const show = i.type === "password";
+  i.type = show ? "text" : "password";
+  $("#togglePw use").setAttribute("href", show ? "#i-eye-off" : "#i-eye");
+  $("#togglePw").setAttribute("aria-label", show ? "Ocultar contraseña" : "Mostrar contraseña");
+});
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = e.target, err = $("#loginErr");
+  const u = f.usuario.value.trim(), p = f.clave.value;
+  if (!u || !p) { err.textContent = "Escribe tu usuario y contraseña."; return; }
+  err.textContent = ""; $("#loginBtn").disabled = true;
+  try { await signInWithEmailAndPassword(auth, usuarioAEmail(u), p); }
+  catch (er) {
+    const c = er.code || "";
+    err.textContent = c.includes("too-many-requests") ? "Demasiados intentos. Espera unos minutos." :
+      c.includes("network") ? "Sin conexión a internet." : "Usuario o contraseña incorrectos.";
+  } finally { $("#loginBtn").disabled = false; }
+});
+$$("[data-logout]").forEach(b => b.addEventListener("click", async () => { if (await confirmar("¿Quieres cerrar la sesión?", "Cerrar sesión", "Cerrar sesión")) signOut(auth); }));
+
+/* ---------- Estado ---------- */
+let productos = [], categorias = [], pedidos = [], cfg = { ...configBase };
+let unsubs = [];
+const catNombre = id => categorias.find(c => c.id === id)?.nombre || id || "Sin categoría";
+const tasa = () => Number(cfg.tasa) || 0;
+
+onAuthStateChanged(auth, user => {
+  $("#boot").hidden = true;
+  unsubs.forEach(u => u()); unsubs = [];
+  if (!user) { $("#app").hidden = true; $("#login").hidden = false; return; }
+  $("#login").hidden = true; $("#app").hidden = false;
+  $("#userName").textContent = (user.email || "").split("@")[0];
+  $("#permNotice").hidden = true;
+  const onErr = e => { console.warn(e); if (String(e.code).includes("permission")) avisoPermisos(); };
+  unsubs.push(onSnapshot(collection(db, "productos"), s => { productos = s.docs.map(d => ({ id: d.id, ...d.data() })); renderAll(); }, onErr));
+  unsubs.push(onSnapshot(collection(db, "categorias"), s => { categorias = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.orden ?? 99) - (b.orden ?? 99)); renderAll(); }, onErr));
+  unsubs.push(onSnapshot(query(collection(db, "pedidos"), orderBy("creado", "desc"), limit(300)), s => { pedidos = s.docs.map(d => ({ id: d.id, ...d.data() })); renderAll(); }, onErr));
+  unsubs.push(onSnapshot(doc(db, "config", "tienda"), s => { cfg = { ...configBase, ...(s.exists() ? s.data() : {}) }; renderAll(); fillSettings(); }, onErr));
+  go(location.hash.slice(1) || "resumen", false);
+  renderAll();
+});
+
+/* ---------- Navegación ---------- */
+const vistas = [
+  ["resumen", "Resumen", "home"],
+  ["pedidos", "Pedidos", "receipt"],
+  ["productos", "Productos", "box"],
+  ["categorias", "Categorías", "tag"],
+  ["ajustes", "Ajustes", "settings"]
+];
+let vista = "resumen";
+function renderNav() {
+  const nuevos = pedidos.filter(p => p.estado === "nuevo").length;
+  const btn = ([id, n, ic]) => `<button type="button" data-go="${id}" ${id === vista ? 'aria-current="page"' : ""}>${icon(ic)}<span>${n}</span>${id === "pedidos" && nuevos ? `<span class="dot">${nuevos}</span>` : ""}</button>`;
+  $("#sideNav").innerHTML = vistas.map(btn).join("");
+  $("#bottomNav").innerHTML = vistas.map(btn).join("");
+}
+function go(v, push = true) {
+  if (!vistas.some(x => x[0] === v)) v = "resumen";
+  vista = v;
+  $$("[data-view]").forEach(s => s.hidden = s.dataset.view !== v);
+  $("#viewTitle").textContent = vistas.find(x => x[0] === v)[1];
+  if (push) history.replaceState(null, "", "#" + v);
+  renderNav(); window.scrollTo(0, 0);
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
+
+function renderAll() { renderNav(); renderResumen(); renderProductos(); renderCategorias(); renderPedidos(); }
+
+/* ---------- Resumen ---------- */
+function renderResumen() {
+  const activos = productos.filter(p => p.activo).length;
+  const agot = productos.filter(p => p.stock === 0).length;
+  const bajo = productos.filter(p => p.stock > 0 && p.stock <= 3).length;
+  const nuevos = pedidos.filter(p => p.estado === "nuevo").length;
+  const ahora = new Date(); const ini = new Date(ahora.getFullYear(), ahora.getMonth(), 1);
+  const ventasMes = pedidos.filter(p => ["confirmado", "pagado", "entregado"].includes(p.estado) && p.creado?.toDate && p.creado.toDate() >= ini).reduce((s, p) => s + (p.totalUsd || 0), 0);
+  const st = (ic, val, lbl, goTo) => `<button class="stat glass" type="button" data-go="${goTo}"><span class="ic">${icon(ic)}</span><b>${val}</b><span>${lbl}</span></button>`;
+  $("#stats").innerHTML =
+    st("receipt", nuevos, "Pedidos nuevos", "pedidos") +
+    st("box", activos, `Productos visibles de ${productos.length}`, "productos") +
+    st("alert", agot + bajo, `Agotados o con stock bajo`, "productos") +
+    st("dollar", fmtUsd(ventasMes), "Ventas del mes (confirmadas)", "pedidos");
+  const qr = $("#quickRate").tasa;
+  if (document.activeElement !== qr) qr.value = tasa() || "";
+  $("#rateInfo").textContent = cfg.tasaActualizada?.toDate ? `Última actualización: ${fecha(cfg.tasaActualizada)}` : "Aún no has guardado una tasa. Sin tasa, la tienda solo muestra precios en dólares.";
+  const last = pedidos.slice(0, 5);
+  $("#lastOrders").innerHTML = last.length ? last.map(orderHtml).join("") : `<div class="empty">${icon("receipt")}<p>Todavía no hay pedidos.</p></div>`;
+}
+$("#quickRate").addEventListener("submit", async e => {
+  e.preventDefault();
+  const v = numOrNull(e.target.tasa.value);
+  if (v == null || v < 0) { toast("Escribe una tasa válida", false); return; }
+  try { await setDoc(doc(db, "config", "tienda"), { tasa: v, tasaActualizada: serverTimestamp() }, { merge: true }); toast("Tasa actualizada"); }
+  catch (er) { toast(errorTexto(er), false); }
+});
+
+/* ---------- Productos ---------- */
+function renderCatSelects() {
+  const opts = categorias.map(c => `<option value="${esc(c.id)}">${esc(c.nombre)}</option>`).join("");
+  const pc = $("#pcat"), v = pc.value;
+  pc.innerHTML = `<option value="">Todas las categorías</option>` + opts; pc.value = v;
+  const fc = $("#pfCat"), v2 = fc.value;
+  fc.innerHTML = `<option value="" disabled>Elige una categoría</option>` + opts; fc.value = v2;
+}
+function renderProductos() {
+  renderCatSelects();
+  const q = slugify($("#pq").value), cat = $("#pcat").value, stt = $("#pstate").value;
+  let l = productos.filter(p => (!cat || p.categoria === cat) &&
+    (!q || slugify([p.nombre, p.marca, p.sku].join(" ")).includes(q)));
+  const f = { visibles: p => p.activo, ocultos: p => !p.activo, agotados: p => p.stock === 0, bajo: p => p.stock > 0 && p.stock <= 3, destacados: p => p.destacado, ofertas: p => p.precioAnterior > p.precio }[stt];
+  if (f) l = l.filter(f);
+  l.sort((a, b) => (b.actualizado?.seconds || b.creado?.seconds || 0) - (a.actualizado?.seconds || a.creado?.seconds || 0));
+  $("#pcount").textContent = `${productos.length} producto${productos.length === 1 ? "" : "s"} en total · ${productos.filter(p => p.activo).length} visibles`;
+  if (!productos.length) {
+    $("#plist").innerHTML = `<div class="empty glass">${icon("box")}<h3>Sin productos</h3><p>${categorias.length ? "Crea tu primer producto con fotos, precio y variantes." : "Primero crea las categorías, luego agrega productos."}</p><button class="btn btn-red" type="button" ${categorias.length ? "data-new-product" : 'data-go="categorias"'}>${icon("plus")}${categorias.length ? "Nuevo producto" : "Ir a categorías"}</button></div>`;
+    return;
+  }
+  if (!l.length) { $("#plist").innerHTML = `<div class="empty glass">${icon("search")}<p>No hay productos con ese filtro.</p></div>`; return; }
+  $("#plist").innerHTML = l.map(p => {
+    const img = (p.imagenes || [])[0];
+    const stock = p.stock == null ? "" : p.stock === 0 ? `<span class="pill red">Agotado</span>` : p.stock <= 3 ? `<span class="pill amber">Quedan ${p.stock}</span>` : `<span>${p.stock} en stock</span>`;
+    return `<div class="prow glass">
+      <div class="th">${img ? `<img src="${esc(cl(img, 140))}" alt="" loading="lazy">` : icon("image")}</div>
+      <div>
+        <h4>${esc(p.nombre)}</h4>
+        <div class="meta">
+          <b>${fmtUsd(p.precio)}</b>${p.precioAnterior > p.precio ? `<s>${fmtUsd(p.precioAnterior)}</s>` : ""}
+          <span>${esc(catNombre(p.categoria))}</span>
+          ${stock}
+          ${!p.activo ? `<span class="pill">Oculto</span>` : ""}
+          ${p.destacado ? `<span class="pill red">Destacado</span>` : ""}
+          ${p.nuevo ? `<span class="pill blue">Nuevo</span>` : ""}
+          ${(p.colores || []).length ? `<span>${p.colores.length} color${p.colores.length > 1 ? "es" : ""}</span>` : ""}
+          ${(p.tallas || []).length ? `<span>${p.tallas.length} ${esc((p.etiquetaTalla || "talla").toLowerCase())}${p.tallas.length > 1 ? "s" : ""}</span>` : ""}
+        </div>
+      </div>
+      <div class="acts">
+        <label class="sw" title="Visible en la tienda"><span class="sr-only">Visible</span><input type="checkbox" data-toggle="${esc(p.id)}" ${p.activo ? "checked" : ""}><span class="t"></span></label>
+        <button class="ibtn" type="button" data-edit="${esc(p.id)}" aria-label="Editar">${icon("edit")}</button>
+        <button class="ibtn" type="button" data-dup="${esc(p.id)}" aria-label="Duplicar">${icon("copy")}</button>
+        <button class="ibtn danger" type="button" data-del="${esc(p.id)}" aria-label="Eliminar">${icon("trash")}</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+["#pq", "#pcat", "#pstate"].forEach(s => $(s).addEventListener("input", renderProductos));
+$("#plist").addEventListener("change", async e => {
+  const t = e.target.closest("[data-toggle]"); if (!t) return;
+  try { await updateDoc(doc(db, "productos", t.dataset.toggle), { activo: t.checked, actualizado: serverTimestamp() }); toast(t.checked ? "Producto visible" : "Producto oculto"); }
+  catch (er) { t.checked = !t.checked; toast(errorTexto(er), false); }
+});
+$("#plist").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.edit) openProduct(productos.find(p => p.id === b.dataset.edit));
+  if (b.dataset.dup) {
+    const p = productos.find(x => x.id === b.dataset.dup); if (!p) return;
+    const { id, creado, actualizado, ...rest } = p;
+    openProduct({ ...rest, nombre: p.nombre + " (copia)", activo: false }, true);
+  }
+  if (b.dataset.del) borrarProducto(b.dataset.del);
+});
+async function borrarProducto(id) {
+  const p = productos.find(x => x.id === id); if (!p) return false;
+  if (!await confirmar(`Se eliminará "${p.nombre}" de la tienda. Esta acción no se puede deshacer.`, "Eliminar producto", "Eliminar")) return false;
+  try { await deleteDoc(doc(db, "productos", id)); toast("Producto eliminado"); return true; }
+  catch (er) { toast(errorTexto(er), false); return false; }
+}
+
+/* ---------- Editor de producto ---------- */
+const pdlg = $("#pdlg"), pform = $("#pform");
+let editId = null, fotos = [], colores = [], tallas = [], subiendo = 0, sucio = false;
+document.addEventListener("click", e => {
+  if (e.target.closest("[data-new-product]")) {
+    if (!categorias.length) { toast("Primero crea las categorías", false); go("categorias"); return; }
+    openProduct(null);
+  }
+});
+function openProduct(p, copia = false) {
+  editId = p && !copia ? p.id : null;
+  pform.reset(); renderCatSelects();
+  $("#pdTitle").textContent = editId ? "Editar producto" : copia ? "Duplicar producto" : "Nuevo producto";
+  $("#pDelete").hidden = !editId;
+  $("#pErr").textContent = "";
+  const d = p || {};
+  pform.nombre.value = d.nombre || "";
+  pform.categoria.value = d.categoria || ($("#pcat").value || categorias[0]?.id || "");
+  pform.marca.value = d.marca || "";
+  pform.sku.value = d.sku || "";
+  pform.descripcion.value = d.descripcion || "";
+  pform.precio.value = d.precio ?? "";
+  pform.precioAnterior.value = d.precioAnterior ?? "";
+  pform.stock.value = d.stock ?? "";
+  pform.etiquetaTalla.value = d.etiquetaTalla || "";
+  pform.activo.checked = d.activo !== false;
+  pform.destacado.checked = !!d.destacado;
+  pform.nuevo.checked = !!d.nuevo;
+  fotos = [...(d.imagenes || [])];
+  colores = (d.colores || []).map(c => ({ ...c }));
+  tallas = (d.tallas || []).map(t => ({ ...t }));
+  renderFotos(); renderColores(); renderTallas(); bsPreview();
+  sucio = false;
+  pdlg.showModal();
+  pdlg.querySelector(".bodyd").scrollTop = 0;
+}
+pform.addEventListener("input", () => { sucio = true; });
+async function cerrarEditor() {
+  if (subiendo) { toast("Espera a que terminen de subir las fotos", false); return; }
+  if (sucio && !await confirmar("Tienes cambios sin guardar. ¿Salir sin guardar?", "Cambios sin guardar", "Salir")) return;
+  pdlg.close();
+}
+pdlg.addEventListener("cancel", e => { e.preventDefault(); cerrarEditor(); });
+pdlg.addEventListener("click", e => { if (e.target.closest("[data-close]")) cerrarEditor(); });
+function bsPreview() { const v = Number(pform.precio.value); $("#pfBs").textContent = tasa() && v ? `${fmtBs(v * tasa())} a la tasa actual` : ""; }
+pform.precio.addEventListener("input", bsPreview);
+
+/* Fotos */
+function renderFotos() {
+  const ups = $$(".ph.up", $("#photos"));
+  $("#photos").innerHTML = fotos.map((u, i) => `<div class="ph">
+    <img src="${esc(cl(u, 240))}" alt="Foto ${i + 1}">
+    ${i === 0 ? `<span class="main-tag">Principal</span>` : ""}
+    <div class="ctl">
+      <button type="button" data-mv="${i}" data-d="-1" aria-label="Mover a la izquierda" ${i === 0 ? "hidden" : ""}>${icon("left")}</button>
+      <button type="button" data-rmf="${i}" aria-label="Quitar foto" style="margin:0 auto">${icon("trash")}</button>
+      <button type="button" data-mv="${i}" data-d="1" aria-label="Mover a la derecha" ${i === fotos.length - 1 ? "hidden" : ""}>${icon("right")}</button>
+    </div>
+  </div>`).join("");
+  ups.forEach(u => $("#photos").append(u));
+  renderColores(true);
+}
+$("#photos").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.mv) { const i = +b.dataset.mv, j = i + +b.dataset.d; [fotos[i], fotos[j]] = [fotos[j], fotos[i]]; }
+  if (b.dataset.rmf) { const u = fotos[+b.dataset.rmf]; fotos.splice(+b.dataset.rmf, 1); colores.forEach(c => { if (c.imagen === u) c.imagen = ""; }); }
+  sucio = true; renderFotos();
+});
+const drop = $("#drop");
+$("#pfFiles").addEventListener("change", e => { subir([...e.target.files]); e.target.value = ""; });
+["dragenter", "dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => subir([...e.dataTransfer.files].filter(f => f.type.startsWith("image/"))));
+
+// Reduce la foto a 1600 px antes de subirla (más rápido con datos móviles)
+async function reducir(file) {
+  try {
+    if (file.size < 600 * 1024 || file.type === "image/gif") return file;
+    const bmp = await createImageBitmap(file);
+    const s = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+    const c = document.createElement("canvas"); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+    c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+    const blob = await new Promise(r => c.toBlob(r, "image/webp", .88));
+    return blob && blob.size < file.size ? blob : file;
+  } catch { return file; }
+}
+function subirUno(file, onProg) {
+  return new Promise((res, rej) => {
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("upload_preset", cloudinary.uploadPreset);
+    fd.append("folder", cloudinary.folder);
+    const x = new XMLHttpRequest();
+    x.open("POST", `https://api.cloudinary.com/v1_1/${cloudinary.cloudName}/image/upload`);
+    x.upload.onprogress = e => e.lengthComputable && onProg(e.loaded / e.total);
+    x.onload = () => { try { const r = JSON.parse(x.responseText); x.status < 300 && r.secure_url ? res(r.secure_url) : rej(new Error(r.error?.message || "Error al subir")); } catch (er) { rej(er); } };
+    x.onerror = () => rej(new Error("Sin conexión"));
+    x.send(fd);
+  });
+}
+async function subir(files) {
+  for (const f of files) {
+    if (!f.type.startsWith("image/")) continue;
+    if (f.size > 20 * 1024 * 1024) { toast(`${f.name}: la foto pesa más de 20 MB`, false); continue; }
+    const ph = document.createElement("div"); ph.className = "ph up"; ph.innerHTML = `<span>Subiendo...</span><div class="bar2"><i></i></div>`;
+    $("#photos").append(ph); subiendo++; $("#pSave").disabled = true;
+    try {
+      const url = await subirUno(await reducir(f), p => { ph.querySelector("i").style.width = Math.round(p * 100) + "%"; });
+      ph.remove(); fotos.push(url); sucio = true; renderFotos();
+    } catch (er) { ph.remove(); toast("No se pudo subir la foto: " + er.message, false); }
+    finally { subiendo--; if (!subiendo) $("#pSave").disabled = false; }
+  }
+}
+
+/* Colores */
+const presetColores = [["Negro", "#111111"], ["Blanco", "#f5f5f5"], ["Rojo", "#d62828"], ["Azul", "#1f4fd1"], ["Gris", "#8a8f98"], ["Amarillo", "#f2c230"], ["Verde", "#2a9d4b"], ["Naranja", "#f47c20"], ["Plateado", "#c0c4cc"], ["Negro mate", "#2b2b2b"]];
+$("#colorPresets").innerHTML = `<button type="button" data-addc="">${icon("plus")}Agregar color</button>` + presetColores.map(([n, h]) => `<button type="button" data-addc="${n}" data-hex="${h}"><i style="background:${h}"></i>${n}</button>`).join("");
+$("#colorPresets").addEventListener("click", e => {
+  const b = e.target.closest("[data-addc]"); if (!b) return;
+  if (b.dataset.addc && colores.some(c => c.nombre === b.dataset.addc)) return;
+  colores.push({ nombre: b.dataset.addc, hex: b.dataset.hex || "#888888", imagen: "" }); sucio = true; renderColores();
+  if (!b.dataset.addc) $$("#colors .in")[colores.length - 1]?.focus();
+});
+function renderColores(soloFotos) {
+  if (soloFotos && document.activeElement?.closest?.("#colors")) return;
+  $("#colors").innerHTML = colores.map((c, i) => `<div class="vrow c">
+    <input type="color" value="${esc(c.hex || "#888888")}" data-ci="${i}" data-k="hex" aria-label="Color">
+    <input class="in" value="${esc(c.nombre)}" data-ci="${i}" data-k="nombre" placeholder="Nombre del color" maxlength="30">
+    <select class="in photo-sel" data-ci="${i}" data-k="imagen" aria-label="Foto de este color">
+      <option value="">Sin foto asociada</option>
+      ${fotos.map((u, j) => `<option value="${esc(u)}" ${u === c.imagen ? "selected" : ""}>Foto ${j + 1}</option>`).join("")}
+    </select>
+    <button class="ibtn danger" type="button" data-rmc="${i}" aria-label="Quitar color">${icon("x")}</button>
+  </div>`).join("");
+}
+$("#colors").addEventListener("input", e => { const t = e.target; if (t.dataset.ci == null) return; colores[+t.dataset.ci][t.dataset.k] = t.value; sucio = true; });
+$("#colors").addEventListener("click", e => { const b = e.target.closest("[data-rmc]"); if (b) { colores.splice(+b.dataset.rmc, 1); sucio = true; renderColores(); } });
+
+/* Tallas / medidas */
+const presetTallas = { "Tallas de ropa": ["XS", "S", "M", "L", "XL", "XXL"], "Tallas de casco": ["S (55-56)", "M (57-58)", "L (59-60)", "XL (61-62)"], "Litros de aceite": ["1 L", "4 L"] };
+$("#sizePresets").innerHTML = `<button type="button" data-adds="">${icon("plus")}Agregar opción</button>` + Object.keys(presetTallas).map(k => `<button type="button" data-preset="${k}">${icon("ruler")}${k}</button>`).join("");
+$("#sizePresets").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.preset) presetTallas[b.dataset.preset].forEach(n => { if (!tallas.some(t => t.nombre === n)) tallas.push({ nombre: n, precio: null }); });
+  else tallas.push({ nombre: "", precio: null });
+  sucio = true; renderTallas();
+  if (b.dataset.adds != null) $$("#sizes .in")[(tallas.length - 1) * 2]?.focus();
+});
+function renderTallas() {
+  $("#sizes").innerHTML = tallas.map((t, i) => `<div class="vrow t">
+    <input class="in" value="${esc(t.nombre)}" data-ti="${i}" data-k="nombre" placeholder="Ej: M, 90/90-18, 1 L" maxlength="30">
+    <span class="money"><input class="in" type="number" inputmode="decimal" step="0.01" min="0" value="${t.precio ?? ""}" data-ti="${i}" data-k="precio" placeholder="Precio" aria-label="Precio de esta opción"></span>
+    <button class="ibtn danger" type="button" data-rmt="${i}" aria-label="Quitar opción">${icon("x")}</button>
+  </div>`).join("");
+}
+$("#sizes").addEventListener("input", e => { const t = e.target; if (t.dataset.ti == null) return; tallas[+t.dataset.ti][t.dataset.k] = t.dataset.k === "precio" ? numOrNull(t.value) : t.value; sucio = true; });
+$("#sizes").addEventListener("click", e => { const b = e.target.closest("[data-rmt]"); if (b) { tallas.splice(+b.dataset.rmt, 1); sucio = true; renderTallas(); } });
+
+/* Guardar producto */
+pform.addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("#pErr");
+  const nombre = pform.nombre.value.trim();
+  const precio = numOrNull(pform.precio.value);
+  if (!nombre) { err.textContent = "Escribe el nombre del producto."; pform.nombre.focus(); return; }
+  if (!pform.categoria.value) { err.textContent = "Elige una categoría."; pform.categoria.focus(); return; }
+  if (precio == null || precio < 0) { err.textContent = "Escribe el precio en dólares."; pform.precio.focus(); return; }
+  if (subiendo) { err.textContent = "Espera a que terminen de subir las fotos."; return; }
+  err.textContent = "";
+  const data = {
+    nombre, slug: slugify(nombre),
+    categoria: pform.categoria.value,
+    marca: pform.marca.value.trim(),
+    sku: pform.sku.value.trim(),
+    descripcion: pform.descripcion.value.trim(),
+    precio,
+    precioAnterior: numOrNull(pform.precioAnterior.value),
+    stock: numOrNull(pform.stock.value) == null ? null : Math.max(0, Math.floor(numOrNull(pform.stock.value))),
+    imagenes: fotos,
+    colores: colores.filter(c => c.nombre.trim()).map(c => ({ nombre: c.nombre.trim(), hex: c.hex || "#888888", imagen: c.imagen || "" })),
+    etiquetaTalla: pform.etiquetaTalla.value.trim() || (tallas.length ? "Talla" : ""),
+    tallas: tallas.filter(t => String(t.nombre).trim()).map(t => ({ nombre: String(t.nombre).trim(), precio: t.precio > 0 ? t.precio : null })),
+    activo: pform.activo.checked,
+    destacado: pform.destacado.checked,
+    nuevo: pform.nuevo.checked,
+    actualizado: serverTimestamp()
+  };
+  $("#pSave").disabled = true;
+  try {
+    if (editId) await updateDoc(doc(db, "productos", editId), data);
+    else await addDoc(collection(db, "productos"), { ...data, creado: serverTimestamp() });
+    sucio = false; pdlg.close(); toast(editId ? "Producto actualizado" : "Producto creado");
+  } catch (er) { err.textContent = errorTexto(er); }
+  finally { $("#pSave").disabled = false; }
+});
+$("#pDelete").addEventListener("click", async () => { if (await borrarProducto(editId)) { sucio = false; pdlg.close(); } });
+
+/* ---------- Categorías ---------- */
+const cdlg = $("#cdlg"), cform = $("#cform");
+let catEdit = null, catIcon = "spark";
+function renderCategorias() {
+  if (!categorias.length) {
+    $("#clist").innerHTML = `<div class="empty glass">${icon("tag")}<h3>Sin categorías</h3><p>Crea las categorías iniciales de la tienda con un clic. Luego puedes editarlas.</p><button class="btn btn-red" type="button" id="seedCats">${icon("spark")}Crear categorías iniciales</button></div>`;
+    return;
+  }
+  $("#clist").innerHTML = categorias.map((c, i) => {
+    const n = productos.filter(p => p.categoria === c.id).length;
+    return `<div class="crow glass">
+      <div class="ord">
+        <button type="button" data-up="${i}" aria-label="Subir" ${i === 0 ? "disabled style='opacity:.3'" : ""}>${icon("up")}</button>
+        <button type="button" data-down="${i}" aria-label="Bajar" ${i === categorias.length - 1 ? "disabled style='opacity:.3'" : ""}>${icon("down")}</button>
+      </div>
+      <span class="ci">${icon(c.icono || "spark")}</span>
+      <div><h4>${esc(c.nombre)}</h4><span class="muted" style="font-size:13px">${n} producto${n === 1 ? "" : "s"}${c.activa === false ? " · Oculta" : ""}</span></div>
+      <div class="acts">
+        <label class="sw" title="Visible"><span class="sr-only">Visible</span><input type="checkbox" data-ctoggle="${esc(c.id)}" ${c.activa !== false ? "checked" : ""}><span class="t"></span></label>
+        <button class="ibtn" type="button" data-cedit="${esc(c.id)}" aria-label="Editar">${icon("edit")}</button>
+        <button class="ibtn danger" type="button" data-cdel="${esc(c.id)}" aria-label="Eliminar">${icon("trash")}</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+$("#clist").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.id === "seedCats") {
+    try { const batch = writeBatch(db); categoriasBase.forEach(c => { const { id, ...d } = c; batch.set(doc(db, "categorias", id), d); }); await batch.commit(); toast("Categorías creadas"); }
+    catch (er) { toast(errorTexto(er), false); }
+    return;
+  }
+  if (b.dataset.up || b.dataset.down) {
+    const i = +(b.dataset.up ?? b.dataset.down), j = b.dataset.up ? i - 1 : i + 1;
+    const arr = [...categorias];[arr[i], arr[j]] = [arr[j], arr[i]];
+    try { const batch = writeBatch(db); arr.forEach((c, k) => batch.update(doc(db, "categorias", c.id), { orden: k })); await batch.commit(); }
+    catch (er) { toast(errorTexto(er), false); }
+  }
+  if (b.dataset.cedit) openCat(categorias.find(c => c.id === b.dataset.cedit));
+  if (b.dataset.cdel) {
+    const c = categorias.find(x => x.id === b.dataset.cdel);
+    const n = productos.filter(p => p.categoria === c.id).length;
+    if (n) { toast(`No se puede eliminar: tiene ${n} producto${n > 1 ? "s" : ""}. Muévelos a otra categoría primero.`, false); return; }
+    if (!await confirmar(`Se eliminará la categoría "${c.nombre}".`, "Eliminar categoría", "Eliminar")) return;
+    try { await deleteDoc(doc(db, "categorias", c.id)); toast("Categoría eliminada"); } catch (er) { toast(errorTexto(er), false); }
+  }
+});
+$("#clist").addEventListener("change", async e => {
+  const t = e.target.closest("[data-ctoggle]"); if (!t) return;
+  try { await updateDoc(doc(db, "categorias", t.dataset.ctoggle), { activa: t.checked }); } catch (er) { t.checked = !t.checked; toast(errorTexto(er), false); }
+});
+$("#newCat").addEventListener("click", () => openCat(null));
+function renderIconPick() { $("#iconPick").innerHTML = iconosCategoria.map(i => `<button type="button" data-ic="${i}" aria-pressed="${i === catIcon}" aria-label="${i}">${icon(i)}</button>`).join(""); }
+$("#iconPick").addEventListener("click", e => { const b = e.target.closest("[data-ic]"); if (b) { catIcon = b.dataset.ic; renderIconPick(); } });
+function openCat(c) {
+  catEdit = c?.id || null; cform.reset();
+  $("#cdTitle").textContent = c ? "Editar categoría" : "Nueva categoría";
+  cform.nombre.value = c?.nombre || ""; cform.activa.checked = c ? c.activa !== false : true;
+  catIcon = c?.icono || "spark"; renderIconPick(); $("#cErr").textContent = "";
+  cdlg.showModal();
+}
+cdlg.addEventListener("click", e => { if (e.target.closest("[data-close]")) cdlg.close(); });
+cform.addEventListener("submit", async e => {
+  e.preventDefault();
+  const nombre = cform.nombre.value.trim();
+  if (!nombre) { $("#cErr").textContent = "Escribe el nombre."; return; }
+  const data = { nombre, icono: catIcon, activa: cform.activa.checked };
+  try {
+    if (catEdit) await updateDoc(doc(db, "categorias", catEdit), data);
+    else {
+      let id = slugify(nombre) || "categoria";
+      if (categorias.some(c => c.id === id)) id += "-" + Date.now().toString(36).slice(-4);
+      await setDoc(doc(db, "categorias", id), { ...data, orden: categorias.length });
+    }
+    cdlg.close(); toast("Categoría guardada");
+  } catch (er) { $("#cErr").textContent = errorTexto(er); }
+});
+
+/* ---------- Pedidos ---------- */
+let oFiltro = "nuevo";
+const estadoPill = e => ({ nuevo: "red", confirmado: "blue", pagado: "amber", entregado: "green", cancelado: "" }[e] ?? "");
+function orderHtml(o) {
+  const tel = String(o.telefono || "").replace(/\D/g, "");
+  const telWa = tel.startsWith("0") ? "58" + tel.slice(1) : tel;
+  return `<details class="order glass">
+    <summary>
+      <div><span class="num">${esc(o.numero || o.id.slice(0, 6))}</span> <span class="pill ${estadoPill(o.estado)}">${esc(estadosPedido[o.estado] || o.estado)}</span><div class="who">${esc(o.cliente)} · ${esc(fecha(o.creado))}</div></div>
+      <div class="tot">${fmtUsd(o.totalUsd)}${o.totalBs ? `<small>${fmtBs(o.totalBs)}</small>` : ""}</div>
+    </summary>
+    <div class="od">
+      <table>${(o.items || []).map(i => `<tr><td>${esc(i.nombre)}${[i.color, i.talla].filter(Boolean).length ? `<br><small class="muted">${esc([i.color, i.talla].filter(Boolean).join(" · "))}</small>` : ""}</td><td>x${i.qty}</td><td>${fmtUsd(i.precio * i.qty)}</td></tr>`).join("")}</table>
+      <div class="info">
+        <span><b>Entrega:</b> ${esc(o.entrega)}</span>
+        ${o.direccion ? `<span><b>Dirección:</b> ${esc(o.direccion)}</span>` : ""}
+        ${o.telefono ? `<span><b>Teléfono:</b> ${esc(o.telefono)}</span>` : ""}
+        ${o.nota ? `<span><b>Nota:</b> ${esc(o.nota)}</span>` : ""}
+        ${o.tasa ? `<span><b>Tasa usada:</b> ${fmtBs(o.tasa)}</span>` : ""}
+      </div>
+      <div class="oacts">
+        <label class="sr-only" for="st-${esc(o.id)}">Estado</label>
+        <select class="in" id="st-${esc(o.id)}" data-ostate="${esc(o.id)}">${Object.entries(estadosPedido).map(([k, v]) => `<option value="${k}" ${k === o.estado ? "selected" : ""}>${v}</option>`).join("")}</select>
+        ${telWa ? `<a class="btn btn-sm btn-green" href="https://wa.me/${esc(telWa)}?text=${encodeURIComponent(`Hola ${o.cliente}, te escribimos de Amilkar Biker Shop por tu pedido ${o.numero || ""}.`)}" target="_blank" rel="noopener">${icon("wa")}Escribir al cliente</a>` : ""}
+        <button class="btn btn-sm btn-danger" type="button" data-odel="${esc(o.id)}">${icon("trash")}Eliminar</button>
+      </div>
+    </div>
+  </details>`;
+}
+function renderPedidos() {
+  const counts = Object.fromEntries(Object.keys(estadosPedido).map(k => [k, pedidos.filter(p => p.estado === k).length]));
+  $("#ochips").innerHTML = [["todos", "Todos", pedidos.length], ...Object.entries(estadosPedido).map(([k, v]) => [k, v, counts[k]])]
+    .map(([k, v, n]) => `<button class="chip" type="button" data-of="${k}" aria-pressed="${k === oFiltro}">${v} (${n})</button>`).join("");
+  const q = slugify($("#oq").value);
+  const l = pedidos.filter(p => (oFiltro === "todos" || p.estado === oFiltro) && (!q || slugify([p.numero, p.cliente, p.telefono, ...(p.items || []).map(i => i.nombre)].join(" ")).includes(q)));
+  const open = new Set($$("#orders details[open] [data-ostate]").map(s => s.dataset.ostate));
+  $("#orders").innerHTML = l.length ? l.map(orderHtml).join("") : `<div class="empty glass">${icon("receipt")}<p>No hay pedidos ${oFiltro !== "todos" ? "en este estado" : "todavía"}.</p></div>`;
+  $$("#orders details").forEach(d => { if (open.has(d.querySelector("[data-ostate]")?.dataset.ostate)) d.open = true; });
+}
+$("#ochips").addEventListener("click", e => { const b = e.target.closest("[data-of]"); if (b) { oFiltro = b.dataset.of; renderPedidos(); } });
+$("#oq").addEventListener("input", renderPedidos);
+document.addEventListener("change", async e => {
+  const s = e.target.closest("[data-ostate]"); if (!s) return;
+  try { await updateDoc(doc(db, "pedidos", s.dataset.ostate), { estado: s.value }); toast("Estado actualizado: " + estadosPedido[s.value]); }
+  catch (er) { toast(errorTexto(er), false); }
+});
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-odel]"); if (!b) return;
+  if (!await confirmar("Se eliminará este pedido del panel.", "Eliminar pedido", "Eliminar")) return;
+  try { await deleteDoc(doc(db, "pedidos", b.dataset.odel)); toast("Pedido eliminado"); } catch (er) { toast(errorTexto(er), false); }
+});
+
+/* ---------- Ajustes ---------- */
+const sform = $("#settingsForm");
+let sedes = [], settingsSucio = false;
+function fillSettings() {
+  if (settingsSucio) return;
+  ["tasa", "whatsapp", "telefonoVisible", "email", "instagram", "facebook", "tiktok", "anuncio", "envios"].forEach(k => { sform[k].value = cfg[k] ?? ""; });
+  if (!cfg.tasa) sform.tasa.value = "";
+  sform.mostrarBs.checked = cfg.mostrarBs !== false;
+  sedes = (cfg.sedes || []).map(s => ({ ...s }));
+  renderSedes();
+}
+function renderSedes() {
+  $("#sedesEdit").innerHTML = sedes.map((s, i) => `<div class="sede-row">
+    <div class="hd"><span>Sede ${i + 1}</span><button class="ibtn danger" type="button" data-rms="${i}" aria-label="Quitar sede">${icon("trash")}</button></div>
+    <div class="row2">
+      <label class="f">Nombre<input data-si="${i}" data-k="nombre" value="${esc(s.nombre)}" maxlength="60" placeholder="Ej: Av. Delicias"></label>
+      <label class="f">Horario<input data-si="${i}" data-k="horario" value="${esc(s.horario)}" maxlength="120" placeholder="Ej: Lun a Sáb 8:00 a.m. a 6:00 p.m."></label>
+    </div>
+    <label class="f">Dirección<input data-si="${i}" data-k="direccion" value="${esc(s.direccion)}" maxlength="160" placeholder="Calle, sector, punto de referencia"></label>
+    <label class="f">Enlace de Google Maps<input data-si="${i}" data-k="mapa" type="url" value="${esc(s.mapa)}" placeholder="https://maps.app.goo.gl/..."></label>
+  </div>`).join("");
+}
+$("#sedesEdit").addEventListener("input", e => { const t = e.target; if (t.dataset.si != null) sedes[+t.dataset.si][t.dataset.k] = t.value; });
+$("#sedesEdit").addEventListener("click", e => { const b = e.target.closest("[data-rms]"); if (b) { sedes.splice(+b.dataset.rms, 1); settingsSucio = true; renderSedes(); } });
+$("#addSede").addEventListener("click", () => { sedes.push({ nombre: "", direccion: "", horario: "", mapa: "" }); settingsSucio = true; renderSedes(); });
+sform.addEventListener("input", () => { settingsSucio = true; });
+sform.addEventListener("submit", async e => {
+  e.preventDefault();
+  const wa = sform.whatsapp.value.replace(/\D/g, "");
+  if (wa.length < 10) { toast("Revisa el número de WhatsApp (con código de país)", false); sform.whatsapp.focus(); return; }
+  const urlOk = v => !v || /^https?:\/\//i.test(v);
+  for (const k of ["instagram", "facebook", "tiktok"]) if (!urlOk(sform[k].value.trim())) { toast("El enlace de " + k + " debe empezar con https://", false); sform[k].focus(); return; }
+  const t = numOrNull(sform.tasa.value);
+  const data = {
+    whatsapp: wa,
+    telefonoVisible: sform.telefonoVisible.value.trim(),
+    email: sform.email.value.trim(),
+    instagram: sform.instagram.value.trim(),
+    facebook: sform.facebook.value.trim(),
+    tiktok: sform.tiktok.value.trim(),
+    anuncio: sform.anuncio.value.trim(),
+    envios: sform.envios.value.trim(),
+    mostrarBs: sform.mostrarBs.checked,
+    sedes: sedes.filter(s => s.nombre.trim()).map(s => ({ nombre: s.nombre.trim(), direccion: (s.direccion || "").trim(), horario: (s.horario || "").trim(), mapa: (s.mapa || "").trim() })),
+    tasa: t ?? 0
+  };
+  if ((t ?? 0) !== tasa()) data.tasaActualizada = serverTimestamp();
+  try { await setDoc(doc(db, "config", "tienda"), data, { merge: true }); settingsSucio = false; toast("Ajustes guardados"); }
+  catch (er) { toast(errorTexto(er), false); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://amilkarbikershop.3s-dev.com/sitemap.xml

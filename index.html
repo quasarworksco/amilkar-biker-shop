@@ -1,28 +1,1060 @@
 <!doctype html>
-<!--
-  Amilkar Biker Shop · sitio en construcción por DGP Global Group.
-  Para Claude: lee CLAUDE.md antes de empezar. Diseño premium basado en el logo, sin emojis (solo iconos SVG),
-  pregunta el estilo visual, la página de ejemplo y los datos de contacto y redes que falten, y trabaja sobre eso.
--->
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Amilkar Biker Shop · Próximamente</title>
-<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amilkar Biker Shop · Accesorios y repuestos para moto en Maracaibo</title>
+<meta name="description" content="Tienda de accesorios para moto en Maracaibo: cascos, guantes, chaquetas, luces, repuestos, equipaje, cauchos y aceites. Precios en dólares y bolívares. Arma tu carrito y pide por WhatsApp.">
+<meta name="theme-color" content="#07080b">
+<link rel="canonical" href="https://amilkarbikershop.3s-dev.com/">
+<link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_VE">
+<meta property="og:site_name" content="Amilkar Biker Shop">
+<meta property="og:title" content="Amilkar Biker Shop · Accesorios para moto en Maracaibo">
+<meta property="og:description" content="Cascos, guantes, chaquetas, luces, repuestos, equipaje, cauchos y aceites. Arma tu pedido y envíalo por WhatsApp.">
+<meta property="og:url" content="https://amilkarbikershop.3s-dev.com/">
+<meta property="og:image" content="https://amilkarbikershop.3s-dev.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Amilkar Biker Shop",
+  "description": "Tienda de accesorios y repuestos para moto: cascos, guantes, chaquetas, luces, repuestos, equipaje, cauchos y aceites.",
+  "url": "https://amilkarbikershop.3s-dev.com/",
+  "logo": "https://amilkarbikershop.3s-dev.com/assets/logo.svg",
+  "image": "https://amilkarbikershop.3s-dev.com/assets/og-image.jpg",
+  "telephone": "+584126833301",
+  "currenciesAccepted": "USD, VES",
+  "address": { "@type": "PostalAddress", "addressLocality": "Maracaibo", "addressRegion": "Zulia", "addressCountry": "VE" },
+  "areaServed": "Maracaibo",
+  "sameAs": ["https://www.instagram.com/amilkarbikershop/"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preload" as="fetch" href="assets/icons.svg" crossorigin>
+
 <style>
-  :root { color-scheme: light dark; }
-  body { margin:0; min-height:100vh; display:grid; place-items:center; font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:#0b1220; color:#e2e8f0; text-align:center; padding:24px; box-sizing:border-box; }
-  img { max-width:220px; max-height:140px; object-fit:contain; margin-bottom:28px; }
-  h1 { font-size:clamp(26px,5vw,40px); margin:0 0 10px; font-weight:700; letter-spacing:-.02em; }
-  p { margin:0; color:#94a3b8; }
+:root{
+  --bg:#07080b; --bg-2:#0d0f14;
+  --ink:#f4f5f7; --ink-2:#b9bdc7; --ink-3:#7f8594;
+  --red:#e3252b; --red-2:#ff4047; --red-glow:rgba(227,37,43,.45);
+  --blue:#2f6bff; --blue-glow:rgba(47,107,255,.35);
+  --glass:rgba(255,255,255,.055); --glass-2:rgba(255,255,255,.09);
+  --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.2);
+  --radius:20px; --radius-sm:14px;
+  --shadow:0 20px 50px -20px rgba(0,0,0,.7);
+  --display:"Barlow Condensed", "Arial Narrow", sans-serif;
+  --body:"Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pad:clamp(16px,4vw,32px);
+  --max:1200px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+:focus-visible{outline:2px solid var(--red-2);outline-offset:3px;border-radius:8px}
+.icon{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.icon-fill{fill:currentColor;stroke:none}
+
+/* Fondo ambiental */
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.ambient::before,.ambient::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+.ambient::before{width:60vmax;height:60vmax;left:-20vmax;top:-18vmax;background:radial-gradient(circle,var(--red-glow),transparent 65%)}
+.ambient::after{width:55vmax;height:55vmax;right:-22vmax;top:30vh;background:radial-gradient(circle,var(--blue-glow),transparent 65%)}
+.streaks{position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 120px,rgba(255,255,255,.018) 120px 122px);mask-image:linear-gradient(180deg,#000,transparent 80%)}
+
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.glass{background:linear-gradient(160deg,var(--glass-2),var(--glass));border:1px solid var(--line);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid transparent;font-weight:700;font-size:16px;letter-spacing:.01em;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;white-space:nowrap}
+.btn:active{transform:scale(.98)}
+.btn-red{background:linear-gradient(135deg,var(--red-2),var(--red));color:#fff;box-shadow:0 10px 30px -10px var(--red-glow)}
+.btn-red:hover{box-shadow:0 14px 36px -8px var(--red-glow);transform:translateY(-1px)}
+.btn-glass{background:var(--glass);border-color:var(--line-2);color:var(--ink);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.btn-glass:hover{background:var(--glass-2);border-color:rgba(255,255,255,.32)}
+.btn-wa{background:#1fa855;color:#fff}
+.btn-wa:hover{background:#21b75d}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.5;pointer-events:none}
+
+/* Header */
+.header{position:sticky;top:0;z-index:40;padding:10px 0}
+.header .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px 12px;border-radius:999px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{width:44px;height:44px;object-fit:contain}
+.brand span{font-family:var(--display);font-weight:800;font-style:italic;font-size:20px;letter-spacing:.02em;text-transform:uppercase;line-height:1;white-space:nowrap}
+.brand b{color:var(--red-2);font-weight:800}
+.nav{display:none;gap:4px}
+.nav a{padding:10px 16px;border-radius:999px;color:var(--ink-2);font-weight:600;font-size:15px;transition:color .2s,background .2s}
+.nav a:hover{color:var(--ink);background:var(--glass)}
+.head-actions{display:flex;align-items:center;gap:8px}
+.icon-btn{position:relative;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--glass);border:1px solid var(--line);transition:background .2s}
+.icon-btn:hover{background:var(--glass-2)}
+.badge{position:absolute;top:-2px;right:-2px;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;border:2px solid var(--bg);transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.badge.on{transform:scale(1)}
+.mobile-menu{display:none;margin-top:8px;padding:10px;border-radius:var(--radius)}
+.mobile-menu.open{display:grid}
+.mobile-menu a{padding:14px 16px;border-radius:12px;font-weight:600;font-size:17px}
+.mobile-menu a:hover{background:var(--glass)}
+@media (min-width:900px){.nav{display:flex}.menu-toggle{display:none}.mobile-menu{display:none!important}}
+
+/* Hero */
+.hero{padding:clamp(28px,6vw,72px) 0 clamp(48px,8vw,96px)}
+.hero-grid{display:grid;gap:36px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--line);color:var(--ink-2);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.kicker i{width:8px;height:8px;border-radius:50%;background:var(--red-2);box-shadow:0 0 12px var(--red-2)}
+h1,h2,h3{font-family:var(--display);line-height:.98;margin:0;letter-spacing:.005em}
+.hero h1{font-size:clamp(44px,11vw,92px);font-weight:800;font-style:italic;text-transform:uppercase;margin:18px 0 18px}
+.hero h1 em{font-style:italic;color:transparent;background:linear-gradient(90deg,var(--red-2),#ff7a5c);-webkit-background-clip:text;background-clip:text}
+.hero p.lead{font-size:clamp(17px,2.2vw,20px);color:var(--ink-2);max-width:34em;margin:0 0 28px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-ctas .btn{flex:1 1 220px}
+@media (min-width:560px){.hero-ctas .btn{flex:0 0 auto}}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;padding:0;list-style:none}
+.chips li{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--line);font-size:14px;color:var(--ink-2);font-weight:500}
+.chips .icon{width:18px;height:18px;color:var(--red-2)}
+.hero-art{position:relative;display:grid;place-items:center;max-width:520px;margin:0 auto;width:100%}
+.hero-art::before{content:"";position:absolute;inset:8% 6%;border-radius:50%;background:radial-gradient(circle,rgba(227,37,43,.5),transparent 62%);filter:blur(30px)}
+.hero-art .ring{position:absolute;inset:2%;border-radius:50%;border:1px solid var(--line);background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.08),transparent 60%)}
+.hero-art img{position:relative;width:92%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6));animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.1fr .9fr}}
+
+/* Secciones */
+section{scroll-margin-top:90px}
+.section{padding:clamp(56px,9vw,110px) 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:32px}
+.eyebrow{display:block;color:var(--red-2);font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.sec-head h2{font-size:clamp(36px,6vw,60px);font-weight:800;font-style:italic;text-transform:uppercase}
+.sec-head p{color:var(--ink-2);margin:10px 0 0;max-width:36em}
+
+/* Categorías */
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:640px){.cats{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1000px){.cats{grid-template-columns:repeat(5,1fr)}}
+.cat{position:relative;display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding:20px;min-height:132px;border-radius:var(--radius);text-align:left;overflow:hidden;transition:transform .25s ease,border-color .25s ease,background .25s}
+.cat::after{content:"";position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,var(--red-glow),transparent 70%);opacity:0;transition:opacity .3s}
+.cat:hover{transform:translateY(-3px);border-color:rgba(255,64,71,.5)}
+.cat:hover::after{opacity:1}
+.cat .ico{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:rgba(227,37,43,.14);border:1px solid rgba(255,64,71,.3);color:var(--red-2)}
+.cat .ico .icon{width:28px;height:28px}
+.cat strong{font-family:var(--display);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+.cat small{color:var(--ink-3);font-size:13px;margin-top:-10px}
+
+/* Catálogo */
+.toolbar{display:grid;gap:14px;margin-bottom:24px}
+.search{display:flex;align-items:center;gap:10px;padding:0 18px;min-height:54px;border-radius:999px}
+.search input{flex:1;min-width:0;background:none;border:0;outline:0;font-size:16px}
+.search input::placeholder{color:var(--ink-3)}
+.search .icon{color:var(--ink-3)}
+.filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;margin:0 calc(var(--pad) * -1);padding-left:var(--pad);padding-right:var(--pad)}
+.filters::-webkit-scrollbar{display:none}
+.filter{flex:none;min-height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-weight:600;font-size:14px;color:var(--ink-2);transition:all .2s}
+.filter:hover{color:var(--ink);border-color:var(--line-2)}
+.filter[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+@media (min-width:900px){.toolbar{grid-template-columns:minmax(280px,380px) 1fr;align-items:center}.filters{margin:0;padding:0 0 6px;flex-wrap:wrap}}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media (min-width:1050px){.grid{grid-template-columns:repeat(4,1fr);gap:20px}}
+.card{display:flex;flex-direction:column;border-radius:var(--radius);overflow:hidden;transition:transform .25s ease,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.card .media{position:relative;aspect-ratio:1;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.1),rgba(255,255,255,.02));display:grid;place-items:center;overflow:hidden;border:0;padding:0;width:100%}
+.card .media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .media img{transform:scale(1.05)}
+.card .media .icon{width:56px;height:56px;color:var(--ink-3)}
+.tag{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(7,8,11,.7);border:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.tag.hot{background:var(--red);border-color:var(--red)}
+.tag.out{top:auto;bottom:10px;background:rgba(7,8,11,.85)}
+.card .body{display:flex;flex-direction:column;gap:6px;padding:14px;flex:1}
+.card .cat-name{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red-2)}
+.card h3{font-family:var(--body);font-size:15px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.price{margin-top:auto;padding-top:6px}
+.price .usd{font-family:var(--display);font-size:26px;font-weight:800;line-height:1}
+.price .bs{display:block;font-size:13px;color:var(--ink-3);margin-top:3px}
+.add{margin-top:10px;min-height:46px;border-radius:12px;border:1px solid rgba(255,64,71,.45);background:rgba(227,37,43,.14);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s}
+.add:hover{background:var(--red)}
+.add .icon{width:18px;height:18px}
+.add.done{background:#1fa855;border-color:#1fa855}
+@media (min-width:700px){.card .body{padding:16px}.card h3{font-size:16px}}
+
+.skeleton{border-radius:var(--radius);aspect-ratio:.72;background:linear-gradient(100deg,var(--glass) 30%,var(--glass-2) 50%,var(--glass) 70%);background-size:300% 100%;animation:shimmer 1.4s linear infinite;border:1px solid var(--line)}
+@keyframes shimmer{to{background-position:-150% 0}}
+.empty{grid-column:1/-1;padding:48px 24px;text-align:center;border-radius:var(--radius)}
+.empty > .icon{width:48px;height:48px;color:var(--red-2);margin:0 auto 14px}
+.empty h3{font-size:28px;text-transform:uppercase;font-style:italic;margin-bottom:8px}
+.empty p{color:var(--ink-2);margin:0 auto 20px;max-width:30em}
+.rate-note{margin-top:18px;color:var(--ink-3);font-size:14px;text-align:center}
+
+/* Pasos */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media (min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{padding:26px;border-radius:var(--radius);position:relative}
+.step .num{font-family:var(--display);font-weight:800;font-style:italic;font-size:56px;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(255,64,71,.7);position:absolute;right:22px;top:18px}
+.step .ico{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:rgba(47,107,255,.14);border:1px solid rgba(47,107,255,.35);color:#8fb0ff;margin-bottom:18px}
+.step h3{font-size:26px;text-transform:uppercase;margin-bottom:8px}
+.step p{margin:0;color:var(--ink-2)}
+
+/* Sedes */
+.sedes{display:grid;gap:14px}
+@media (min-width:800px){.sedes{grid-template-columns:1fr 1fr}}
+.sede{padding:28px;border-radius:var(--radius);display:flex;flex-direction:column;gap:14px;overflow:hidden;position:relative}
+.sede::before{content:"";position:absolute;inset:auto -40px -60px auto;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,var(--red-glow),transparent 70%);opacity:.6}
+.sede .ico{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--red-2),var(--red));color:#fff;box-shadow:0 10px 30px -10px var(--red-glow)}
+.sede h3{font-size:clamp(28px,4vw,36px);text-transform:uppercase;font-style:italic}
+.sede p{margin:0;color:var(--ink-2)}
+.sede .btn{align-self:flex-start;position:relative}
+
+/* CTA */
+.cta{padding:clamp(32px,6vw,64px);border-radius:28px;display:grid;gap:24px;align-items:center;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(227,37,43,.28),transparent 55%),linear-gradient(300deg,rgba(47,107,255,.2),transparent 50%);pointer-events:none}
+.cta > *{position:relative}
+.cta h2{font-size:clamp(34px,6vw,58px);font-weight:800;font-style:italic;text-transform:uppercase}
+.cta p{color:var(--ink-2);margin:12px 0 0}
+.cta .actions{display:flex;flex-wrap:wrap;gap:12px}
+.cta .actions .btn{flex:1 1 220px}
+@media (min-width:900px){.cta{grid-template-columns:1.3fr 1fr}.cta .actions{justify-content:flex-end}.cta .actions .btn{flex:0 0 auto}}
+
+/* Footer */
+footer{padding:48px 0 calc(110px + env(safe-area-inset-bottom));border-top:1px solid var(--line);margin-top:40px;color:var(--ink-3);font-size:14px}
+.foot{display:grid;gap:24px}
+.foot .brand span{font-size:22px;color:var(--ink)}
+.foot nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+.foot nav a:hover,.foot a.dgp:hover{color:var(--ink)}
+.foot .legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-top:24px;border-top:1px solid var(--line)}
+.foot a.dgp{color:var(--ink-2);font-weight:600}
+@media (min-width:800px){.foot .top{display:flex;justify-content:space-between;align-items:center}}
+.socials{display:flex;gap:10px}
+
+/* WhatsApp flotante */
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:45;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:#1fa855;color:#fff;box-shadow:0 14px 34px -8px rgba(31,168,85,.6);transition:transform .2s}
+.fab:hover{transform:scale(1.06)}
+.fab .icon{width:30px;height:30px}
+.fab::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #1fa855;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+
+/* Carrito (drawer) */
+.overlay{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;z-index:61;top:0;right:0;bottom:0;width:min(440px,100%);display:flex;flex-direction:column;background:rgba(13,15,20,.88);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.drawer header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line)}
+.drawer header h2{font-size:30px;font-style:italic;text-transform:uppercase}
+.drawer .scroll{flex:1;overflow-y:auto;padding:16px 20px;overscroll-behavior:contain}
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.line .thumb{width:64px;height:64px;border-radius:12px;background:var(--glass);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.line .thumb img{width:100%;height:100%;object-fit:cover}
+.line .thumb .icon{color:var(--ink-3)}
+.line h4{margin:0;font-size:15px;font-weight:600;line-height:1.3}
+.line .lp{font-size:13px;color:var(--ink-3)}
+.qty{display:inline-flex;align-items:center;gap:2px;margin-top:6px;border:1px solid var(--line);border-radius:999px;background:var(--glass)}
+.qty button{width:36px;height:36px;border:0;background:none;display:grid;place-items:center;border-radius:50%}
+.qty button:hover{background:var(--glass-2)}
+.qty .icon{width:16px;height:16px}
+.qty span{min-width:24px;text-align:center;font-weight:700}
+.line .rm{width:40px;height:40px;border:0;background:none;color:var(--ink-3);display:grid;place-items:center;border-radius:50%}
+.line .rm:hover{color:var(--red-2);background:var(--glass)}
+.line .rm .icon{width:18px;height:18px}
+.cart-empty{text-align:center;padding:48px 10px;color:var(--ink-2)}
+.cart-empty .icon{width:48px;height:48px;color:var(--ink-3);margin:0 auto 12px}
+.checkout{display:grid;gap:14px;margin-top:20px}
+.checkout h3{font-size:22px;text-transform:uppercase;margin-top:6px}
+label.f{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.f input,.f select,.f textarea{width:100%;min-height:50px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);outline:0;font-size:16px;transition:border-color .2s}
+.f textarea{min-height:84px;resize:vertical}
+.f select option{background:#14161c}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--red-2)}
+.drawer footer{padding:16px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:grid;gap:12px;background:rgba(7,8,11,.6)}
+.totals{display:flex;justify-content:space-between;align-items:end}
+.totals .t-usd{font-family:var(--display);font-size:34px;font-weight:800;line-height:1}
+.totals .t-bs{color:var(--ink-3);font-size:14px;text-align:right}
+.form-error{color:var(--red-2);font-size:14px;margin:0;min-height:0}
+
+/* Vista rápida */
+dialog.quick{border:0;padding:0;background:transparent;color:var(--ink);width:min(860px,calc(100% - 24px));max-height:calc(100% - 24px)}
+dialog.quick::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.quick .panel{display:grid;overflow:auto;max-height:calc(100vh - 24px);background:rgba(16,18,24,.92)}
+.quick .q-body{padding:8px 20px 24px;display:flex;flex-direction:column;gap:14px;position:relative}
+.quick h2{font-size:clamp(30px,4vw,40px);text-transform:uppercase;font-style:italic}
+.quick .desc{color:var(--ink-2);white-space:pre-line;margin:0}
+.quick .close{position:absolute;top:14px;right:14px;z-index:2;background:rgba(7,8,11,.7)}
+.quick .panel{position:relative}
+@media (min-width:760px){.quick .panel{grid-template-columns:1fr 1fr}.quick .q-body{padding:36px 28px}.gallery{padding:20px}}
+
+.toast{position:fixed;left:50%;top:calc(84px + env(safe-area-inset-top));z-index:70;transform:translate(-50%,-20px);opacity:0;padding:12px 18px;border-radius:999px;font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast .icon{color:#3ddc84}
+
+
+/* Barra de anuncio */
+.announce{background:linear-gradient(90deg,var(--red),#a3141a);color:#fff;text-align:center;font-size:14px;font-weight:600;padding:9px var(--pad);line-height:1.4}
+.announce[hidden]{display:none}
+
+/* Orden */
+.tools-row{display:flex;gap:10px;align-items:center}
+.tools-row .search{flex:1;min-width:0}
+.toolbar > *{min-width:0}
+.sort{min-height:54px;padding:0 40px 0 16px;border-radius:999px;border:1px solid var(--line);background:var(--glass) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b9bdc7' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/16px;appearance:none;-webkit-appearance:none;font-weight:600;font-size:14px;flex:none;width:132px}
+.sort option{background:#14161c}
+
+/* Precio con oferta */
+.price .old{font-size:14px;color:var(--ink-3);text-decoration:line-through;margin-left:6px;font-family:var(--body);font-weight:500}
+.tag.off{left:auto;right:10px;background:#1fa855;border-color:#1fa855}
+.tag.new{background:var(--blue);border-color:var(--blue)}
+.tags{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.tags .tag{position:static}
+.dots{display:flex;gap:5px;margin-top:2px}
+.dots i{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
+.dots small{font-size:12px;color:var(--ink-3);align-self:center}
+
+/* Detalle de producto */
+.gallery{display:grid;gap:10px;padding:14px}
+.gallery .main{aspect-ratio:1;border-radius:16px;overflow:hidden;background:radial-gradient(circle,rgba(255,255,255,.08),rgba(255,255,255,.02));display:grid;place-items:center}
+.gallery .main img{width:100%;height:100%;object-fit:contain}
+.gallery .main .icon{width:72px;height:72px;color:var(--ink-3)}
+.thumbs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.thumbs button{flex:none;width:64px;height:64px;border-radius:12px;overflow:hidden;border:2px solid transparent;padding:0;background:var(--glass)}
+.thumbs button[aria-current="true"]{border-color:var(--red-2)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.opt{display:grid;gap:8px}
+.opt > span{font-size:14px;font-weight:600;color:var(--ink-2)}
+.opt > span b{color:var(--ink)}
+.swatches,.sizes{display:flex;flex-wrap:wrap;gap:8px}
+.swatch{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);padding:3px;background:none}
+.swatch i{display:block;width:100%;height:100%;border-radius:50%;border:1px solid rgba(255,255,255,.25)}
+.swatch[aria-pressed="true"]{border-color:var(--red-2)}
+.size{min-width:52px;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--glass);font-weight:700;font-size:14px}
+.size[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.q-actions{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-top:4px}
+.q-actions .qty{margin:0;height:52px}
+.q-actions .qty button{width:44px;height:50px}
+.q-meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-3)}
+.q-links{display:flex;flex-wrap:wrap;gap:8px}
+.q-links .btn{min-height:44px;font-size:14px;padding:0 16px}
+.stock{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.stock.ok{color:#3ddc84}.stock.low{color:#ffb547}.stock.out{color:var(--red-2)}
+.stock .icon{width:18px;height:18px}
+.line .var{font-size:12px;color:var(--ink-2)}
+.done-box{text-align:center;padding:40px 10px}
+.done-box .icon{width:56px;height:56px;color:#3ddc84;margin:0 auto 12px}
+.done-box h3{font-size:30px;text-transform:uppercase;font-style:italic;margin-bottom:8px}
+.done-box p{color:var(--ink-2)}
+.sede .meta{display:grid;gap:8px;position:relative}
+.sede .meta span{display:flex;gap:10px;align-items:flex-start;color:var(--ink-2)}
+.sede .meta .icon{width:20px;height:20px;color:var(--red-2);margin-top:2px}
+.sede .row{display:flex;flex-wrap:wrap;gap:10px;position:relative}
+
+/* Animación de aparición */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+}
 </style>
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-  <main>
-    <img src="assets/logo.jpg" alt="Amilkar Biker Shop">
-    <h1>Amilkar Biker Shop</h1>
-    <p>Nuestro sitio web está en construcción.</p>
-  </main>
+
+<div class="ambient" aria-hidden="true"><div class="streaks"></div></div>
+
+<div class="announce" id="announce" hidden></div>
+
+<header class="header">
+  <div class="wrap">
+    <div class="bar glass">
+      <a class="brand" href="#inicio" aria-label="Amilkar Biker Shop, ir al inicio">
+        <img src="assets/logo-mark.svg" alt="" width="44" height="44">
+        <span>Amilkar <b>Biker</b></span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#categorias">Categorías</a>
+        <a href="#como-comprar">Cómo comprar</a>
+        <a href="#sedes">Sedes</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="head-actions">
+        <button class="icon-btn" id="openCart" type="button" aria-label="Abrir carrito">
+          <svg class="icon"><use href="#i-cart"/></svg>
+          <span class="badge" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="icon"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu glass" id="mobileMenu" aria-label="Menú móvil">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#como-comprar">Cómo comprar</a>
+      <a href="#sedes">Sedes</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="kicker"><i></i>Accesorios para moto · Maracaibo</span>
+        <h1>Equípate para <em>rodar</em> sin límites</h1>
+        <p class="lead">Cascos, guantes, chaquetas, luces, repuestos, equipaje, cauchos y aceites. Todo lo que tu moto y tú necesitan, con precios en dólares y bolívares.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-red" href="#catalogo"><svg class="icon"><use href="#i-grid"/></svg>Ver catálogo</a>
+          <a class="btn btn-glass wa-link" href="https://wa.me/584126833301" target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg>Escríbenos</a>
+        </div>
+        <ul class="chips" aria-label="Ventajas">
+          <li><svg class="icon"><use href="#i-store"/></svg>2 sedes en Maracaibo</li>
+          <li><svg class="icon"><use href="#i-dollar"/></svg>Precios en $ y Bs</li>
+          <li><svg class="icon"><use href="#i-truck"/></svg>Delivery y envíos</li>
+        </ul>
+      </div>
+      <div class="hero-art reveal">
+        <div class="ring" aria-hidden="true"></div>
+        <img src="assets/logo.svg" alt="Logo de Amilkar Biker Shop: casco de moto con alas y el texto Amilkar Biker Shop Accesorios" width="600" height="560" fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="categorias" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Categorías</span>
+          <h2>Todo para tu moto</h2>
+          <p>Elige una categoría y te mostramos lo que tenemos disponible.</p>
+        </div>
+      </div>
+      <div class="cats" id="cats"></div>
+    </div>
+  </section>
+
+  <section class="section" id="catalogo" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Catálogo</span>
+          <h2>Productos</h2>
+          <p>Toca un producto para ver fotos, colores y medidas. Agrega al carrito y envíanos tu pedido por WhatsApp.</p>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="tools-row">
+          <label class="search glass">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <span class="sr-only">Buscar productos</span>
+            <input id="q" type="search" placeholder="Buscar casco, aceite, caucho..." autocomplete="off">
+          </label>
+          <label class="sr-only" for="sort">Ordenar</label>
+          <select class="sort" id="sort">
+            <option value="destacados">Destacados</option>
+            <option value="nuevos">Más nuevos</option>
+            <option value="menor">Menor precio</option>
+            <option value="mayor">Mayor precio</option>
+            <option value="ofertas">Ofertas</option>
+          </select>
+        </div>
+        <div class="filters" id="filters" role="toolbar" aria-label="Filtrar por categoría"></div>
+      </div>
+      <div class="grid" id="grid" aria-live="polite"></div>
+      <p class="rate-note" id="rateNote" hidden></p>
+    </div>
+  </section>
+
+  <section class="section" id="como-comprar" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Cómo comprar</span>
+          <h2>Pedir es muy fácil</h2>
+          <p id="enviosTxt"></p>
+        </div>
+      </div>
+      <div class="steps">
+        <article class="step glass reveal">
+          <span class="num" aria-hidden="true">01</span>
+          <div class="ico"><svg class="icon"><use href="#i-grid"/></svg></div>
+          <h3>Elige</h3>
+          <p>Explora el catálogo, escoge color y medida, y agrega al carrito lo que necesitas.</p>
+        </article>
+        <article class="step glass reveal">
+          <span class="num" aria-hidden="true">02</span>
+          <div class="ico"><svg class="icon"><use href="#i-cart"/></svg></div>
+          <h3>Revisa</h3>
+          <p>Ajusta cantidades, mira el total en dólares y bolívares y elige retiro en sede o delivery.</p>
+        </article>
+        <article class="step glass reveal">
+          <span class="num" aria-hidden="true">03</span>
+          <div class="ico"><svg class="icon"><use href="#i-wa"/></svg></div>
+          <h3>Envía</h3>
+          <p>Tu pedido llega a nuestro WhatsApp. Te confirmamos disponibilidad y forma de pago.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sedes" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">Sedes</span>
+          <h2>Visítanos en Maracaibo</h2>
+          <p>Tenemos dos tiendas para atenderte.</p>
+        </div>
+      </div>
+      <div class="sedes" id="sedesList"></div>
+    </div>
+  </section>
+
+  <section class="section" id="contacto" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta glass reveal">
+        <div>
+          <span class="eyebrow">Contacto</span>
+          <h2>¿Buscas algo en específico?</h2>
+          <p>Si no lo ves en el catálogo, pregúntanos. Te ayudamos a encontrar el repuesto o accesorio que tu moto necesita.</p>
+        </div>
+        <div class="actions" id="contactActions">
+          <a class="btn btn-wa wa-link" data-msg="Hola, estoy buscando un producto para mi moto." href="https://wa.me/584126833301" target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg>WhatsApp</a>
+          <a class="btn btn-glass tel-link" href="tel:+584126833301"><svg class="icon"><use href="#i-phone"/></svg>Llamar</a>
+          <a class="btn btn-glass" href="https://www.instagram.com/amilkarbikershop/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-instagram"/></svg>Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="top">
+      <a class="brand" href="#inicio">
+        <img src="assets/logo-mark.svg" alt="" width="44" height="44" loading="lazy">
+        <span>Amilkar <b>Biker</b> Shop</span>
+      </a>
+      <nav aria-label="Pie de página" id="footNav">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#sedes">Sedes</a>
+        <a class="tel-link" href="tel:+584126833301">+58 412 683 3301</a>
+        <a href="https://www.instagram.com/amilkarbikershop/" target="_blank" rel="noopener">@amilkarbikershop</a>
+      </nav>
+    </div>
+    <div class="legal">
+      <span>© <span id="year">2026</span> Amilkar Biker Shop. Maracaibo, Venezuela.</span>
+      <span>Diseñado por <a class="dgp" href="https://dgpglobalgroup.com" target="_blank" rel="noopener">DGP Global Group</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="fab wa-link" href="https://wa.me/584126833301" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg class="icon"><use href="#i-wa"/></svg>
+</a>
+
+<!-- Carrito -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Carrito de compras" aria-hidden="true">
+  <header>
+    <h2>Tu carrito</h2>
+    <button class="icon-btn" id="closeCart" type="button" aria-label="Cerrar carrito"><svg class="icon"><use href="#i-x"/></svg></button>
+  </header>
+  <div class="scroll">
+    <div id="lines"></div>
+    <form class="checkout" id="checkout" novalidate>
+      <h3>Datos del pedido</h3>
+      <label class="f">Nombre y apellido
+        <input name="nombre" autocomplete="name" required maxlength="80" placeholder="Tu nombre">
+      </label>
+      <label class="f">Teléfono (opcional)
+        <input name="telefono" type="tel" autocomplete="tel" maxlength="20" placeholder="0412 000 0000">
+      </label>
+      <label class="f">¿Cómo lo quieres recibir?
+        <select name="entrega" id="entrega"></select>
+      </label>
+      <label class="f" id="dirWrap" hidden>Dirección de entrega
+        <textarea name="direccion" maxlength="240" placeholder="Ciudad, sector, calle y punto de referencia"></textarea>
+      </label>
+      <label class="f">Nota (opcional)
+        <textarea name="nota" maxlength="300" placeholder="Modelo de tu moto, forma de pago preferida..."></textarea>
+      </label>
+    </form>
+  </div>
+  <footer id="cartFoot">
+    <div class="totals">
+      <div><small style="color:var(--ink-3)">Total</small><div class="t-usd" id="tUsd">$0,00</div></div>
+      <div class="t-bs" id="tBs"></div>
+    </div>
+    <p class="form-error" id="formError" role="alert"></p>
+    <button class="btn btn-wa btn-block" id="sendOrder" type="submit" form="checkout"><svg class="icon"><use href="#i-wa"/></svg>Enviar pedido por WhatsApp</button>
+  </footer>
+</aside>
+
+<!-- Detalle de producto -->
+<dialog class="quick" id="quick" aria-labelledby="qTitle">
+  <div class="panel glass">
+    <button class="icon-btn close" type="button" id="qClose" aria-label="Cerrar"><svg class="icon"><use href="#i-x"/></svg></button>
+    <div class="gallery">
+      <div class="main" id="qMain"></div>
+      <div class="thumbs" id="qThumbs"></div>
+    </div>
+    <div class="q-body">
+      <span class="eyebrow" id="qCat" style="margin:16px 0 0"></span>
+      <h2 id="qTitle"></h2>
+      <div class="q-meta" id="qMeta"></div>
+      <div class="price"><span class="usd" id="qUsd"></span><span class="old" id="qOld"></span><span class="bs" id="qBs"></span></div>
+      <div class="stock" id="qStock"></div>
+      <div class="opt" id="qColorsWrap" hidden><span>Color: <b id="qColorName"></b></span><div class="swatches" id="qColors"></div></div>
+      <div class="opt" id="qSizesWrap" hidden><span id="qSizesLabel">Talla / medida: <b id="qSizeName"></b></span><div class="sizes" id="qSizes"></div></div>
+      <p class="desc" id="qDesc"></p>
+      <div class="q-actions">
+        <div class="qty"><button type="button" id="qDec" aria-label="Quitar uno"><svg class="icon"><use href="#i-minus"/></svg></button><span id="qQty">1</span><button type="button" id="qInc" aria-label="Agregar uno"><svg class="icon"><use href="#i-plus"/></svg></button></div>
+        <button class="btn btn-red" id="qAdd" type="button"><svg class="icon"><use href="#i-cart"/></svg><span>Agregar al carrito</span></button>
+      </div>
+      <p class="form-error" id="qErr" role="alert"></p>
+      <div class="q-links">
+        <a class="btn btn-glass" id="qAsk" href="#" target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg>Preguntar</a>
+        <button class="btn btn-glass" id="qShare" type="button"><svg class="icon"><use href="#i-share"/></svg>Compartir</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast glass" id="toast" role="status"><svg class="icon"><use href="#i-check"/></svg><span></span></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, getDoc, setDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-lite.js";
+import { firebaseConfig, configBase, categoriasBase, cl, cargarIconos, precioDe } from "./assets/config.js";
+
+cargarIconos();
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const icon = id => `<svg class="icon" aria-hidden="true"><use href="#i-${id}"/></svg>`;
+const num = n => Number(n || 0).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmtUsd = n => "$" + num(n);
+const fmtBs = n => "Bs " + num(n);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let cfg = { ...configBase };
+let categorias = categoriasBase;
+let catById = {};
+let productos = [];
+let filtro = "todos", busqueda = "", orden = "destacados";
+const waUrl = msg => `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(msg)}`;
+const tasa = () => (cfg.mostrarBs !== false && Number(cfg.tasa) > 0 ? Number(cfg.tasa) : 0);
+const bsDe = usd => tasa() ? fmtBs(usd * tasa()) : "";
+
+$("#year").textContent = new Date().getFullYear();
+
+/* Menú móvil */
+const menuBtn = $("#menuToggle"), menu = $("#mobileMenu");
+menuBtn.addEventListener("click", () => { const o = menu.classList.toggle("open"); menuBtn.setAttribute("aria-expanded", o); });
+menu.addEventListener("click", e => { if (e.target.closest("a")) { menu.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); } });
+
+/* Aparición al hacer scroll */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .1 });
+const observe = root => root.querySelectorAll(".reveal:not(.in)").forEach(el => io.observe(el));
+observe(document);
+
+/* Almacenamiento local seguro */
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+let cart = store.get("abs-cart-v2", []); // [{key,id,nombre,precio,imagen,categoria,color,talla,qty}]
+
+/* ---------- Ajustes de la tienda ---------- */
+function aplicarConfig() {
+  document.querySelectorAll(".wa-link").forEach(a => { a.href = waUrl(a.dataset.msg || "Hola Amilkar Biker Shop, quiero información sobre sus productos."); });
+  document.querySelectorAll(".tel-link").forEach(a => { a.href = "tel:+" + cfg.whatsapp; if (!a.classList.contains("btn")) a.textContent = cfg.telefonoVisible || "+" + cfg.whatsapp; });
+  const an = $("#announce"); an.hidden = !cfg.anuncio; an.textContent = cfg.anuncio || "";
+  $("#enviosTxt").textContent = cfg.envios || "";
+  // Sedes
+  const sedes = (cfg.sedes || []).filter(s => s.nombre);
+  $("#sedesList").innerHTML = sedes.map(s => `
+    <article class="sede glass reveal">
+      <div class="ico">${icon("pin")}</div>
+      <h3>${esc(s.nombre)}</h3>
+      <div class="meta">
+        <span>${icon("pin")}${esc(s.direccion || "Maracaibo, Zulia")}</span>
+        ${s.horario ? `<span>${icon("clock")}${esc(s.horario)}</span>` : ""}
+      </div>
+      <div class="row">
+        ${s.mapa ? `<a class="btn btn-red" href="${esc(s.mapa)}" target="_blank" rel="noopener">${icon("pin")}Ver en el mapa</a>` : ""}
+        <a class="btn btn-glass" href="${waUrl(`Hola, quiero saber cómo llegar a la sede ${s.nombre} y su horario.`)}" target="_blank" rel="noopener">${icon("wa")}${s.mapa ? "Escribir" : "Cómo llegar"}</a>
+      </div>
+    </article>`).join("");
+  observe($("#sedesList"));
+  // Entrega
+  $("#entrega").innerHTML = sedes.map(s => `<option>Retiro en sede ${esc(s.nombre)}</option>`).join("") + `<option value="Delivery / envío">Delivery o envío</option>`;
+  // Redes en contacto
+  const redes = [["instagram", "Instagram"], ["facebook", "Facebook"], ["tiktok", "TikTok"]].filter(([k]) => cfg[k]);
+  $("#contactActions").innerHTML = `
+    <a class="btn btn-wa" href="${waUrl("Hola, estoy buscando un producto para mi moto.")}" target="_blank" rel="noopener">${icon("wa")}WhatsApp</a>
+    <a class="btn btn-glass" href="tel:+${esc(cfg.whatsapp)}">${icon("phone")}Llamar</a>
+    ${cfg.email ? `<a class="btn btn-glass" href="mailto:${esc(cfg.email)}">${icon("mail")}Correo</a>` : ""}
+    ${redes.map(([k, n]) => `<a class="btn btn-glass" href="${esc(cfg[k])}" target="_blank" rel="noopener">${icon(k)}${n}</a>`).join("")}`;
+  const t = tasa(); const n = $("#rateNote");
+  n.hidden = !t; n.textContent = t ? `Precios en bolívares calculados a la tasa de ${fmtBs(t)} por $1.` : "";
+}
+
+/* ---------- Categorías ---------- */
+function renderCats() {
+  catById = Object.fromEntries(categorias.map(c => [c.id, c]));
+  const conProductos = new Set(productos.map(p => p.categoria));
+  const visibles = categorias.filter(c => c.activa !== false && (!productos.length || conProductos.has(c.id)));
+  $("#cats").innerHTML = visibles.map(c => {
+    const n = productos.filter(p => p.categoria === c.id).length;
+    return `<button class="cat glass reveal" type="button" data-cat="${esc(c.id)}">
+      <span class="ico">${icon(c.icono || "spark")}</span>
+      <strong>${esc(c.nombre)}</strong>
+      <small>${n ? `${n} producto${n === 1 ? "" : "s"}` : "Ver productos"}</small>
+    </button>`;
+  }).join("");
+  observe($("#cats"));
+  renderFilters();
+}
+$("#cats").addEventListener("click", e => {
+  const b = e.target.closest("[data-cat]"); if (!b) return;
+  setFiltro(b.dataset.cat);
+  $("#catalogo").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+});
+function renderFilters() {
+  const presentes = new Set(productos.map(p => p.categoria));
+  const lista = [{ id: "todos", nombre: "Todos" }, ...categorias.filter(c => c.activa !== false && (presentes.has(c.id) || !productos.length))];
+  $("#filters").innerHTML = lista.map(c => `<button class="filter" type="button" data-f="${esc(c.id)}" aria-pressed="${c.id === filtro}">${esc(c.nombre)}</button>`).join("");
+}
+$("#filters").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (b) setFiltro(b.dataset.f); });
+function setFiltro(f) { filtro = f; renderFilters(); renderGrid(); }
+$("#q").addEventListener("input", e => { busqueda = e.target.value.trim(); renderGrid(); });
+$("#sort").addEventListener("change", e => { orden = e.target.value; renderGrid(); });
+
+/* ---------- Catálogo ---------- */
+const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const agotado = p => p.stock === 0;
+const enOferta = p => Number(p.precioAnterior) > Number(p.precio);
+const desde = p => { const ps = [p.precio, ...(p.tallas || []).map(t => t.precio).filter(v => v > 0)].map(Number).filter(v => v > 0); return ps.length ? Math.min(...ps) : 0; };
+const variaPrecio = p => (p.tallas || []).some(t => t.precio > 0 && Number(t.precio) !== Number(p.precio));
+
+function renderGrid() {
+  const q = norm(busqueda);
+  let lista = productos.filter(p =>
+    (filtro === "todos" || p.categoria === filtro) &&
+    (!q || [p.nombre, p.descripcion, p.marca, p.sku, catById[p.categoria]?.nombre, ...(p.colores || []).map(c => c.nombre), ...(p.tallas || []).map(t => t.nombre)].some(v => norm(v).includes(q)))
+  );
+  if (orden === "ofertas") lista = lista.filter(enOferta);
+  const t = p => p.creado?.seconds || 0;
+  const sorters = {
+    destacados: (a, b) => (agotado(a) - agotado(b)) || ((b.destacado === true) - (a.destacado === true)) || (t(b) - t(a)),
+    nuevos: (a, b) => t(b) - t(a),
+    menor: (a, b) => desde(a) - desde(b),
+    mayor: (a, b) => desde(b) - desde(a),
+    ofertas: (a, b) => (b.precioAnterior - b.precio) / b.precioAnterior - (a.precioAnterior - a.precio) / a.precioAnterior
+  };
+  lista.sort(sorters[orden]);
+  const grid = $("#grid");
+  if (!productos.length) {
+    grid.innerHTML = `<div class="empty glass">${icon("helmet")}<h3>Catálogo en preparación</h3><p>Estamos cargando nuestros productos. Mientras tanto, escríbenos y te decimos qué tenemos disponible.</p><a class="btn btn-wa" href="${waUrl("Hola, quiero saber qué productos tienen disponibles.")}" target="_blank" rel="noopener">${icon("wa")}Consultar por WhatsApp</a></div>`;
+    return;
+  }
+  if (!lista.length) {
+    const cat = catById[filtro]?.nombre;
+    grid.innerHTML = `<div class="empty glass">${icon("search")}<h3>Sin resultados</h3><p>No encontramos productos${cat ? " en " + esc(cat) : ""}${busqueda ? " para “" + esc(busqueda) + "”" : ""}. Pregúntanos, puede que lo tengamos en tienda.</p><a class="btn btn-wa" href="${waUrl("Hola, estoy buscando: " + (busqueda || cat || "un producto"))}" target="_blank" rel="noopener">${icon("wa")}Preguntar por WhatsApp</a></div>`;
+    return;
+  }
+  grid.innerHTML = lista.map(p => {
+    const c = catById[p.categoria];
+    const img = (p.imagenes || [])[0];
+    const off = enOferta(p) ? Math.round((1 - p.precio / p.precioAnterior) * 100) : 0;
+    const precio = variaPrecio(p) ? desde(p) : Number(p.precio);
+    const colores = p.colores || [];
+    return `<article class="card glass reveal">
+      <button class="media" type="button" data-view="${esc(p.id)}" aria-label="Ver ${esc(p.nombre)}">
+        ${img ? `<img src="${esc(cl(img, 520))}" alt="${esc(p.nombre)}" loading="lazy" decoding="async" width="520" height="520">` : icon(c?.icono || "helmet")}
+        <span class="tags">
+          ${p.destacado ? `<span class="tag hot">Destacado</span>` : ""}
+          ${p.nuevo ? `<span class="tag new">Nuevo</span>` : ""}
+        </span>
+        ${off ? `<span class="tag off">-${off}%</span>` : ""}
+        ${agotado(p) ? `<span class="tag out">Agotado</span>` : ""}
+      </button>
+      <div class="body">
+        <span class="cat-name">${esc(c?.nombre || "Accesorios")}</span>
+        <h3>${esc(p.nombre)}</h3>
+        ${colores.length ? `<div class="dots" aria-label="${colores.length} colores">${colores.slice(0, 5).map(k => `<i style="background:${esc(k.hex || "#888")}" title="${esc(k.nombre)}"></i>`).join("")}${colores.length > 5 ? `<small>+${colores.length - 5}</small>` : ""}</div>` : ""}
+        <div class="price">${variaPrecio(p) ? `<small style="color:var(--ink-3)">Desde </small>` : ""}<span class="usd">${fmtUsd(precio)}</span>${off ? `<span class="old">${fmtUsd(p.precioAnterior)}</span>` : ""}${tasa() ? `<span class="bs">${bsDe(precio)}</span>` : ""}</div>
+        <button class="add" type="button" data-add="${esc(p.id)}" ${agotado(p) ? "disabled style='opacity:.5'" : ""}>${icon(agotado(p) ? "x" : "plus")}${agotado(p) ? "Agotado" : (colores.length > 1 || (p.tallas || []).length > 1 ? "Elegir opciones" : "Agregar")}</button>
+      </div>
+    </article>`;
+  }).join("");
+  observe(grid);
+}
+
+$("#grid").addEventListener("click", e => {
+  const add = e.target.closest("[data-add]");
+  if (add) {
+    const p = productos.find(x => x.id === add.dataset.add); if (!p) return;
+    if ((p.colores || []).length > 1 || (p.tallas || []).length > 1) { openQuick(p.id); return; }
+    addToCart(p, (p.colores || [])[0]?.nombre || "", (p.tallas || [])[0]?.nombre || "", 1, add);
+    return;
+  }
+  const v = e.target.closest("[data-view]");
+  if (v) openQuick(v.dataset.view);
+});
+
+/* ---------- Detalle de producto ---------- */
+const quick = $("#quick");
+let qp = null, qColor = "", qTalla = "", qQty = 1, qImg = 0;
+function openQuick(id) {
+  const p = productos.find(x => x.id === id); if (!p) return;
+  qp = p; qQty = 1; qImg = 0;
+  qColor = (p.colores || []).length === 1 ? p.colores[0].nombre : "";
+  qTalla = (p.tallas || []).length === 1 ? p.tallas[0].nombre : "";
+  const c = catById[p.categoria];
+  $("#qCat").textContent = c?.nombre || "Accesorios";
+  $("#qTitle").textContent = p.nombre;
+  $("#qMeta").innerHTML = [p.marca && `Marca: ${esc(p.marca)}`, p.sku && `Código: ${esc(p.sku)}`].filter(Boolean).map(x => `<span>${x}</span>`).join("");
+  $("#qDesc").textContent = p.descripcion || "";
+  $("#qErr").textContent = "";
+  const st = $("#qStock");
+  if (agotado(p)) { st.className = "stock out"; st.innerHTML = icon("x") + "Agotado"; }
+  else if (p.stock > 0 && p.stock <= 3) { st.className = "stock low"; st.innerHTML = icon("alert") + `Últimas ${p.stock} unidades`; }
+  else if (p.stock > 0 || p.stock == null) { st.className = "stock ok"; st.innerHTML = icon("check") + "Disponible"; }
+  $("#qColorsWrap").hidden = !(p.colores || []).length;
+  $("#qSizesWrap").hidden = !(p.tallas || []).length;
+  $("#qSizesLabel").firstChild.textContent = (p.etiquetaTalla || "Talla / medida") + ": ";
+  $("#qAdd").disabled = agotado(p);
+  $("#qAdd").querySelector("span").textContent = agotado(p) ? "Agotado" : "Agregar al carrito";
+  $("#qAsk").href = waUrl(`Hola, quiero información sobre: ${p.nombre}${p.sku ? " (" + p.sku + ")" : ""}`);
+  renderQuick();
+  if (!quick.open) quick.showModal();
+  history.replaceState(null, "", "#producto/" + encodeURIComponent(p.id));
+}
+function renderQuick() {
+  const p = qp; const imgs = p.imagenes || [];
+  const c = catById[p.categoria];
+  $("#qMain").innerHTML = imgs[qImg] ? `<img src="${esc(cl(imgs[qImg], 1000))}" alt="${esc(p.nombre)}${qColor ? " color " + esc(qColor) : ""}">` : icon(c?.icono || "helmet");
+  $("#qThumbs").innerHTML = imgs.length > 1 ? imgs.map((u, i) => `<button type="button" data-img="${i}" aria-label="Foto ${i + 1}" aria-current="${i === qImg}"><img src="${esc(cl(u, 140))}" alt="" loading="lazy"></button>`).join("") : "";
+  $("#qColors").innerHTML = (p.colores || []).map(k => `<button class="swatch" type="button" data-color="${esc(k.nombre)}" aria-pressed="${k.nombre === qColor}" aria-label="${esc(k.nombre)}" title="${esc(k.nombre)}"><i style="background:${esc(k.hex || "#888")}"></i></button>`).join("");
+  $("#qColorName").textContent = qColor || "elige uno";
+  $("#qSizes").innerHTML = (p.tallas || []).map(t => `<button class="size" type="button" data-size="${esc(t.nombre)}" aria-pressed="${t.nombre === qTalla}">${esc(t.nombre)}</button>`).join("");
+  $("#qSizeName").textContent = qTalla || "elige una";
+  const precio = qTalla ? precioDe(p, qTalla) : (variaPrecio(p) ? desde(p) : Number(p.precio));
+  $("#qUsd").textContent = (!qTalla && variaPrecio(p) ? "Desde " : "") + fmtUsd(precio);
+  $("#qOld").textContent = enOferta(p) && !variaPrecio(p) ? fmtUsd(p.precioAnterior) : "";
+  $("#qBs").textContent = bsDe(precio);
+  $("#qQty").textContent = qQty;
+}
+$("#qThumbs").addEventListener("click", e => { const b = e.target.closest("[data-img]"); if (b) { qImg = +b.dataset.img; renderQuick(); } });
+$("#qColors").addEventListener("click", e => {
+  const b = e.target.closest("[data-color]"); if (!b) return;
+  qColor = b.dataset.color; $("#qErr").textContent = "";
+  const k = qp.colores.find(x => x.nombre === qColor);
+  const i = (qp.imagenes || []).indexOf(k?.imagen);
+  if (i >= 0) qImg = i;
+  renderQuick();
+});
+$("#qSizes").addEventListener("click", e => { const b = e.target.closest("[data-size]"); if (b) { qTalla = b.dataset.size; $("#qErr").textContent = ""; renderQuick(); } });
+$("#qInc").addEventListener("click", () => { qQty = Math.min(qp.stock > 0 ? qp.stock : 99, qQty + 1); renderQuick(); });
+$("#qDec").addEventListener("click", () => { qQty = Math.max(1, qQty - 1); renderQuick(); });
+$("#qAdd").addEventListener("click", () => {
+  if ((qp.colores || []).length && !qColor) { $("#qErr").textContent = "Elige un color."; return; }
+  if ((qp.tallas || []).length && !qTalla) { $("#qErr").textContent = `Elige ${(qp.etiquetaTalla || "una talla o medida").toLowerCase()}.`; return; }
+  addToCart(qp, qColor, qTalla, qQty);
+  quick.close();
+});
+$("#qShare").addEventListener("click", async () => {
+  const url = location.origin + location.pathname + "#producto/" + encodeURIComponent(qp.id);
+  try {
+    if (navigator.share) await navigator.share({ title: qp.nombre, text: `${qp.nombre} en Amilkar Biker Shop`, url });
+    else { await navigator.clipboard.writeText(url); toast("Enlace copiado"); }
+  } catch {}
+});
+$("#qClose").addEventListener("click", () => quick.close());
+quick.addEventListener("click", e => { if (e.target === quick) quick.close(); });
+quick.addEventListener("close", () => { if (location.hash.startsWith("#producto/")) history.replaceState(null, "", location.pathname); });
+
+/* ---------- Carrito ---------- */
+function saveCart() { store.set("abs-cart-v2", cart); renderCart(); }
+function addToCart(p, color, talla, qty = 1, btn) {
+  const key = [p.id, color, talla].join("|");
+  const max = p.stock > 0 ? p.stock : 99;
+  const l = cart.find(x => x.key === key);
+  const imgColor = (p.colores || []).find(k => k.nombre === color)?.imagen;
+  if (l) l.qty = Math.min(max, l.qty + qty);
+  else cart.push({ key, id: p.id, nombre: p.nombre, sku: p.sku || "", precio: precioDe(p, talla), imagen: imgColor || (p.imagenes || [])[0] || "", categoria: p.categoria, color, talla, qty: Math.min(max, qty) });
+  saveCart();
+  toast("Agregado al carrito");
+  if (btn) { btn.classList.add("done"); btn.innerHTML = icon("check") + "Agregado"; setTimeout(() => { btn.classList.remove("done"); btn.innerHTML = icon("plus") + "Agregar"; }, 1400); }
+}
+// Mantener el carrito al día con el catálogo (precios, productos retirados)
+function syncCart() {
+  if (!productos.length) return;
+  cart = cart.filter(l => productos.some(p => p.id === l.id && !agotado(p))).map(l => {
+    const p = productos.find(x => x.id === l.id);
+    return { ...l, nombre: p.nombre, precio: precioDe(p, l.talla) };
+  });
+  saveCart();
+}
+const totalUsd = () => cart.reduce((s, l) => s + l.precio * l.qty, 0);
+const varTxt = l => [l.color, l.talla].filter(Boolean).join(" · ");
+
+let pedidoEnviado = null;
+function renderCart() {
+  const n = cart.reduce((s, l) => s + l.qty, 0);
+  const badge = $("#cartCount");
+  badge.textContent = n; badge.classList.toggle("on", n > 0);
+  $("#openCart").setAttribute("aria-label", `Abrir carrito (${n} productos)`);
+  const lines = $("#lines");
+  if (pedidoEnviado) {
+    lines.innerHTML = `<div class="done-box">${icon("check")}<h3>Pedido enviado</h3><p>Tu pedido <b>${esc(pedidoEnviado)}</b> se abrió en WhatsApp. Si no se envió, toca el botón de abajo.</p><a class="btn btn-wa" href="${esc(ultimoWa)}" target="_blank" rel="noopener">${icon("wa")}Abrir WhatsApp otra vez</a><p><a href="#catalogo" data-close style="color:var(--ink-2);text-decoration:underline">Seguir comprando</a></p></div>`;
+    $("#checkout").hidden = true; $("#cartFoot").hidden = true; return;
+  }
+  if (!cart.length) {
+    lines.innerHTML = `<div class="cart-empty">${icon("cart")}<p>Tu carrito está vacío.</p><a class="btn btn-glass" href="#catalogo" data-close>Ver catálogo</a></div>`;
+    $("#checkout").hidden = true; $("#cartFoot").hidden = true;
+    return;
+  }
+  $("#checkout").hidden = false; $("#cartFoot").hidden = false;
+  lines.innerHTML = cart.map(l => `
+    <div class="line">
+      <div class="thumb">${l.imagen ? `<img src="${esc(cl(l.imagen, 140))}" alt="" loading="lazy">` : icon(catById[l.categoria]?.icono || "helmet")}</div>
+      <div>
+        <h4>${esc(l.nombre)}</h4>
+        ${varTxt(l) ? `<div class="var">${esc(varTxt(l))}</div>` : ""}
+        <div class="lp">${fmtUsd(l.precio)}${tasa() ? " · " + bsDe(l.precio) : ""}</div>
+        <div class="qty">
+          <button type="button" data-dec="${esc(l.key)}" aria-label="Quitar uno">${icon("minus")}</button>
+          <span>${l.qty}</span>
+          <button type="button" data-inc="${esc(l.key)}" aria-label="Agregar uno">${icon("plus")}</button>
+        </div>
+      </div>
+      <button class="rm" type="button" data-rm="${esc(l.key)}" aria-label="Eliminar ${esc(l.nombre)}">${icon("trash")}</button>
+    </div>`).join("");
+  const t = totalUsd();
+  $("#tUsd").textContent = fmtUsd(t);
+  $("#tBs").innerHTML = tasa() ? `${fmtBs(t * tasa())}<br><small>Tasa: ${fmtBs(tasa())} por $1</small>` : "";
+}
+$("#lines").addEventListener("click", e => {
+  const b = e.target.closest("button,[data-close]"); if (!b) return;
+  if (b.hasAttribute("data-close")) { pedidoEnviado = null; closeCart(); renderCart(); return; }
+  const key = b.dataset.inc || b.dataset.dec || b.dataset.rm; if (!key) return;
+  const l = cart.find(x => x.key === key); if (!l) return;
+  const p = productos.find(x => x.id === l.id);
+  if (b.dataset.inc) l.qty = Math.min(p?.stock > 0 ? p.stock : 99, l.qty + 1);
+  if (b.dataset.dec) l.qty -= 1;
+  if (b.dataset.rm || l.qty <= 0) cart = cart.filter(x => x.key !== key);
+  saveCart();
+});
+
+const drawer = $("#drawer"), overlay = $("#overlay");
+let lastFocus = null;
+function openCart() { lastFocus = document.activeElement; drawer.classList.add("open"); overlay.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; setTimeout(() => $("#closeCart").focus(), 50); }
+function closeCart() { drawer.classList.remove("open"); overlay.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus?.focus?.(); if (pedidoEnviado) { pedidoEnviado = null; renderCart(); } }
+$("#openCart").addEventListener("click", openCart);
+$("#closeCart").addEventListener("click", closeCart);
+overlay.addEventListener("click", closeCart);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && drawer.classList.contains("open")) closeCart(); });
+$("#entrega").addEventListener("change", e => { $("#dirWrap").hidden = !e.target.value.startsWith("Delivery"); });
+
+/* Enviar pedido: se guarda en el panel y se abre WhatsApp */
+let db = null, ultimoWa = "";
+const store2 = store.get("abs-cliente", {});
+if (store2.nombre) $("#checkout").nombre.value = store2.nombre;
+if (store2.telefono) $("#checkout").telefono.value = store2.telefono;
+
+$("#checkout").addEventListener("submit", e => {
+  e.preventDefault();
+  const form = e.target, f = new FormData(form);
+  const nombre = (f.get("nombre") || "").trim();
+  const telefono = (f.get("telefono") || "").trim();
+  const entrega = f.get("entrega") || "";
+  const direccion = (f.get("direccion") || "").trim();
+  const nota = (f.get("nota") || "").trim();
+  const err = $("#formError");
+  if (!cart.length) return;
+  if (!nombre) { err.textContent = "Escribe tu nombre para enviar el pedido."; form.nombre.focus(); return; }
+  const delivery = entrega.startsWith("Delivery");
+  if (delivery && !direccion) { err.textContent = "Indica la dirección de entrega."; form.direccion.focus(); return; }
+  err.textContent = "";
+  store.set("abs-cliente", { nombre, telefono });
+
+  const numero = "AB-" + Date.now().toString(36).toUpperCase().slice(-6);
+  const t = totalUsd(), tz = tasa();
+  const lineas = cart.map((l, i) => `${i + 1}. ${l.nombre}${varTxt(l) ? " (" + varTxt(l) + ")" : ""} x${l.qty} — ${fmtUsd(l.precio * l.qty)}`).join("\n");
+  let msg = `Hola Amilkar Biker Shop, quiero hacer este pedido (${numero}):\n\n${lineas}\n\nTotal: ${fmtUsd(t)}`;
+  if (tz) msg += ` / ${fmtBs(t * tz)} (tasa ${fmtBs(tz)})`;
+  msg += `\n\nNombre: ${nombre}`;
+  if (telefono) msg += `\nTeléfono: ${telefono}`;
+  msg += `\nEntrega: ${entrega}`;
+  if (delivery) msg += `\nDirección: ${direccion}`;
+  if (nota) msg += `\nNota: ${nota}`;
+
+  // Guardar el pedido en el panel (si falla, el pedido igual llega por WhatsApp)
+  if (db) {
+    setDoc(doc(collection(db, "pedidos")), {
+      numero, cliente: nombre, telefono, entrega, direccion: delivery ? direccion : "", nota,
+      items: cart.map(l => ({ id: l.id, nombre: l.nombre, sku: l.sku || "", color: l.color || "", talla: l.talla || "", precio: l.precio, qty: l.qty })),
+      totalUsd: Math.round(t * 100) / 100, tasa: tz, totalBs: Math.round(t * tz * 100) / 100,
+      estado: "nuevo", creado: serverTimestamp()
+    }).catch(er => console.warn("Pedido no guardado:", er));
+  }
+  ultimoWa = waUrl(msg);
+  window.open(ultimoWa, "_blank", "noopener");
+  pedidoEnviado = numero;
+  cart = []; saveCart();
+});
+
+/* Toast */
+let tt;
+function toast(text) { const t = $("#toast"); t.querySelector("span").textContent = text; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 1800); }
+
+/* ---------- Carga de datos ---------- */
+$("#grid").innerHTML = Array.from({ length: 8 }, () => `<div class="skeleton"></div>`).join("");
+aplicarConfig(); renderCats(); renderCart();
+
+async function cargar() {
+  try {
+    db = getFirestore(initializeApp(firebaseConfig));
+    const [snap, cats, conf] = await Promise.all([
+      getDocs(query(collection(db, "productos"), where("activo", "==", true))),
+      getDocs(collection(db, "categorias")).catch(() => null),
+      getDoc(doc(db, "config", "tienda")).catch(() => null)
+    ]);
+    productos = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (cats && !cats.empty) categorias = cats.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.orden ?? 99) - (b.orden ?? 99));
+    if (conf?.exists()) cfg = { ...configBase, ...conf.data() };
+  } catch (err) {
+    console.warn("No se pudo cargar el catálogo:", err);
+  }
+  aplicarConfig(); renderCats(); syncCart(); renderGrid(); renderCart();
+  const m = location.hash.match(/^#producto\/(.+)$/);
+  if (m) openQuick(decodeURIComponent(m[1]));
+}
+cargar();
+</script>
 </body>
 </html>

@@ -1,0 +1,49 @@
+rules_version = '2';
+// Reglas de Firestore para Amilkar Biker Shop.
+// Copiar en: Firebase Console > Firestore Database > Reglas > Publicar.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Usuario administrador "amilkarbiker" (Firebase Authentication).
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == "W4XVxe56laP2RyAmN1MkJ83URq02";
+    }
+
+    // Productos: el público solo ve los activos; el admin ve y edita todo.
+    match /productos/{id} {
+      allow read: if resource.data.activo == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Categorías y ajustes de la tienda: lectura pública, edición solo admin.
+    match /categorias/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /config/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Pedidos: cualquier cliente puede crear uno (desde el carrito);
+    // solo el admin puede verlos, cambiarlos o borrarlos.
+    match /pedidos/{id} {
+      allow create: if request.resource.data.keys().hasOnly(
+                        ['numero', 'cliente', 'telefono', 'entrega', 'direccion', 'nota', 'items', 'totalUsd', 'tasa', 'totalBs', 'estado', 'creado'])
+                    && request.resource.data.estado == 'nuevo'
+                    && request.resource.data.cliente is string
+                    && request.resource.data.cliente.size() > 0
+                    && request.resource.data.cliente.size() <= 80
+                    && request.resource.data.items is list
+                    && request.resource.data.items.size() > 0
+                    && request.resource.data.items.size() <= 60
+                    && request.resource.data.totalUsd is number
+                    && request.resource.data.creado == request.time;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

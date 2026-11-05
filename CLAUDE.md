@@ -21,7 +21,11 @@ Haz estas preguntas **en un solo mensaje** y espera la respuesta. No inventes da
 - **Redes sociales:** @amilkarbikershop Instagram
 - **Idiomas:** Solo español
 - **Notas:** Es una tienda online que conectaremos con firestore y cloudinary para gestionar un panel /admin  para agregar mas productos
-- **Logo:** `assets/logo.jpg`
+- **Logo:** `assets/logo.svg` (versión vectorial simétrica, la que se usa en todo el sitio), `assets/logo-mark.svg` (icono cuadrado / favicon). `assets/logo.jpg` es el original de referencia.
+- **Sedes:** Av. Delicias y La Curva de Molina, Maracaibo (dirección exacta y horario: pendientes; se cargan desde /admin > Ajustes).
+- **Productos:** cascos, guantes, chaquetas, luces, repuestos, equipaje, cauchos, aceites y accesorios.
+- **Compra:** carrito que envía el pedido por WhatsApp; precios en USD y Bs según la tasa que fija el admin.
+- **Panel:** `/admin` (Firebase Auth usuario `amilkarbiker`, Firestore `productos`, `categorias`, `pedidos`, `config/tienda`; fotos en Cloudinary). Reglas en `firestore.rules`. Config compartida en `assets/config.js`.
 
 ## Reglas de diseño (obligatorias)
 - **Diseño premium basado en el logo:** saca la paleta de colores, el estilo y la personalidad del logo (`assets/logo.jpg`). El sitio debe sentirse hecho a la medida de esa marca.
