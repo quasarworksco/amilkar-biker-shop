@@ -3,11 +3,10 @@
   "short_name": "Amilkar Biker",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#07080b",
-  "theme_color": "#07080b",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "icons": [
     { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "assets/logo-mark.svg", "sizes": "any", "type": "image/svg+xml" }
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }

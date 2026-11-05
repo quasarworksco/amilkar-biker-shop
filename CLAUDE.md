@@ -21,7 +21,8 @@ Haz estas preguntas **en un solo mensaje** y espera la respuesta. No inventes da
 - **Redes sociales:** @amilkarbikershop Instagram
 - **Idiomas:** Solo español
 - **Notas:** Es una tienda online que conectaremos con firestore y cloudinary para gestionar un panel /admin  para agregar mas productos
-- **Logo:** `assets/logo.svg` (versión vectorial simétrica, la que se usa en todo el sitio), `assets/logo-mark.svg` (icono cuadrado / favicon). `assets/logo.jpg` es el original de referencia.
+- **Logo:** `assets/logo.jpg` (original del cliente). Versiones recortadas sin fondo y centradas: `assets/logo.webp` y `assets/logo-sm.webp`. Usar siempre el logo real, no rediseñarlo.
+- **Diseño:** fondos claros (blanco), acentos rojos; hero con video de motos (`assets/video/`, clips de Mixkit con licencia gratuita; reemplazar por video propio del cliente cuando lo envíe).
 - **Sedes:** Av. Delicias y La Curva de Molina, Maracaibo (dirección exacta y horario: pendientes; se cargan desde /admin > Ajustes).
 - **Productos:** cascos, guantes, chaquetas, luces, repuestos, equipaje, cauchos, aceites y accesorios.
 - **Compra:** carrito que envía el pedido por WhatsApp; precios en USD y Bs según la tasa que fija el admin.
