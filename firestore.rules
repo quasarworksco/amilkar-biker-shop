@@ -42,6 +42,11 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
+    // Historial de inventario: solo el admin.
+    match /movimientos/{id} {
+      allow read, write: if isAdmin();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

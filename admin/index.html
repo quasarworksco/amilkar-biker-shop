@@ -96,7 +96,7 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1;letter-spacing:.01em}
 .topbar .brand img{width:36px;height:36px}
 .topbar h1{font-size:24px;text-transform:uppercase;font-style:italic}
 .content{padding:20px 16px calc(100px + env(safe-area-inset-bottom));width:100%;max-width:1180px;margin:0 auto}
-.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(6,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
 .bottom button{position:relative;display:grid;justify-items:center;gap:3px;padding:8px 2px;border:0;background:none;color:var(--ink-3);font-size:11px;font-weight:600;border-radius:12px}
 .bottom button[aria-current="page"]{color:var(--red);background:rgba(200,16,26,.08)}
 .bottom .icon{width:22px;height:22px}
@@ -254,6 +254,38 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
 .order .oacts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .order .oacts select{min-height:40px;width:auto;padding:6px 12px}
 
+/* Inventario */
+.inv-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+@media (min-width:900px){.inv-stats{grid-template-columns:repeat(5,1fr)}}
+.inv-tools{display:grid;gap:10px;margin-bottom:14px}
+@media (min-width:900px){.inv-tools{grid-template-columns:minmax(220px,1fr) 190px 170px auto}}
+.inv{display:grid;gap:8px}
+.irow{display:grid;grid-template-columns:52px 1fr;gap:10px 12px;align-items:center;padding:10px 12px;border-radius:16px}
+.irow .th{width:52px;height:52px;border-radius:10px;overflow:hidden;background:var(--glass-2);display:grid;place-items:center;color:var(--ink-3)}
+.irow .th img{width:100%;height:100%;object-fit:cover}
+.irow h4{margin:0;font-size:15px;font-weight:600;line-height:1.25}
+.irow .meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:var(--ink-3);margin-top:2px}
+.irow .ctl{grid-column:1/-1;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line-2);border-radius:12px;overflow:hidden;background:#fff}
+.stepper button{width:44px;height:44px;border:0;background:none;display:grid;place-items:center;font-size:20px;font-weight:700}
+.stepper button:hover{background:var(--glass-2)}
+.stepper input{width:70px;height:44px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-weight:700;font-size:17px;outline:0;background:#fff;-moz-appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.stepper input::placeholder{font-weight:500;font-size:12px;color:var(--ink-3)}
+.irow .val{font-size:13px;color:var(--ink-3);text-align:right}
+.irow .val b{display:block;color:var(--ink);font-size:15px}
+.irow.saving{opacity:.6}
+@media (min-width:900px){.irow{grid-template-columns:52px 1fr auto auto auto}.irow .ctl{grid-column:auto;border:0;padding:0;display:contents}}
+.mlist{display:grid;gap:0}
+.mrow{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.mrow .q{font-family:var(--display);font-weight:800;font-size:20px;min-width:52px}
+.mrow .q.in{color:#178a45}.mrow .q.out{color:var(--red)}.mrow .q.adj{color:#2554d8}
+.mrow small{display:block;color:var(--ink-3);font-size:12px}
+.mrow .res{text-align:right;color:var(--ink-3);font-size:13px}
+.mrow .res b{color:var(--ink)}
+.inv-grid{display:grid;gap:16px}
+@media (min-width:1100px){.inv-grid{grid-template-columns:1.6fr 1fr;align-items:start}}
+
 /* Sedes en ajustes */
 .sede-row{display:grid;gap:10px;padding:14px;border-radius:14px;border:1px solid var(--line);background:rgba(15,17,21,.02)}
 .sede-row .hd{display:flex;justify-content:space-between;align-items:center;font-weight:700}
@@ -372,6 +404,40 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
           </select>
         </div>
         <div class="plist" id="plist"></div>
+      </section>
+
+      <!-- Inventario -->
+      <section data-view="inventario" hidden>
+        <div class="vhead">
+          <div><h2>Inventario</h2><p>Controla las unidades de cada producto. Los cambios se guardan solos y quedan registrados en el historial.</p></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" type="button" id="invExport"><svg class="icon"><use href="#i-upload"/></svg>Exportar a Excel</button>
+            <button class="btn btn-red" type="button" id="invNew"><svg class="icon"><use href="#i-plus"/></svg>Registrar movimiento</button>
+          </div>
+        </div>
+        <div class="notice" id="movNotice" hidden></div>
+        <div class="inv-stats" id="invStats"></div>
+        <div class="inv-grid">
+          <div>
+            <div class="inv-tools">
+              <div class="search"><svg class="icon"><use href="#i-search"/></svg><input class="in" id="iq" type="search" placeholder="Buscar producto o código"></div>
+              <select class="in" id="icat" aria-label="Categoría"></select>
+              <select class="in" id="istate" aria-label="Estado de stock">
+                <option value="">Todos</option>
+                <option value="agotado">Agotados</option>
+                <option value="bajo">Stock bajo</option>
+                <option value="ok">Con stock</option>
+                <option value="sin">Sin control de stock</option>
+              </select>
+              <label class="f" style="grid-template-columns:auto 72px;align-items:center;gap:8px;font-size:13px">Stock bajo si quedan<input class="in" id="iMin" type="number" min="0" step="1" style="min-height:44px;padding:8px 10px"></label>
+            </div>
+            <div class="inv" id="invList"></div>
+          </div>
+          <div class="card glass">
+            <h3><svg class="icon"><use href="#i-refresh"/></svg>Últimos movimientos</h3>
+            <div class="mlist" id="movList"></div>
+          </div>
+        </div>
       </section>
 
       <!-- Categorías -->
@@ -520,6 +586,29 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
   </form>
 </dialog>
 
+<!-- Movimiento de inventario -->
+<dialog class="small-d" id="mdlg" aria-labelledby="mdTitle">
+  <form class="box" id="mform" novalidate>
+    <h2 id="mdTitle">Registrar movimiento</h2>
+    <label class="f">Producto<select name="producto" id="mfProd" required></select></label>
+    <label class="f">Tipo
+      <select name="tipo">
+        <option value="entrada">Entrada (llegó mercancía)</option>
+        <option value="salida">Salida (venta en tienda, daño, uso)</option>
+        <option value="ajuste">Ajuste (contar y fijar cantidad exacta)</option>
+      </select>
+    </label>
+    <label class="f"><span id="mfQtyLbl">Cantidad</span><input name="cantidad" type="number" inputmode="numeric" min="0" step="1" required placeholder="0"></label>
+    <label class="f">Nota (opcional)<input name="nota" maxlength="120" placeholder="Ej: proveedor, factura, venta en sede Delicias"></label>
+    <p class="muted" id="mfPrev" style="margin:0;font-size:14px"></p>
+    <p class="err" id="mErr" role="alert"></p>
+    <div class="acts">
+      <button class="btn" type="button" data-close>Cancelar</button>
+      <button class="btn btn-red" type="submit"><svg class="icon"><use href="#i-check"/></svg>Guardar</button>
+    </div>
+  </form>
+</dialog>
+
 <!-- Confirmación -->
 <dialog class="small-d" id="confirmDlg" aria-labelledby="cfTitle">
   <div class="box">
@@ -537,7 +626,7 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, doc, onSnapshot, getDoc, setDoc, addDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, doc, onSnapshot, getDoc, setDoc, addDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy, limit, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig, cloudinary, usuarioAEmail, configBase, categoriasBase, iconosCategoria, estadosPedido, cl, cargarIconos, slugify } from "../assets/config.js";
 
 await cargarIconos("../");
@@ -609,7 +698,7 @@ $("#loginForm").addEventListener("submit", async e => {
 $$("[data-logout]").forEach(b => b.addEventListener("click", async () => { if (await confirmar("¿Quieres cerrar la sesión?", "Cerrar sesión", "Cerrar sesión")) signOut(auth); }));
 
 /* ---------- Estado ---------- */
-let productos = [], categorias = [], pedidos = [], cfg = { ...configBase };
+let productos = [], categorias = [], pedidos = [], movimientos = [], movOk = true, cfg = { ...configBase };
 let unsubs = [];
 const catNombre = id => categorias.find(c => c.id === id)?.nombre || id || "Sin categoría";
 const tasa = () => Number(cfg.tasa) || 0;
@@ -625,6 +714,7 @@ onAuthStateChanged(auth, user => {
   unsubs.push(onSnapshot(collection(db, "productos"), s => { productos = s.docs.map(d => ({ id: d.id, ...d.data() })); renderAll(); }, onErr));
   unsubs.push(onSnapshot(collection(db, "categorias"), s => { categorias = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.orden ?? 99) - (b.orden ?? 99)); renderAll(); }, onErr));
   unsubs.push(onSnapshot(query(collection(db, "pedidos"), orderBy("creado", "desc"), limit(300)), s => { pedidos = s.docs.map(d => ({ id: d.id, ...d.data() })); renderAll(); }, onErr));
+  unsubs.push(onSnapshot(query(collection(db, "movimientos"), orderBy("fecha", "desc"), limit(60)), s => { movOk = true; movimientos = s.docs.map(d => ({ id: d.id, ...d.data() })); renderInventario(); }, e => { console.warn(e); movOk = false; renderInventario(); }));
   unsubs.push(onSnapshot(doc(db, "config", "tienda"), s => { cfg = { ...configBase, ...(s.exists() ? s.data() : {}) }; renderAll(); fillSettings(); }, onErr));
   go(location.hash.slice(1) || "resumen", false);
   renderAll();
@@ -635,6 +725,7 @@ const vistas = [
   ["resumen", "Resumen", "home"],
   ["pedidos", "Pedidos", "receipt"],
   ["productos", "Productos", "box"],
+  ["inventario", "Inventario", "grid"],
   ["categorias", "Categorías", "tag"],
   ["ajustes", "Ajustes", "settings"]
 ];
@@ -655,7 +746,7 @@ function go(v, push = true) {
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
 
-function renderAll() { renderNav(); renderResumen(); renderProductos(); renderCategorias(); renderPedidos(); }
+function renderAll() { renderNav(); renderResumen(); renderProductos(); renderInventario(); renderCategorias(); renderPedidos(); }
 
 /* ---------- Resumen ---------- */
 function renderResumen() {
@@ -1056,6 +1147,7 @@ function orderHtml(o) {
         <label class="sr-only" for="st-${esc(o.id)}">Estado</label>
         <select class="in" id="st-${esc(o.id)}" data-ostate="${esc(o.id)}">${Object.entries(estadosPedido).map(([k, v]) => `<option value="${k}" ${k === o.estado ? "selected" : ""}>${v}</option>`).join("")}</select>
         ${telWa ? `<a class="btn btn-sm btn-green" href="https://wa.me/${esc(telWa)}?text=${encodeURIComponent(`Hola ${o.cliente}, te escribimos de Amilkar Biker Shop por tu pedido ${o.numero || ""}.`)}" target="_blank" rel="noopener">${icon("wa")}Escribir al cliente</a>` : ""}
+        ${o.descontado ? `<span class="pill green">${icon("check")}Descontado del inventario</span>` : o.estado !== "cancelado" ? `<button class="btn btn-sm" type="button" data-odesc="${esc(o.id)}">${icon("box")}Descontar del inventario</button>` : ""}
         <button class="btn btn-sm btn-danger" type="button" data-odel="${esc(o.id)}">${icon("trash")}Eliminar</button>
       </div>
     </div>
@@ -1082,6 +1174,175 @@ document.addEventListener("click", async e => {
   const b = e.target.closest("[data-odel]"); if (!b) return;
   if (!await confirmar("Se eliminará este pedido del panel.", "Eliminar pedido", "Eliminar")) return;
   try { await deleteDoc(doc(db, "pedidos", b.dataset.odel)); toast("Pedido eliminado"); } catch (er) { toast(errorTexto(er), false); }
+});
+
+/* ---------- Inventario ---------- */
+const stockMin = () => Number.isFinite(Number(cfg.stockMinimo)) && cfg.stockMinimo !== "" && cfg.stockMinimo != null ? Number(cfg.stockMinimo) : 3;
+const estadoStock = p => p.stock == null ? "sin" : p.stock === 0 ? "agotado" : p.stock <= stockMin() ? "bajo" : "ok";
+const tipoTxt = { entrada: "Entrada", salida: "Salida", ajuste: "Ajuste", pedido: "Pedido" };
+
+async function registrarMov(p, nuevo, tipo, cantidad, nota) {
+  const antes = p.stock;
+  await updateDoc(doc(db, "productos", p.id), { stock: nuevo, actualizado: serverTimestamp() });
+  try {
+    await addDoc(collection(db, "movimientos"), { productoId: p.id, producto: p.nombre, tipo, cantidad, antes: antes ?? null, despues: nuevo, nota: nota || "", fecha: serverTimestamp() });
+  } catch (er) { console.warn("Movimiento no registrado", er); movOk = false; renderInventario(); }
+}
+
+function renderInventario() {
+  if (!$("#invList")) return;
+  const iMin = $("#iMin"); if (document.activeElement !== iMin) iMin.value = stockMin();
+  const ic = $("#icat"), v = ic.value;
+  ic.innerHTML = `<option value="">Todas las categorías</option>` + categorias.map(c => `<option value="${esc(c.id)}">${esc(c.nombre)}</option>`).join(""); ic.value = v;
+  const con = productos.filter(p => p.stock != null);
+  const unidades = con.reduce((s, p) => s + (p.stock || 0), 0);
+  const valor = con.reduce((s, p) => s + (p.stock || 0) * (Number(p.precio) || 0), 0);
+  const cnt = k => productos.filter(p => estadoStock(p) === k).length;
+  const st = (ic2, val, lbl, f) => `<button class="stat glass" type="button" data-ifil="${f}"><span class="ic">${icon(ic2)}</span><b>${val}</b><span>${lbl}</span></button>`;
+  $("#invStats").innerHTML =
+    st("box", unidades, "Unidades en stock", "") +
+    st("dollar", fmtUsd(valor), "Valor del inventario (precio de venta)", "") +
+    st("alert", cnt("agotado"), "Agotados", "agotado") +
+    st("refresh", cnt("bajo"), `Stock bajo (${stockMin()} o menos)`, "bajo") +
+    st("eye-off", cnt("sin"), "Sin control de stock", "sin");
+  const n = $("#movNotice");
+  n.hidden = movOk;
+  if (!movOk) n.innerHTML = `${icon("alert")}<div><b>El historial de movimientos necesita una regla nueva.</b> El stock se guarda igual, pero para registrar el historial publica otra vez el archivo <code>firestore.rules</code> en Firebase Console &gt; Firestore Database &gt; Reglas.</div>`;
+
+  const q = slugify($("#iq").value), cat = $("#icat").value, est = $("#istate").value;
+  const orden = { agotado: 0, bajo: 1, ok: 2, sin: 3 };
+  const l = productos.filter(p => (!cat || p.categoria === cat) && (!est || estadoStock(p) === est) && (!q || slugify([p.nombre, p.sku, p.marca].join(" ")).includes(q)))
+    .sort((a, b) => orden[estadoStock(a)] - orden[estadoStock(b)] || (a.stock ?? 1e9) - (b.stock ?? 1e9) || a.nombre.localeCompare(b.nombre));
+  const focused = document.activeElement?.dataset?.istock;
+  if (!productos.length) { $("#invList").innerHTML = `<div class="empty glass">${icon("box")}<p>Todavía no hay productos.</p></div>`; }
+  else if (!l.length) { $("#invList").innerHTML = `<div class="empty glass">${icon("search")}<p>No hay productos con ese filtro.</p></div>`; }
+  else if (!focused) {
+    $("#invList").innerHTML = l.map(p => {
+      const e = estadoStock(p), img = (p.imagenes || [])[0];
+      const pill = { agotado: `<span class="pill red">Agotado</span>`, bajo: `<span class="pill amber">Stock bajo</span>`, ok: `<span class="pill green">En stock</span>`, sin: `<span class="pill">Sin control</span>` }[e];
+      return `<div class="irow glass" data-irow="${esc(p.id)}">
+        <div class="th">${img ? `<img src="${esc(cl(img, 120))}" alt="" loading="lazy">` : icon("image")}</div>
+        <div><h4>${esc(p.nombre)}</h4><div class="meta"><span>${esc(catNombre(p.categoria))}</span>${p.sku ? `<span>${esc(p.sku)}</span>` : ""}<span>${fmtUsd(p.precio)}</span>${pill}</div></div>
+        <div class="ctl">
+          <div class="stepper">
+            <button type="button" data-idec="${esc(p.id)}" aria-label="Restar uno">−</button>
+            <input type="number" inputmode="numeric" min="0" step="1" value="${p.stock ?? ""}" placeholder="Sin control" data-istock="${esc(p.id)}" aria-label="Unidades de ${esc(p.nombre)}">
+            <button type="button" data-iinc="${esc(p.id)}" aria-label="Sumar uno">+</button>
+          </div>
+          <div class="val">Valor<b>${p.stock != null ? fmtUsd(p.stock * (Number(p.precio) || 0)) : "—"}</b></div>
+          <button class="ibtn" type="button" data-imov="${esc(p.id)}" aria-label="Registrar movimiento de ${esc(p.nombre)}">${icon("edit")}</button>
+        </div>
+      </div>`;
+    }).join("");
+  }
+  $("#movList").innerHTML = movimientos.length ? movimientos.slice(0, 30).map(m => {
+    const cls = m.tipo === "entrada" ? "in" : m.tipo === "ajuste" ? "adj" : "out";
+    const sign = m.tipo === "entrada" ? "+" : m.tipo === "ajuste" ? "=" : "−";
+    return `<div class="mrow"><span class="q ${cls}">${sign}${m.tipo === "ajuste" ? m.despues : m.cantidad}</span><div>${esc(m.producto)}<small>${esc(tipoTxt[m.tipo] || m.tipo)}${m.nota ? " · " + esc(m.nota) : ""} · ${esc(fecha(m.fecha))}</small></div><div class="res">Quedan<br><b>${m.despues ?? "—"}</b></div></div>`;
+  }).join("") : `<p class="muted" style="margin:0">${movOk ? "Aún no hay movimientos. Cada cambio de stock aparecerá aquí." : "Historial no disponible hasta publicar las reglas."}</p>`;
+}
+["#iq", "#icat", "#istate"].forEach(s => $(s).addEventListener("input", renderInventario));
+$("#invStats").addEventListener("click", e => { const b = e.target.closest("[data-ifil]"); if (b && b.dataset.ifil) { $("#istate").value = b.dataset.ifil; renderInventario(); } });
+$("#iMin").addEventListener("change", async e => {
+  const v = Math.max(0, Math.floor(Number(e.target.value) || 0));
+  try { await setDoc(doc(db, "config", "tienda"), { stockMinimo: v }, { merge: true }); toast("Alerta de stock bajo: " + v + " o menos"); } catch (er) { toast(errorTexto(er), false); }
+});
+
+// +/− con pausa: suma varios toques y guarda un solo movimiento
+const pend = {};
+function tocar(id, delta) {
+  const p = productos.find(x => x.id === id); if (!p) return;
+  const inp = document.querySelector(`[data-istock="${CSS.escape(id)}"]`);
+  const base = pend[id]?.base ?? (p.stock ?? 0);
+  const d = (pend[id]?.d || 0) + delta;
+  if (base + d < 0) return;
+  inp.value = base + d;
+  clearTimeout(pend[id]?.t);
+  pend[id] = { base, d, t: setTimeout(async () => {
+    delete pend[id]; if (!d) return;
+    const row = document.querySelector(`[data-irow="${CSS.escape(id)}"]`); row?.classList.add("saving");
+    try { await registrarMov(p, base + d, d > 0 ? "entrada" : "salida", Math.abs(d), "Ajuste rápido"); toast(`${p.nombre}: ${base + d} unidades`); }
+    catch (er) { toast(errorTexto(er), false); renderInventario(); }
+  }, 700) };
+}
+$("#invList").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.iinc) tocar(b.dataset.iinc, 1);
+  if (b.dataset.idec) tocar(b.dataset.idec, -1);
+  if (b.dataset.imov) abrirMov(b.dataset.imov);
+});
+$("#invList").addEventListener("keydown", e => { if (e.key === "Enter" && e.target.dataset.istock) e.target.blur(); });
+$("#invList").addEventListener("focusout", async e => {
+  const inp = e.target; const id = inp.dataset?.istock; if (!id) return;
+  const p = productos.find(x => x.id === id); if (!p) return;
+  const raw = inp.value.trim();
+  const nuevo = raw === "" ? null : Math.max(0, Math.floor(Number(raw)));
+  if (nuevo === (p.stock ?? null) || pend[id]) { setTimeout(renderInventario, 0); return; }
+  try {
+    if (nuevo == null) { await updateDoc(doc(db, "productos", id), { stock: null, actualizado: serverTimestamp() }); toast("Control de stock desactivado"); }
+    else { await registrarMov(p, nuevo, "ajuste", nuevo, p.stock == null ? "Inicio de control de stock" : "Conteo"); toast(`${p.nombre}: ${nuevo} unidades`); }
+  } catch (er) { toast(errorTexto(er), false); }
+  setTimeout(renderInventario, 0);
+});
+
+// Diálogo de movimiento
+const mdlg = $("#mdlg"), mform = $("#mform");
+function abrirMov(id) {
+  if (!productos.length) { toast("Primero crea productos", false); return; }
+  mform.reset(); $("#mErr").textContent = "";
+  $("#mfProd").innerHTML = [...productos].sort((a, b) => a.nombre.localeCompare(b.nombre)).map(p => `<option value="${esc(p.id)}">${esc(p.nombre)} (${p.stock ?? "sin control"})</option>`).join("");
+  if (id) $("#mfProd").value = id;
+  prevMov(); mdlg.showModal();
+}
+function prevMov() {
+  const p = productos.find(x => x.id === mform.producto.value); const t = mform.tipo.value; const c = Math.floor(Number(mform.cantidad.value) || 0);
+  $("#mfQtyLbl").textContent = t === "ajuste" ? "Cantidad exacta que hay" : "Cantidad";
+  if (!p) return;
+  const a = p.stock ?? 0; const n = t === "entrada" ? a + c : t === "salida" ? a - c : c;
+  $("#mfPrev").textContent = `Ahora: ${p.stock ?? "sin control"} · Después: ${Math.max(0, n)} unidades`;
+}
+mform.addEventListener("input", prevMov);
+$("#invNew").addEventListener("click", () => abrirMov());
+mdlg.addEventListener("click", e => { if (e.target.closest("[data-close]")) mdlg.close(); });
+mform.addEventListener("submit", async e => {
+  e.preventDefault();
+  const p = productos.find(x => x.id === mform.producto.value); const t = mform.tipo.value;
+  const raw = mform.cantidad.value; const c = Math.floor(Number(raw));
+  if (!p) return;
+  if (raw === "" || !(c >= 0) || (t !== "ajuste" && c === 0)) { $("#mErr").textContent = "Escribe una cantidad válida."; return; }
+  const a = p.stock ?? 0;
+  if (t === "salida" && c > a) { $("#mErr").textContent = `Solo hay ${a} unidades.`; return; }
+  const n = t === "entrada" ? a + c : t === "salida" ? a - c : c;
+  try { await registrarMov(p, n, t, c, mform.nota.value.trim()); mdlg.close(); toast(`${tipoTxt[t]} registrada: ${p.nombre} queda en ${n}`); }
+  catch (er) { $("#mErr").textContent = errorTexto(er); }
+});
+
+// Exportar a Excel (CSV)
+$("#invExport").addEventListener("click", () => {
+  const rows = [["Producto", "Código", "Categoría", "Precio USD", "Stock", "Estado", "Valor USD"]];
+  [...productos].sort((a, b) => a.nombre.localeCompare(b.nombre)).forEach(p => rows.push([p.nombre, p.sku || "", catNombre(p.categoria), Number(p.precio) || 0, p.stock ?? "", { agotado: "Agotado", bajo: "Stock bajo", ok: "En stock", sin: "Sin control" }[estadoStock(p)], p.stock != null ? (p.stock * (Number(p.precio) || 0)).toFixed(2) : ""]));
+  const csv = "\ufeff" + rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  a.download = `inventario-amilkar-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+});
+
+// Descontar un pedido del inventario
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-odesc]"); if (!b) return;
+  const o = pedidos.find(x => x.id === b.dataset.odesc); if (!o) return;
+  const lineas = (o.items || []).map(i => ({ i, p: productos.find(p => p.id === i.id) })).filter(x => x.p && x.p.stock != null);
+  if (!lineas.length) { toast("Los productos de este pedido no tienen control de stock", false); return; }
+  if (!await confirmar(`Se restarán del inventario ${lineas.map(x => `${x.i.qty} × ${x.p.nombre}`).join(", ")}.`, "Descontar del inventario", "Descontar")) return;
+  b.disabled = true;
+  try {
+    const porProd = {};
+    lineas.forEach(({ i, p }) => { porProd[p.id] = porProd[p.id] || { p, q: 0 }; porProd[p.id].q += i.qty; });
+    for (const { p, q } of Object.values(porProd)) await registrarMov(p, Math.max(0, p.stock - q), "pedido", q, "Pedido " + (o.numero || ""));
+    await updateDoc(doc(db, "pedidos", o.id), { descontado: true });
+    toast("Pedido descontado del inventario");
+  } catch (er) { b.disabled = false; toast(errorTexto(er), false); }
 });
 
 /* ---------- Ajustes ---------- */
