@@ -499,8 +499,8 @@ dialog.quick::backdrop{background:rgba(11,11,12,.55)}
 
   <div class="tapes" aria-hidden="true">
     <div class="marquee b"><div class="track">
-      <span>Tienda online</span><span class="o">Precios en $ y Bs</span><span>Dos sedes en Maracaibo</span><span class="o">Pedidos por WhatsApp</span>
-      <span>Tienda online</span><span class="o">Precios en $ y Bs</span><span>Dos sedes en Maracaibo</span><span class="o">Pedidos por WhatsApp</span>
+      <span>Envíos a toda Venezuela</span><span class="o">Precios en $ y Bs</span><span>Dos sedes en Maracaibo</span><span class="o">Pedidos por WhatsApp</span>
+      <span>Envíos a toda Venezuela</span><span class="o">Precios en $ y Bs</span><span>Dos sedes en Maracaibo</span><span class="o">Pedidos por WhatsApp</span>
     </div></div>
     <div class="marquee a"><div class="track">
       <span>Cascos</span><span class="o">Guantes</span><span>Chaquetas</span><span class="o">Luces</span><span>Repuestos</span><span class="o">Equipaje</span><span>Cauchos</span><span class="o">Aceites</span>
@@ -661,11 +661,22 @@ dialog.quick::backdrop{background:rgba(11,11,12,.55)}
       <label class="f">¿Cómo lo quieres recibir?
         <select name="entrega" id="entrega"></select>
       </label>
-      <label class="f" id="dirWrap" hidden>Dirección de entrega
-        <textarea name="direccion" maxlength="240" placeholder="Ciudad, sector, calle y punto de referencia"></textarea>
+      <label class="f" id="empWrap" hidden>Empresa de envío
+        <select name="empresa">
+          <option>MRW</option><option>Zoom</option><option>Tealca</option><option>Domesa</option><option>Liberty Express</option><option value="La que me recomienden">La que me recomienden</option>
+        </select>
+      </label>
+      <label class="f" id="dirWrap" hidden><span id="dirLbl">Dirección de entrega</span>
+        <textarea name="direccion" maxlength="240" placeholder="Sector, calle y punto de referencia"></textarea>
+      </label>
+      <label class="f">Forma de pago
+        <select name="pago">
+          <option value="">La confirmo por WhatsApp</option>
+          <option>Efectivo (dólares)</option><option>Efectivo (bolívares)</option><option>Pago móvil</option><option>Transferencia</option><option>Zelle</option><option>Punto de venta</option><option>Binance / USDT</option>
+        </select>
       </label>
       <label class="f">Nota (opcional)
-        <textarea name="nota" maxlength="300" placeholder="Modelo de tu moto, forma de pago preferida..."></textarea>
+        <textarea name="nota" maxlength="300" placeholder="Modelo de tu moto, talla, color..."></textarea>
       </label>
     </form>
   </div>
@@ -787,7 +798,7 @@ function aplicarConfig() {
     </article>`).join("");
   observe($("#sedesList"));
   // Entrega
-  $("#entrega").innerHTML = sedes.map(s => `<option>Retiro en sede ${esc(s.nombre)}</option>`).join("") + `<option value="Delivery / envío">Delivery o envío</option>`;
+  $("#entrega").innerHTML = sedes.map(s => `<option>Retiro en sede ${esc(s.nombre)}</option>`).join("") + `<option value="Delivery en Maracaibo">Delivery en Maracaibo</option><option value="Envío nacional">Envío nacional (toda Venezuela)</option>`;
   // Redes en contacto
   const redes = [["instagram", "Instagram"], ["facebook", "Facebook"], ["tiktok", "TikTok"]].filter(([k]) => cfg[k]);
   $("#contactActions").innerHTML = `
@@ -1058,7 +1069,12 @@ $("#openCart").addEventListener("click", openCart);
 $("#closeCart").addEventListener("click", closeCart);
 overlay.addEventListener("click", closeCart);
 document.addEventListener("keydown", e => { if (e.key === "Escape" && drawer.classList.contains("open")) closeCart(); });
-$("#entrega").addEventListener("change", e => { $("#dirWrap").hidden = !e.target.value.startsWith("Delivery"); });
+$("#entrega").addEventListener("change", e => {
+  const v = e.target.value, nac = v === "Envío nacional", del = v === "Delivery en Maracaibo";
+  $("#dirWrap").hidden = !(nac || del); $("#empWrap").hidden = !nac;
+  $("#dirLbl").textContent = nac ? "Estado, ciudad y oficina o dirección de envío" : "Dirección de entrega";
+  $("#checkout").direccion.placeholder = nac ? "Ej: Mérida, El Vigía, oficina MRW centro" : "Sector, calle y punto de referencia";
+});
 
 /* Enviar pedido: se guarda en el panel y se abre WhatsApp */
 let db = null, ultimoWa = "";
@@ -1071,14 +1087,16 @@ $("#checkout").addEventListener("submit", e => {
   const form = e.target, f = new FormData(form);
   const nombre = (f.get("nombre") || "").trim();
   const telefono = (f.get("telefono") || "").trim();
-  const entrega = f.get("entrega") || "";
+  const nac = f.get("entrega") === "Envío nacional";
+  const entrega = nac ? `Envío nacional (${f.get("empresa")})` : (f.get("entrega") || "");
+  const pago = f.get("pago") || "";
   const direccion = (f.get("direccion") || "").trim();
   const nota = (f.get("nota") || "").trim();
   const err = $("#formError");
   if (!cart.length) return;
   if (!nombre) { err.textContent = "Escribe tu nombre para enviar el pedido."; form.nombre.focus(); return; }
-  const delivery = entrega.startsWith("Delivery");
-  if (delivery && !direccion) { err.textContent = "Indica la dirección de entrega."; form.direccion.focus(); return; }
+  const delivery = nac || entrega.startsWith("Delivery");
+  if (delivery && !direccion) { err.textContent = nac ? "Indica el estado, la ciudad y la oficina o dirección de envío." : "Indica la dirección de entrega."; form.direccion.focus(); return; }
   err.textContent = "";
   store.set("abs-cliente", { nombre, telefono });
 
@@ -1091,15 +1109,22 @@ $("#checkout").addEventListener("submit", e => {
   if (telefono) msg += `\nTeléfono: ${telefono}`;
   msg += `\nEntrega: ${entrega}`;
   if (delivery) msg += `\nDirección: ${direccion}`;
+  if (pago) msg += `\nForma de pago: ${pago}`;
   if (nota) msg += `\nNota: ${nota}`;
 
   // Guardar el pedido en el panel (si falla, el pedido igual llega por WhatsApp)
   if (db) {
-    setDoc(doc(collection(db, "pedidos")), {
-      numero, cliente: nombre, telefono, entrega, direccion: delivery ? direccion : "", nota,
+    const ped = {
+      numero, cliente: nombre, telefono, entrega, direccion: delivery ? direccion : "", nota, pago,
       items: cart.map(l => ({ id: l.id, nombre: l.nombre, sku: l.sku || "", color: l.color || "", talla: l.talla || "", precio: l.precio, qty: l.qty })),
       totalUsd: Math.round(t * 100) / 100, tasa: tz, totalBs: Math.round(t * tz * 100) / 100,
       estado: "nuevo", creado: serverTimestamp()
+    };
+    const ref = doc(collection(db, "pedidos"));
+    setDoc(ref, ped).catch(() => {
+      // Compatibilidad con reglas anteriores (sin el campo "pago")
+      const { pago: pg, ...rest } = ped;
+      return setDoc(ref, { ...rest, nota: [nota, pg && "Pago: " + pg].filter(Boolean).join(" · ") });
     }).catch(er => console.warn("Pedido no guardado:", er));
   }
   ultimoWa = waUrl(msg);

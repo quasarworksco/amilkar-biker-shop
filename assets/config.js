@@ -34,7 +34,7 @@ export const configBase = {
   tasa: 0,
   mostrarBs: true,
   anuncio: "",
-  envios: "Te confirmamos disponibilidad, forma de pago y entrega por WhatsApp.",
+  envios: "Retiro en nuestras sedes, delivery en Maracaibo y envíos a toda Venezuela por encomienda.",
   sedes: [
     { nombre: "Av. Delicias", direccion: "Maracaibo, Zulia", horario: "", mapa: "" },
     { nombre: "La Curva de Molina", direccion: "Maracaibo, Zulia", horario: "", mapa: "" }

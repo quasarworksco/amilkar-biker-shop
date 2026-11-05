@@ -29,7 +29,7 @@ service cloud.firestore {
     // solo el admin puede verlos, cambiarlos o borrarlos.
     match /pedidos/{id} {
       allow create: if request.resource.data.keys().hasOnly(
-                        ['numero', 'cliente', 'telefono', 'entrega', 'direccion', 'nota', 'items', 'totalUsd', 'tasa', 'totalBs', 'estado', 'creado'])
+                        ['numero', 'cliente', 'telefono', 'entrega', 'direccion', 'nota', 'pago', 'items', 'totalUsd', 'tasa', 'totalBs', 'estado', 'creado'])
                     && request.resource.data.estado == 'nuevo'
                     && request.resource.data.cliente is string
                     && request.resource.data.cliente.size() > 0
@@ -44,6 +44,11 @@ service cloud.firestore {
 
     // Historial de inventario: solo el admin.
     match /movimientos/{id} {
+      allow read, write: if isAdmin();
+    }
+
+    // Facturas: solo el admin.
+    match /facturas/{id} {
       allow read, write: if isAdmin();
     }
 

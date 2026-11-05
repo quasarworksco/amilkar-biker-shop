@@ -96,8 +96,8 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1;letter-spacing:.01em}
 .topbar .brand img{width:36px;height:36px}
 .topbar h1{font-size:24px;text-transform:uppercase;font-style:italic}
 .content{padding:20px 16px calc(100px + env(safe-area-inset-bottom));width:100%;max-width:1180px;margin:0 auto}
-.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(6,1fr);padding:6px 4px calc(6px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
-.bottom button{position:relative;display:grid;justify-items:center;gap:3px;padding:8px 2px;border:0;background:none;color:var(--ink-3);font-size:11px;font-weight:600;border-radius:12px}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(7,1fr);padding:6px 2px calc(6px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.bottom button{position:relative;display:grid;justify-items:center;gap:3px;padding:8px 0;border:0;background:none;color:var(--ink-3);font-size:10px;letter-spacing:-.01em;font-weight:600;border-radius:12px}
 .bottom button[aria-current="page"]{color:var(--red);background:rgba(200,16,26,.08)}
 .bottom .icon{width:22px;height:22px}
 .dot{position:absolute;top:4px;right:calc(50% - 20px);min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
@@ -286,6 +286,53 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
 .inv-grid{display:grid;gap:16px}
 @media (min-width:1100px){.inv-grid{grid-template-columns:1.6fr 1fr;align-items:start}}
 
+/* Facturas */
+.flist{display:grid;gap:8px}
+.frow{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:14px 16px;border-radius:16px}
+.frow .num{font-family:var(--display);font-weight:800;font-size:19px}
+.frow .who{font-size:14px;color:var(--ink-2)}
+.frow .tot{text-align:right;font-family:var(--display);font-weight:800;font-size:20px}
+.frow .tot small{display:block;font-family:var(--body);font-weight:500;font-size:12px;color:var(--ink-3)}
+.frow .acts{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;border-top:1px solid var(--line);padding-top:10px}
+.frow.anulada{opacity:.55}
+@media (min-width:900px){.frow{grid-template-columns:1fr auto auto}.frow .acts{grid-column:auto;border:0;padding:0}}
+.items-ed{display:grid;gap:8px}
+.it{display:grid;grid-template-columns:1fr 70px 110px 40px;gap:8px;align-items:center}
+.it .in{min-height:44px;padding:8px 10px}
+@media (max-width:560px){.it{grid-template-columns:1fr 64px 96px 40px}}
+.tot-box{display:grid;gap:6px;justify-items:end;font-size:15px}
+.tot-box b{font-family:var(--display);font-size:26px}
+/* Documento de factura (también se usa para el PDF) */
+.inv-doc{width:794px;min-height:1000px;background:#fff;color:#111;font-family:var(--body);padding:48px 52px;box-sizing:border-box;font-size:14px;line-height:1.45}
+.inv-doc .hd{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;padding-bottom:22px;border-bottom:3px solid #c8101a}
+.inv-doc .hd img{width:96px;height:96px;object-fit:contain}
+.inv-doc .biz{display:flex;gap:16px;align-items:center}
+.inv-doc .biz b{display:block;font-family:var(--display);font-size:26px;font-style:italic;text-transform:uppercase;line-height:1}
+.inv-doc .biz span{display:block;color:#555;font-size:12.5px}
+.inv-doc .tt{text-align:right}
+.inv-doc .tt h1{font-family:var(--display);font-size:38px;color:#c8101a;margin:0 0 6px;text-transform:uppercase;letter-spacing:.02em}
+.inv-doc .tt span{display:block;font-size:13px;color:#333}
+.inv-doc .cli{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0}
+.inv-doc .cli h4{margin:0 0 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#888}
+.inv-doc .cli p{margin:0}
+.inv-doc table{width:100%;border-collapse:collapse;margin-top:6px}
+.inv-doc th{background:#111;color:#fff;text-align:left;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding:10px 12px}
+.inv-doc th:nth-child(n+2),.inv-doc td:nth-child(n+2){text-align:right}
+.inv-doc td{padding:11px 12px;border-bottom:1px solid #e6e6e6;vertical-align:top}
+.inv-doc td small{display:block;color:#777;font-size:12px}
+.inv-doc .sum{display:flex;justify-content:flex-end;margin-top:18px}
+.inv-doc .sum table{width:300px}
+.inv-doc .sum td{border:0;padding:5px 12px}
+.inv-doc .sum tr.big td{font-family:var(--display);font-size:22px;font-weight:800;border-top:2px solid #111;padding-top:10px}
+.inv-doc .sum tr.bs td{color:#555}
+.inv-doc .pay{margin-top:22px;padding:14px 16px;background:#f5f5f3;border-radius:10px;font-size:13px}
+.inv-doc .ft{margin-top:40px;padding-top:16px;border-top:1px solid #e6e6e6;text-align:center;color:#777;font-size:12px}
+.inv-doc .ft b{color:#111;display:block;font-size:14px;margin-bottom:4px}
+.inv-doc .anulada{display:inline-block;margin-top:8px;padding:4px 10px;border:2px solid #c8101a;color:#c8101a;font-weight:800;letter-spacing:.1em}
+.inv-scroll{overflow:auto;background:#e9e9e6;border-radius:14px;padding:12px}
+.inv-scroll .inv-doc{transform-origin:top left}
+@media print{body *{visibility:hidden}#printArea,#printArea *{visibility:visible}#printArea{position:absolute;left:0;top:0}}
+
 /* Sedes en ajustes */
 .sede-row{display:grid;gap:10px;padding:14px;border-radius:14px;border:1px solid var(--line);background:rgba(15,17,21,.02)}
 .sede-row .hd{display:flex;justify-content:space-between;align-items:center;font-weight:700}
@@ -404,6 +451,17 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
           </select>
         </div>
         <div class="plist" id="plist"></div>
+      </section>
+
+      <!-- Facturas -->
+      <section data-view="facturas" hidden>
+        <div class="vhead">
+          <div><h2>Facturas</h2><p>Crea facturas desde un pedido o a mano, descárgalas en PDF y envíalas al cliente por WhatsApp.</p></div>
+          <button class="btn btn-red" type="button" id="facNew"><svg class="icon"><use href="#i-plus"/></svg>Nueva factura</button>
+        </div>
+        <div class="notice" id="facNotice" hidden></div>
+        <div class="search" style="margin-bottom:12px"><svg class="icon"><use href="#i-search"/></svg><input class="in" id="fq" type="search" placeholder="Buscar por número o cliente"></div>
+        <div class="flist" id="facList"></div>
       </section>
 
       <!-- Inventario -->
@@ -586,6 +644,70 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
   </form>
 </dialog>
 
+<!-- Editor de factura -->
+<dialog class="sheet" id="fdlg" aria-labelledby="fdTitle">
+  <form class="wrapd" id="fform" novalidate>
+    <header>
+      <h2 id="fdTitle">Nueva factura</h2>
+      <button class="ibtn" type="button" data-close aria-label="Cerrar"><svg class="icon"><use href="#i-x"/></svg></button>
+    </header>
+    <div class="bodyd">
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-user"/></svg>Cliente</h3>
+        <div class="row2">
+          <label class="f">Nombre *<input name="cliente" required maxlength="80"></label>
+          <label class="f">Teléfono / WhatsApp<input name="telefono" type="tel" maxlength="20" placeholder="0412 000 0000"></label>
+        </div>
+        <label class="f">Dirección<input name="direccion" maxlength="200" placeholder="Opcional"></label>
+      </div>
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-box"/></svg>Productos</h3>
+        <div class="it muted" style="font-size:12px;font-weight:600"><span>Descripción</span><span>Cant.</span><span>Precio $</span><span></span></div>
+        <div class="items-ed" id="fItems"></div>
+        <div class="presets">
+          <button type="button" id="fAddFree"><svg class="icon"><use href="#i-plus"/></svg>Línea libre</button>
+          <select class="in" id="fAddProd" style="min-height:36px;width:auto;max-width:100%;padding:4px 12px;border-radius:999px;font-size:13px"><option value="">Agregar producto del catálogo…</option></select>
+        </div>
+      </div>
+      <div class="sec">
+        <h3><svg class="icon"><use href="#i-dollar"/></svg>Pago y totales</h3>
+        <div class="row2">
+          <label class="f">Descuento ($)<span class="money"><input name="descuento" type="number" inputmode="decimal" step="0.01" min="0" placeholder="0.00"></span></label>
+          <label class="f">Tasa Bs por $1<input name="tasa" type="number" inputmode="decimal" step="0.01" min="0"></label>
+        </div>
+        <label class="f">Forma de pago
+          <select name="metodo">
+            <option value="">Sin especificar</option><option>Efectivo (dólares)</option><option>Efectivo (bolívares)</option><option>Pago móvil</option><option>Transferencia</option><option>Zelle</option><option>Punto de venta</option><option>Binance / USDT</option><option>Mixto</option>
+          </select>
+        </label>
+        <label class="f">Nota para el cliente<input name="nota" maxlength="200" placeholder="Ej: garantía de 3 meses"></label>
+        <div class="tot-box" id="fTotals"></div>
+      </div>
+      <p class="err" id="fErr" role="alert"></p>
+    </div>
+    <footer>
+      <button class="btn" type="button" data-close>Cancelar</button>
+      <button class="btn btn-red" type="submit" id="fSave"><svg class="icon"><use href="#i-check"/></svg>Guardar y ver factura</button>
+    </footer>
+  </form>
+</dialog>
+
+<!-- Vista de factura -->
+<dialog class="sheet" id="vdlg" aria-labelledby="vdTitle">
+  <div class="wrapd">
+    <header>
+      <h2 id="vdTitle">Factura</h2>
+      <button class="ibtn" type="button" data-close aria-label="Cerrar"><svg class="icon"><use href="#i-x"/></svg></button>
+    </header>
+    <div class="bodyd"><div class="inv-scroll" id="invScroll"><div id="printArea"></div></div></div>
+    <footer style="flex-wrap:wrap">
+      <button class="btn" type="button" id="vPrint"><svg class="icon"><use href="#i-print"/></svg>Imprimir</button>
+      <button class="btn" type="button" id="vPdf"><svg class="icon"><use href="#i-download"/></svg>Descargar PDF</button>
+      <button class="btn btn-green" type="button" id="vSend"><svg class="icon"><use href="#i-wa"/></svg>Enviar al cliente</button>
+    </footer>
+  </div>
+</dialog>
+
 <!-- Movimiento de inventario -->
 <dialog class="small-d" id="mdlg" aria-labelledby="mdTitle">
   <form class="box" id="mform" novalidate>
@@ -626,7 +748,7 @@ dialog::backdrop{background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, doc, onSnapshot, getDoc, setDoc, addDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy, limit, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, doc, onSnapshot, getDoc, setDoc, addDoc, updateDoc, deleteDoc, writeBatch, serverTimestamp, query, orderBy, limit, increment, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig, cloudinary, usuarioAEmail, configBase, categoriasBase, iconosCategoria, estadosPedido, cl, cargarIconos, slugify } from "../assets/config.js";
 
 await cargarIconos("../");
@@ -698,7 +820,7 @@ $("#loginForm").addEventListener("submit", async e => {
 $$("[data-logout]").forEach(b => b.addEventListener("click", async () => { if (await confirmar("¿Quieres cerrar la sesión?", "Cerrar sesión", "Cerrar sesión")) signOut(auth); }));
 
 /* ---------- Estado ---------- */
-let productos = [], categorias = [], pedidos = [], movimientos = [], movOk = true, cfg = { ...configBase };
+let productos = [], categorias = [], pedidos = [], movimientos = [], movOk = true, facturas = [], facOk = true, cfg = { ...configBase };
 let unsubs = [];
 const catNombre = id => categorias.find(c => c.id === id)?.nombre || id || "Sin categoría";
 const tasa = () => Number(cfg.tasa) || 0;
@@ -715,6 +837,7 @@ onAuthStateChanged(auth, user => {
   unsubs.push(onSnapshot(collection(db, "categorias"), s => { categorias = s.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (a.orden ?? 99) - (b.orden ?? 99)); renderAll(); }, onErr));
   unsubs.push(onSnapshot(query(collection(db, "pedidos"), orderBy("creado", "desc"), limit(300)), s => { pedidos = s.docs.map(d => ({ id: d.id, ...d.data() })); renderAll(); }, onErr));
   unsubs.push(onSnapshot(query(collection(db, "movimientos"), orderBy("fecha", "desc"), limit(60)), s => { movOk = true; movimientos = s.docs.map(d => ({ id: d.id, ...d.data() })); renderInventario(); }, e => { console.warn(e); movOk = false; renderInventario(); }));
+  unsubs.push(onSnapshot(query(collection(db, "facturas"), orderBy("creado", "desc"), limit(300)), s => { facOk = true; facturas = s.docs.map(d => ({ id: d.id, ...d.data() })); renderFacturas(); }, e => { console.warn(e); facOk = false; renderFacturas(); }));
   unsubs.push(onSnapshot(doc(db, "config", "tienda"), s => { cfg = { ...configBase, ...(s.exists() ? s.data() : {}) }; renderAll(); fillSettings(); }, onErr));
   go(location.hash.slice(1) || "resumen", false);
   renderAll();
@@ -726,6 +849,7 @@ const vistas = [
   ["pedidos", "Pedidos", "receipt"],
   ["productos", "Productos", "box"],
   ["inventario", "Inventario", "grid"],
+  ["facturas", "Facturas", "file"],
   ["categorias", "Categorías", "tag"],
   ["ajustes", "Ajustes", "settings"]
 ];
@@ -746,7 +870,7 @@ function go(v, push = true) {
 }
 document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (b) go(b.dataset.go); });
 
-function renderAll() { renderNav(); renderResumen(); renderProductos(); renderInventario(); renderCategorias(); renderPedidos(); }
+function renderAll() { renderNav(); renderResumen(); renderProductos(); renderInventario(); renderFacturas(); renderCategorias(); renderPedidos(); }
 
 /* ---------- Resumen ---------- */
 function renderResumen() {
@@ -1140,6 +1264,7 @@ function orderHtml(o) {
         <span><b>Entrega:</b> ${esc(o.entrega)}</span>
         ${o.direccion ? `<span><b>Dirección:</b> ${esc(o.direccion)}</span>` : ""}
         ${o.telefono ? `<span><b>Teléfono:</b> ${esc(o.telefono)}</span>` : ""}
+        ${o.pago ? `<span><b>Forma de pago:</b> ${esc(o.pago)}</span>` : ""}
         ${o.nota ? `<span><b>Nota:</b> ${esc(o.nota)}</span>` : ""}
         ${o.tasa ? `<span><b>Tasa usada:</b> ${fmtBs(o.tasa)}</span>` : ""}
       </div>
@@ -1147,6 +1272,7 @@ function orderHtml(o) {
         <label class="sr-only" for="st-${esc(o.id)}">Estado</label>
         <select class="in" id="st-${esc(o.id)}" data-ostate="${esc(o.id)}">${Object.entries(estadosPedido).map(([k, v]) => `<option value="${k}" ${k === o.estado ? "selected" : ""}>${v}</option>`).join("")}</select>
         ${telWa ? `<a class="btn btn-sm btn-green" href="https://wa.me/${esc(telWa)}?text=${encodeURIComponent(`Hola ${o.cliente}, te escribimos de Amilkar Biker Shop por tu pedido ${o.numero || ""}.`)}" target="_blank" rel="noopener">${icon("wa")}Escribir al cliente</a>` : ""}
+        <button class="btn btn-sm" type="button" data-ofac="${esc(o.id)}">${icon("file")}${facturas.some(f => f.pedidoId === o.id && f.estado !== "anulada") ? "Ver factura" : "Generar factura"}</button>
         ${o.descontado ? `<span class="pill green">${icon("check")}Descontado del inventario</span>` : o.estado !== "cancelado" ? `<button class="btn btn-sm" type="button" data-odesc="${esc(o.id)}">${icon("box")}Descontar del inventario</button>` : ""}
         <button class="btn btn-sm btn-danger" type="button" data-odel="${esc(o.id)}">${icon("trash")}Eliminar</button>
       </div>
@@ -1343,6 +1469,181 @@ document.addEventListener("click", async e => {
     await updateDoc(doc(db, "pedidos", o.id), { descontado: true });
     toast("Pedido descontado del inventario");
   } catch (er) { b.disabled = false; toast(errorTexto(er), false); }
+});
+
+/* ---------- Facturas ---------- */
+const fdlg = $("#fdlg"), fform = $("#fform"), vdlg = $("#vdlg");
+let fItems = [], fPedido = null, facActual = null;
+const r2 = n => Math.round((Number(n) || 0) * 100) / 100;
+const numFac = n => "F-" + String(n).padStart(6, "0");
+
+function renderFacturas() {
+  if (!$("#facList")) return;
+  const n = $("#facNotice"); n.hidden = facOk;
+  if (!facOk) n.innerHTML = `${icon("alert")}<div><b>Las facturas necesitan una regla nueva.</b> Publica otra vez el archivo <code>firestore.rules</code> en Firebase Console &gt; Firestore Database &gt; Reglas.</div>`;
+  const q = slugify($("#fq").value);
+  const l = facturas.filter(f => !q || slugify([f.numero, f.cliente, f.telefono].join(" ")).includes(q));
+  $("#facList").innerHTML = l.length ? l.map(f => `<div class="frow glass ${f.estado === "anulada" ? "anulada" : ""}">
+      <div><span class="num">${esc(f.numero)}</span> ${f.estado === "anulada" ? `<span class="pill red">Anulada</span>` : ""}${f.pedidoNumero ? ` <span class="pill">${esc(f.pedidoNumero)}</span>` : ""}<div class="who">${esc(f.cliente)} · ${esc(fecha(f.creado))}</div></div>
+      <div class="tot">${fmtUsd(f.total)}${f.totalBs ? `<small>${fmtBs(f.totalBs)}</small>` : ""}</div>
+      <div class="acts">
+        <button class="btn btn-sm" type="button" data-fver="${esc(f.id)}">${icon("eye")}Ver</button>
+        ${f.estado !== "anulada" ? `<button class="btn btn-sm btn-danger" type="button" data-fanul="${esc(f.id)}">${icon("x")}Anular</button>` : ""}
+      </div>
+    </div>`).join("") : `<div class="empty glass">${icon("file")}<h3>Sin facturas</h3><p>Crea una factura nueva o genérala desde un pedido.</p></div>`;
+}
+$("#fq").addEventListener("input", renderFacturas);
+$("#facList").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.fver) verFactura(facturas.find(f => f.id === b.dataset.fver));
+  if (b.dataset.fanul) {
+    const f = facturas.find(x => x.id === b.dataset.fanul);
+    if (!await confirmar(`La factura ${f.numero} quedará anulada. Se conserva en el historial.`, "Anular factura", "Anular")) return;
+    try { await updateDoc(doc(db, "facturas", f.id), { estado: "anulada" }); toast("Factura anulada"); } catch (er) { toast(errorTexto(er), false); }
+  }
+});
+
+function abrirFactura(pedido) {
+  fPedido = pedido || null; fform.reset(); $("#fErr").textContent = "";
+  $("#fdTitle").textContent = pedido ? `Factura del pedido ${pedido.numero || ""}` : "Nueva factura";
+  fform.tasa.value = (pedido?.tasa || tasa()) || "";
+  if (pedido) {
+    fform.cliente.value = pedido.cliente || ""; fform.telefono.value = pedido.telefono || ""; fform.direccion.value = pedido.direccion || "";
+    if (pedido.pago && [...fform.metodo.options].some(o => o.value === pedido.pago)) fform.metodo.value = pedido.pago;
+    fItems = (pedido.items || []).map(i => ({ nombre: i.nombre, detalle: [i.color, i.talla].filter(Boolean).join(" · "), qty: i.qty, precio: i.precio }));
+  } else fItems = [{ nombre: "", detalle: "", qty: 1, precio: null }];
+  $("#fAddProd").innerHTML = `<option value="">Agregar producto del catálogo…</option>` + [...productos].sort((a, b) => a.nombre.localeCompare(b.nombre)).map(p => `<option value="${esc(p.id)}">${esc(p.nombre)} · ${fmtUsd(p.precio)}</option>`).join("");
+  renderFItems(); fdlg.showModal();
+}
+function renderFItems() {
+  $("#fItems").innerHTML = fItems.map((it, i) => `<div class="it">
+    <input class="in" data-fi="${i}" data-k="nombre" value="${esc(it.nombre)}${it.detalle ? " (" + esc(it.detalle) + ")" : ""}" placeholder="Producto o servicio" maxlength="120">
+    <input class="in" data-fi="${i}" data-k="qty" type="number" inputmode="numeric" min="1" step="1" value="${it.qty ?? 1}">
+    <input class="in" data-fi="${i}" data-k="precio" type="number" inputmode="decimal" min="0" step="0.01" value="${it.precio ?? ""}" placeholder="0.00">
+    <button class="ibtn danger" type="button" data-frm="${i}" aria-label="Quitar línea">${icon("x")}</button>
+  </div>`).join("");
+  fTotales();
+}
+function calc(items, desc, tz) {
+  const subtotal = r2(items.reduce((s, i) => s + (Number(i.qty) || 0) * (Number(i.precio) || 0), 0));
+  const descuento = Math.min(subtotal, r2(desc)); const total = r2(subtotal - descuento);
+  return { subtotal, descuento, total, tasa: Number(tz) || 0, totalBs: r2(total * (Number(tz) || 0)) };
+}
+function fTotales() {
+  const t = calc(fItems, fform.descuento.value, fform.tasa.value);
+  $("#fTotals").innerHTML = `<span>Subtotal: ${fmtUsd(t.subtotal)}</span>${t.descuento ? `<span>Descuento: −${fmtUsd(t.descuento)}</span>` : ""}<b>Total ${fmtUsd(t.total)}</b>${t.tasa ? `<span class="muted">${fmtBs(t.totalBs)}</span>` : ""}`;
+}
+$("#fItems").addEventListener("input", e => { const t = e.target; if (t.dataset.fi == null) return; const it = fItems[+t.dataset.fi]; it[t.dataset.k] = t.dataset.k === "nombre" ? t.value : numOrNull(t.value); if (t.dataset.k === "nombre") it.detalle = ""; fTotales(); });
+$("#fItems").addEventListener("click", e => { const b = e.target.closest("[data-frm]"); if (b) { fItems.splice(+b.dataset.frm, 1); renderFItems(); } });
+$("#fAddFree").addEventListener("click", () => { fItems.push({ nombre: "", detalle: "", qty: 1, precio: null }); renderFItems(); $$("#fItems [data-k=nombre]").pop()?.focus(); });
+$("#fAddProd").addEventListener("change", e => { const p = productos.find(x => x.id === e.target.value); if (p) { fItems.push({ nombre: p.nombre, detalle: "", qty: 1, precio: Number(p.precio) || 0 }); renderFItems(); } e.target.value = ""; });
+fform.addEventListener("input", e => { if (e.target.name === "descuento" || e.target.name === "tasa") fTotales(); });
+fdlg.addEventListener("click", e => { if (e.target.closest("[data-close]")) fdlg.close(); });
+fform.addEventListener("submit", async e => {
+  e.preventDefault();
+  const items = fItems.filter(i => String(i.nombre).trim() && Number(i.qty) > 0).map(i => ({ nombre: String(i.nombre).trim(), detalle: i.detalle || "", qty: Math.floor(Number(i.qty)), precio: r2(i.precio) }));
+  if (!fform.cliente.value.trim()) { $("#fErr").textContent = "Escribe el nombre del cliente."; fform.cliente.focus(); return; }
+  if (!items.length) { $("#fErr").textContent = "Agrega al menos un producto con cantidad."; return; }
+  const t = calc(items, fform.descuento.value, fform.tasa.value);
+  $("#fSave").disabled = true;
+  try {
+    const ref = doc(collection(db, "facturas"));
+    const data = await runTransaction(db, async tx => {
+      const cRef = doc(db, "config", "facturas"); const c = await tx.get(cRef);
+      const n = (c.exists() ? c.data().ultimo || 0 : 0) + 1;
+      const d = { numero: numFac(n), cliente: fform.cliente.value.trim(), telefono: fform.telefono.value.trim(), direccion: fform.direccion.value.trim(),
+        items, ...t, metodo: fform.metodo.value, nota: fform.nota.value.trim(), estado: "emitida",
+        pedidoId: fPedido?.id || "", pedidoNumero: fPedido?.numero || "", creado: serverTimestamp() };
+      tx.set(cRef, { ultimo: n }, { merge: true }); tx.set(ref, d);
+      return d;
+    });
+    fdlg.close(); toast("Factura " + data.numero + " creada");
+    verFactura({ id: ref.id, ...data, creado: { toDate: () => new Date() } });
+  } catch (er) { $("#fErr").textContent = errorTexto(er); }
+  finally { $("#fSave").disabled = false; }
+});
+$("#facNew").addEventListener("click", () => abrirFactura(null));
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-ofac]"); if (!b) return;
+  const o = pedidos.find(x => x.id === b.dataset.ofac); if (!o) return;
+  const ya = facturas.find(f => f.pedidoId === o.id && f.estado !== "anulada");
+  ya ? verFactura(ya) : abrirFactura(o);
+});
+
+function facturaHtml(f) {
+  const sedes = (cfg.sedes || []).filter(x => x.nombre).map(x => x.nombre).join(" · ");
+  const d = f.creado?.toDate ? f.creado.toDate() : new Date();
+  return `<div class="inv-doc">
+    <div class="hd">
+      <div class="biz"><img src="../assets/logo.webp" alt=""><div><b>Amilkar Biker Shop</b><span>Accesorios y repuestos para moto</span><span>Maracaibo, Zulia${sedes ? " · Sedes: " + esc(sedes) : ""}</span><span>WhatsApp ${esc(cfg.telefonoVisible || "+" + cfg.whatsapp)}${cfg.email ? " · " + esc(cfg.email) : ""}</span><span>Instagram @amilkarbikershop</span></div></div>
+      <div class="tt"><h1>Factura</h1><span><b>N° ${esc(f.numero)}</b></span><span>Fecha: ${d.toLocaleDateString("es-VE", { day: "2-digit", month: "2-digit", year: "numeric" })}</span>${f.pedidoNumero ? `<span>Pedido: ${esc(f.pedidoNumero)}</span>` : ""}${f.estado === "anulada" ? `<span class="anulada">ANULADA</span>` : ""}</div>
+    </div>
+    <div class="cli">
+      <div><h4>Cliente</h4><p><b>${esc(f.cliente)}</b></p>${f.telefono ? `<p>${esc(f.telefono)}</p>` : ""}${f.direccion ? `<p>${esc(f.direccion)}</p>` : ""}</div>
+      <div><h4>Forma de pago</h4><p>${esc(f.metodo || "Por confirmar")}</p>${f.tasa ? `<h4 style="margin-top:12px">Tasa</h4><p>${fmtBs(f.tasa)} por $1</p>` : ""}</div>
+    </div>
+    <table><thead><tr><th>Descripción</th><th>Cant.</th><th>Precio</th><th>Importe</th></tr></thead><tbody>
+      ${f.items.map(i => `<tr><td>${esc(i.nombre)}${i.detalle ? `<small>${esc(i.detalle)}</small>` : ""}</td><td>${i.qty}</td><td>${fmtUsd(i.precio)}</td><td>${fmtUsd(i.precio * i.qty)}</td></tr>`).join("")}
+    </tbody></table>
+    <div class="sum"><table>
+      <tr><td>Subtotal</td><td>${fmtUsd(f.subtotal)}</td></tr>
+      ${f.descuento ? `<tr><td>Descuento</td><td>−${fmtUsd(f.descuento)}</td></tr>` : ""}
+      <tr class="big"><td>Total</td><td>${fmtUsd(f.total)}</td></tr>
+      ${f.totalBs ? `<tr class="bs"><td>Total en Bs</td><td>${fmtBs(f.totalBs)}</td></tr>` : ""}
+    </table></div>
+    ${f.nota ? `<div class="pay"><b>Nota:</b> ${esc(f.nota)}</div>` : ""}
+    <div class="ft"><b>¡Gracias por tu compra!</b>Documento no fiscal · Amilkar Biker Shop · amilkarbikershop.3s-dev.com</div>
+  </div>`;
+}
+function ajustarVista() {
+  const sc = $("#invScroll"), docEl = $("#printArea .inv-doc"); if (!docEl) return;
+  const k = Math.min(1, (sc.clientWidth - 24) / 794);
+  docEl.style.transform = `scale(${k})`; $("#printArea").style.height = (docEl.offsetHeight * k) + "px";
+}
+function verFactura(f) {
+  if (!f) return; facActual = f;
+  $("#vdTitle").textContent = "Factura " + f.numero;
+  $("#printArea").innerHTML = facturaHtml(f);
+  vdlg.showModal(); requestAnimationFrame(ajustarVista);
+}
+addEventListener("resize", () => vdlg.open && ajustarVista());
+vdlg.addEventListener("click", e => { if (e.target.closest("[data-close]")) vdlg.close(); });
+$("#vPrint").addEventListener("click", () => { const el = $("#printArea .inv-doc"); el.style.transform = ""; window.print(); ajustarVista(); });
+
+const cargarScript = src => new Promise((ok, ko) => { if (document.querySelector(`script[src="${src}"]`)) return ok(); const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = ko; document.head.append(s); });
+async function crearPdf(f) {
+  await cargarScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
+  await cargarScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+  const host = document.createElement("div"); host.style.cssText = "position:fixed;left:-10000px;top:0"; host.innerHTML = facturaHtml(f); document.body.append(host);
+  await Promise.all([...host.querySelectorAll("img")].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; })));
+  await document.fonts?.ready;
+  const canvas = await window.html2canvas(host.firstElementChild, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
+  host.remove();
+  const { jsPDF } = window.jspdf; const pdf = new jsPDF({ unit: "pt", format: "a4" });
+  const W = pdf.internal.pageSize.getWidth(), H = pdf.internal.pageSize.getHeight();
+  const h = canvas.height * W / canvas.width;
+  pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, W, Math.min(h, H * Math.ceil(h / H)));
+  return new File([pdf.output("blob")], `Factura-${f.numero}-Amilkar-Biker-Shop.pdf`, { type: "application/pdf" });
+}
+function descargar(file) { const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = file.name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }
+$("#vPdf").addEventListener("click", async e => {
+  const b = e.currentTarget; b.disabled = true;
+  try { descargar(await crearPdf(facActual)); toast("PDF descargado"); } catch (er) { console.warn(er); toast("No se pudo crear el PDF", false); } finally { b.disabled = false; }
+});
+$("#vSend").addEventListener("click", async e => {
+  const b = e.currentTarget, f = facActual; b.disabled = true;
+  const msg = `Hola ${f.cliente}, te enviamos tu factura ${f.numero} de Amilkar Biker Shop por ${fmtUsd(f.total)}${f.totalBs ? " (" + fmtBs(f.totalBs) + ")" : ""}. ¡Gracias por tu compra!`;
+  try {
+    const file = await crearPdf(f);
+    if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], title: "Factura " + f.numero, text: msg }); }
+    else {
+      descargar(file);
+      const tel = String(f.telefono || "").replace(/\D/g, ""); const t = tel.startsWith("0") ? "58" + tel.slice(1) : tel;
+      window.open(`https://wa.me/${t}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+      toast("PDF descargado: adjúntalo en el chat de WhatsApp");
+    }
+  } catch (er) { if (er?.name !== "AbortError") { console.warn(er); toast("No se pudo enviar", false); } }
+  finally { b.disabled = false; }
 });
 
 /* ---------- Ajustes ---------- */
