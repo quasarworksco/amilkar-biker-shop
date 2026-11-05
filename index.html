@@ -325,10 +325,10 @@ footer{padding:clamp(64px,8vw,110px) 0 calc(24px + env(safe-area-inset-bottom));
 .js .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 .js .reveal.in{opacity:1;transform:none}
 /* Carrito (drawer) */
-.overlay{position:fixed;inset:0;z-index:60;background:rgba(15,17,21,.35);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay{position:fixed;inset:0;z-index:60;background:rgba(11,11,12,.45);opacity:0;pointer-events:none;transition:opacity .22s ease-out}
 .overlay.open{opacity:1;pointer-events:auto}
-.drawer{position:fixed;z-index:61;top:0;right:0;bottom:0;width:min(440px,100%);display:flex;flex-direction:column;background:rgba(255,255,255,.94);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border-left:1px solid var(--line);box-shadow:-30px 0 60px -30px rgba(15,17,21,.25);transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);visibility:hidden}
-.drawer.open{transform:none;visibility:visible}
+.drawer{position:fixed;z-index:61;top:0;right:0;bottom:0;width:min(440px,100%);display:flex;flex-direction:column;background:#fff;border-left:1px solid var(--line);box-shadow:-30px 0 60px -30px rgba(15,17,21,.25);transform:translate3d(100%,0,0);will-change:transform;contain:layout paint;transition:transform .26s cubic-bezier(.2,.8,.2,1),visibility 0s linear .26s;visibility:hidden}
+.drawer.open{transform:translate3d(0,0,0);visibility:visible;transition:transform .26s cubic-bezier(.2,.8,.2,1),visibility 0s}
 .drawer header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line)}
 .drawer header h2{font-size:30px;font-style:italic;text-transform:uppercase}
 .drawer .scroll{flex:1;overflow-y:auto;padding:16px 20px;overscroll-behavior:contain}
@@ -1054,8 +1054,9 @@ $("#lines").addEventListener("click", e => {
 
 const drawer = $("#drawer"), overlay = $("#overlay");
 let lastFocus = null;
-function openCart() { lastFocus = document.activeElement; drawer.classList.add("open"); overlay.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; setTimeout(() => $("#closeCart").focus(), 50); }
-function closeCart() { drawer.classList.remove("open"); overlay.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus?.focus?.(); if (pedidoEnviado) { pedidoEnviado = null; renderCart(); } }
+let vidWasPlaying = false;
+function openCart() { const hv = document.getElementById("heroVideo"); vidWasPlaying = !!hv && !hv.paused; hv?.pause(); lastFocus = document.activeElement; drawer.classList.add("open"); overlay.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; setTimeout(() => $("#closeCart").focus(), 50); }
+function closeCart() { if (vidWasPlaying) document.getElementById("heroVideo").play().catch(() => {}); vidWasPlaying = false; drawer.classList.remove("open"); overlay.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus?.focus?.(); if (pedidoEnviado) { pedidoEnviado = null; renderCart(); } }
 $("#openCart").addEventListener("click", openCart);
 $("#closeCart").addEventListener("click", closeCart);
 overlay.addEventListener("click", closeCart);
